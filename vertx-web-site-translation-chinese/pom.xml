@@ -601,31 +601,31 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <target name="Copy asciidoc translation">
-                                <copy todir="${project.build.directory}/sources/asciidoc">
+                                <copy todir="${project.build.directory}/sources/asciidoc" overwrite="true">
                                     <fileset dir="${project.basedir}/src/main/translation">
                                         <include name="**/*"/>
                                     </fileset>
                                     <mapper type="regexp" from="^(.*)\\(.*)$" to="/js/\1/js/\2"/>
                                 </copy>
-                                <copy todir="${project.build.directory}/sources/asciidoc">
+                                <copy todir="${project.build.directory}/sources/asciidoc" overwrite="true">
                                     <fileset dir="${project.basedir}/src/main/translation">
                                         <include name="**/*"/>
                                     </fileset>
                                     <mapper type="regexp" from="^(.*)\\(.*)$" to="/groovy/\1/groovy/\2"/>
                                 </copy>
-                                <copy todir="${project.build.directory}/sources/asciidoc">
+                                <copy todir="${project.build.directory}/sources/asciidoc" overwrite="true">
                                     <fileset dir="${project.basedir}/src/main/translation">
                                         <include name="**/*"/>
                                     </fileset>
                                     <mapper type="regexp" from="^(.*)\\(.*)$" to="/scala/\1/scala/\2"/>
                                 </copy>
-                                <copy todir="${project.build.directory}/sources/asciidoc">
+                                <copy todir="${project.build.directory}/sources/asciidoc" overwrite="true">
                                     <fileset dir="${project.basedir}/src/main/translation">
                                         <include name="**/*"/>
                                     </fileset>
                                     <mapper type="regexp" from="^(.*)\\(.*)$" to="/kotlin/\1/kotlin/\2"/>
                                 </copy>
-                                <copy todir="${project.build.directory}/sources/asciidoc">
+                                <copy todir="${project.build.directory}/sources/asciidoc" overwrite="true">
                                     <fileset dir="${project.basedir}/src/main/translation">
                                         <include name="**/*"/>
                                     </fileset>
