@@ -14,6 +14,7 @@
 
     <properties>
         <stack.version>3.6.0-SNAPSHOT</stack.version>
+        <vertx.doc.version>3.6.0-SNAPSHOT</vertx.doc.version>
         <asciidoc.path>/kotlin</asciidoc.path>
     </properties>
 
@@ -75,6 +76,41 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.doc.version}</version>
+            <classifier>docs</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-lang-groovy</artifactId>
+            <version>${vertx.doc.version}</version>
+            <classifier>docs</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-lang-js</artifactId>
+            <version>${vertx.doc.version}</version>
+            <classifier>docs</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-lang-kotlin</artifactId>
+            <version>${vertx.doc.version}</version>
+            <classifier>docs</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-lang-scala_2.12</artifactId>
+            <version>${vertx.doc.version}</version>
+            <classifier>docs</classifier>
+            <type>zip</type>
         </dependency>
 
         <dependency>
@@ -509,7 +545,6 @@
                     <includeTypes>jar</includeTypes>
                 </configuration>
                 <executions>
-
                     <!-- Unpack java sources to target/java-sources -->
                     <execution>
                         <id>unpack-java</id>
@@ -526,7 +561,6 @@
                         </configuration>
                     </execution>
 
-                    <!-- Unpack asciidoc sources to target/asciidoc-sources -->
                     <execution>
                         <id>unpack-asciidoc</id>
                         <phase>generate-sources</phase>
@@ -536,6 +570,31 @@
                         <configuration>
                             <includes>*.adoc,images/**</includes>
                             <outputDirectory>${project.build.directory}/sources/asciidoc</outputDirectory>
+                            <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
+                            <stripVersion>true</stripVersion>
+                            <stripClassifier>true</stripClassifier>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>unpack-asciidoc-docoverride</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includes>**/override/*.adoc</includes>
+                            <includeGroupIds>io.vertx</includeGroupIds>
+                            <includeArtifactIds>
+                                vertx-core,
+                                vertx-lang-groovy,
+                                vertx-lang-kotlin,
+                                vertx-lang-js,
+                                vertx-lang-scala_2.12
+                            </includeArtifactIds>
+                            <outputDirectory>${project.build.directory}/sources/asciidoc</outputDirectory>
+                            <classifier>docs</classifier>
+                            <includeTypes>zip</includeTypes>
                             <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
                             <stripVersion>true</stripVersion>
                             <stripClassifier>true</stripClassifier>
@@ -558,6 +617,7 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <target name="Remove the -source-jar prefix in unpackage asciidoc">
+                                <!--将images分别复制到对应语言的文件夹下，方便统一处理-->
                                 <copy todir="${project.build.directory}/sources/asciidoc">
                                     <fileset dir="${project.build.directory}/sources/asciidoc">
                                         <include name="**/*"/>
@@ -591,17 +651,7 @@
                                     </fileset>
                                     <mapper type="regexp" from="^(.*)-sources-jar\\images(.*)$" to="/java/\1/images\2"/>
                                 </move>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>rename-asciidoc</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <target name="Remove the -source-jar prefix in unpackage asciidoc">
+                                <!--将文档分别复制到对应语言的文件夹下，方便统一处理-->
                                 <copy todir="${project.build.directory}/sources/asciidoc">
                                     <fileset dir="${project.build.directory}/sources/asciidoc">
                                         <include name="**/*"/>
@@ -632,19 +682,29 @@
                                     </fileset>
                                     <mapper type="regexp" from="^(.*)-sources-jar(.*)$" to="/java/\1/java\2"/>
                                 </move>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
 
-                    <!-- Copy asciidoc override -->
-                    <execution>
-                        <id>copy-asciidoc-translation</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <target name="Copy asciidoc translation">
+                                <!--将override文档复制到对应语言的文件夹下，方便统一处理-->
+                                <move todir="${project.build.directory}/sources/asciidoc/" overwrite="true">
+                                    <fileset dir="${project.build.directory}/sources/asciidoc/">
+                                        <include name="**/*"/>
+                                    </fileset>
+                                    <mapper type="regexp" from="^vertx-core-docs-zip\\java\\(.*)$" to="/java/vertx-core/\1"/>
+                                </move>
+                                <delete dir="${project.build.directory}/sources/asciidoc/vertx-core-docs-zip" />
+                                <move todir="${project.build.directory}/sources/asciidoc/" overwrite="true">
+                                    <fileset dir="${project.build.directory}/sources/asciidoc/">
+                                        <include name="**/*"/>
+                                    </fileset>
+                                    <mapper type="regexp" from="^vertx-lang-scala_2.12-docs-zip(.*)$" to="/scala/vertx-core/\1"/>
+                                </move>
+                                <move todir="${project.build.directory}/sources/asciidoc/" overwrite="true">
+                                    <fileset dir="${project.build.directory}/sources/asciidoc/">
+                                        <include name="**/*"/>
+                                    </fileset>
+                                    <mapper type="regexp" from="^vertx-lang-(.*)-docs-zip(.*)$" to="/\1\2"/>
+                                </move>
+                                <!--!!!!请确保翻译的文件在最后复制，这样就可以覆盖掉原文档-->
+                                <!--将翻译文档复制到对应语言的文件夹下，方便统一处理-->
                                 <copy todir="${project.build.directory}/sources/asciidoc" overwrite="true">
                                     <fileset dir="${project.basedir}/src/main/translation">
                                         <include name="**/*"/>
@@ -675,6 +735,23 @@
                                     </fileset>
                                     <mapper type="regexp" from="^(.*)\\(.*)$" to="/java/\1/java/\2"/>
                                 </copy>
+
+                                <copy todir="${project.build.directory}/sources/asciidoc" overwrite="true">
+                                    <fileset dir="${project.basedir}/src/main/override">
+                                        <include name="**/*"/>
+                                    </fileset>
+                                    <!--\1  vertx-core  \2        \3-->
+                                    <mapper type="regexp" from="^([^\\]*)\\([^\\]*)\\(.*)$" to="/\2/\1/\2/\3"/>
+                                </copy>
+
+                                <!--vertx-core的java模块包了两层java，所以专门在翻译文件复制之后把整个vertx-core/java下的文件移到vertx-core/java/java目录下，所以这个是允许放到翻译文档下的-->
+                                <move todir="${project.build.directory}/sources/asciidoc/java/vertx-core/java/java" overwrite="true">
+                                    <fileset dir="${project.build.directory}/sources/asciidoc/java/vertx-core/java">
+                                        <include name="**/*"/>
+                                    </fileset>
+                                </move>
+
+                                <!--其他文件操作不允许放到翻译文档复制任务之后-->
                             </target>
                         </configuration>
                         <goals>

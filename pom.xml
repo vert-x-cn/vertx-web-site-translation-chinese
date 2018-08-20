@@ -18,7 +18,4 @@
     <groupId>tk.okou</groupId>
     <artifactId>vertx-web-site-translation-chinese-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <!--<packaging>pom</packaging>-->
-
-
 </project>
