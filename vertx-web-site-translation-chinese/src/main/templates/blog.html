@@ -1,0 +1,38 @@
+{% include "header.html" %}
+
+<div class="container">
+  <div class="row blog">
+    <div class="col-sm-8 blog-main">
+      {% set c = collections.blog|limit(pagination.end, pagination.start) %}
+
+      {% for post in c %}
+      <article class="blog-post">
+          <h2 class="blog-post-title"><a href="{{ site_url }}{{post.path}}/">{{post.title}}</a></h2>
+          {% if post.date %}
+            <p class="blog-post-meta">{{post.date | date}} by
+              <a href="http://github.com/{{post.author}}">{{post.author}}</a></p>
+          {% endif %}
+          <article>{{post.excerpt | safe | admonition | extractContent | render(_ctx) }}</article>
+          <p><a href="{{ site_url }}{{post.path}}/">Read more &raquo;</a></p>
+          <hr/>
+      </article>
+      {% endfor %}
+
+      {% if pagination %}
+         <nav class="pagination">
+             {% if pagination.end + 1 < collections.blog.length %}
+                 <a href="{{pagination.next.num | page}}" class="pagination__link--older">&lt; Older</a>
+             {% endif %}
+
+             {% if pagination.prev %}
+                 <a href="{{pagination.prev.num | page}}" class="pagination__link--newer">Newer &gt;</a>
+             {% endif %}
+
+         </nav>
+      {% endif %}
+    </div>
+    {% include "blog_sidebar.html" %}
+  </div>
+</div>
+
+{% include "footer.html" %}

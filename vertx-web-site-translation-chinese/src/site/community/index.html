@@ -1,0 +1,148 @@
+---
+template: page.html
+title: Eclipse Vert.x Community
+heading: Community
+subheading: Without the community we are nothing.
+---
+
+<div class="container">
+
+  <div class="community-container community-introduction">
+    <div class="row">
+      <div class="col-sm-12">
+        <p>Vert.x is an independent project and has been created by contributions from many different individuals and organisations.</p>
+        <p>We have a thriving user and developer community and many exciting new developments to come, so why not be
+        a part of it?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="community-container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <h3>Get Help</h3>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <h4><a href="https://groups.google.com/forum/?fromgroups#!forum/vertx">User Group</a></h4>
+        <p>A Google Group for users. Post a message if you need help or to report problems.</p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <h4><a href="https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15">Stack Overflow</a></h4>
+        <p>Mark your questions with the <em>vert.x</em> tag.
+          We do our best to answer questions there but keeping up with the <em>User Group</em> is our priority.</p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 col-sm-offset-4 col-md-offset-0">
+        <h4><a href="https://gitter.im/eclipse-vertx/vertx-users">Gitter Channel</a></h4>
+        <p>Come and chat with other users and module maintainers.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3 col-sm-offset-4 col-md-offset-3">
+        <h4><a href="https://github.com/vert-x3/issues/issues/new">Bug reports</a></h4>
+        <p>If you're not sure which module is the cause of your problem, file a new entry on <a href="https://github.com/vert-x3/issues/issues/new">vert-x3/issues</a>.
+          Otherwise you can file directly to <a href="https://github.com/eclipse/vert.x/issues/new">eclipse/vert.x</a> or any of the <a href="https://github.com/vert-x3">vert-x3</a> modules.</p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <h4><a href="https://github.com/vert-x3/wiki/wiki">Wiki</a></h4>
+        <p>The Vert.x wiki contains useful information such as a
+          <a href="https://github.com/vert-x3/wiki/wiki/How-to-contribute-to-Vert.x">How to contribute</a>
+          guide, the <a href="https://github.com/vert-x3/issues-and-wiki/wiki/Vert.x-Roadmap">Roadmap</a> and
+          <a href="https://github.com/vert-x3/wiki/wiki/Project-Information">Project Information</a>.</p>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-3 col-sm-offset-4 col-md-offset-0">
+        <h4><a href="https://groups.google.com/forum/?fromgroups#!forum/vertx-dev">Developer Group</a></h4>
+        <p>A Google Group for Vert.x core <em>developers</em> and <em>contributors</em>.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-3 col-sm-offset-4 col-md-offset-3">
+        <h4><a href="https://github.com/vert-x3/vertx-awesome">Vert.x awesome</a></h4>
+        <p>A curated list of awesome frameworks, libraries or other components for use with Vert.x. Feel free to add yours by submitting a pull request.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  {# macro that iterates over a list of developers and generates columns #}
+  {% macro generate_devs(title, developers) %}
+    {% set res = {"xs": 1, "sm": 2, "md": 3, "lg": 4} %}
+    {% for cols in res %}
+      {% set outerloopkey = loop.key %}
+      {% set colwidth = 12 / cols %}
+      <div class="visible-{{ outerloopkey }}-block">
+        <div class="row community-row">
+          {% for dev in developers %}
+            {% if loop.first %}
+              <div class="col-sm-{{ colwidth }}">
+                <h3>{{ title }}</h3>
+              </div>
+            {% elseif loop.index0 % (cols - 1) == 0 %}
+              </div>
+              <div class="row community-row">
+                <div class="col-sm-{{ colwidth }}">&nbsp;</div>
+            {% endif %}
+            <div class="col-sm-{{ colwidth }}">
+              <div class="media">
+                <div class="media-left">
+                  <img class="contributor-avatar" src="{{ dev.avatar }}" width="80" height="80">
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">{{ dev.name | safe }}</h4>
+                  <p>
+                    {% if dev.role || dev.contribution %}
+                      {{ dev.role || dev.contribution }}<br>
+                    {% endif %}
+                    {% if dev.homepage %}
+                      <a href="{{ dev.homepage }}"><span class="fa fa-globe"></span></a>
+                    {% endif %}
+                    {% if dev.github %}
+                      <a href="{{ dev.github }}"><span class="fa fa-github"></span></a>
+                    {% endif %}
+                    {% if dev.twitter %}
+                      <a href="{{ dev.twitter }}"><span class="fa fa-twitter"></span></a>
+                    {% endif %}
+                    {% if dev.google_plus %}
+                      <a href="{{ dev.google_plus }}"><span class="fa fa-google-plus"></span></a>
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  {% endmacro %}
+
+  <div class="community-container">
+
+    {{ generate_devs("Full time developers", full_time_developers) }}
+
+  </div>
+
+  <div class="community-container maintainers">
+
+    {{ generate_devs("Component maintainers", maintainers) }}
+
+  </div>
+
+  <div class="community-container contributors">
+
+    {{ generate_devs("Contributors", contributors) }}
+
+  </div>
+
+  <hr>
+
+  <div class="community-container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-lg-3">
+        <h3>Awards</h3>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-3">
+        <a href="http://jaxenter.com/jax-innovation-awards-2014-champions-declared-107796.html" class="award"><img src="{{ site_url }}assets/JAX_winner.gif"></a>
+      </div>
+    </div>
+  </div>
+</div>

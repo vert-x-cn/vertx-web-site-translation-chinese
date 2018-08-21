@@ -1,0 +1,52 @@
+= Vert.x User Manual
+:toc: left
+
+Vert.x - a toolkit for creating reactive applications on the JVM.
+
+== Introduction
+
+=== What is Vert.x?
+
+You can think of Vert.x as a set of building blocks for building reactive applications.
+
+Vert.x is a *general purpose* tool-kit. You can use it for all kinds of applications, for example: web applications and enterprise back-end
+applications.
+
+Vert.x is *un-opinionated*. It's not a framework or a container and we don't tell you a "correct" way to write an application.
+Instead we give you a lot of useful bricks and let you create your app the way *you* want to.
+
+Vert.x is *polyglot*. You can use it with multiple JVM languages including Java, JavaScript, Ruby and Groovy.
+Vert.x doesn't care what language is "best" - you use what language(s) that *you* want depending on the
+task at hand and the skill-set of your team. We don't just force you to use our Java API in other languages - we provide
+*idiomatic* APIs for every language that Vert.x supports.
+
+Vert.x is an ideal choice for creating light-weight, high-performance, *micro-services*.
+
+Vert.x is *lightweight* - Vert.x core is around 650kB in size.
+
+Vert.x is *fast*. Don't just take our word for it. [link]
+
+Vert.x is *modular* - when you need more bits just add the bits you need and nothing more.
+
+Vert.x is *not an application server*. There's no monolithic Vert.x instance into which you deploy applications.
+You just run your apps wherever you want to.
+
+Vert.x is *event driven* and *non blocking*. This means you can handle a lot of concurrency in your apps using a small
+number of threads. Vert.x lets your apps *scale* with minimal hardware.
+
+Vert.x is *simple but not simplistic*. Vert.x allows you to create powerful apps, simply.
+
+Vert.x is *fun*. Enjoy being a developer again. Spare a thought for your less fortunate colleagues still deploying WARs to application servers.
+
+Vert.x is a stack for creating compelling, 21st century, reactive applications. As well as low level functionality Vert.x provides
+ higher level building blocks for creating real-world applications.
+
+
+
+
+
+
+
+
+
+
