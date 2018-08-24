@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class CustomDocGenProcessor extends DocGenProcessor {
+public class CustomDocGenProcessor extends NewDocGenProcessor {
+//public class CustomDocGenProcessor extends DocGenProcessor {
     private List<DocGenerator> generators;
 
     public CustomDocGenProcessor() {

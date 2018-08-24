@@ -25,6 +25,7 @@ import java.util.jar.Manifest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("ALL")
 @SupportedOptions({
         NewDocGenProcessor.DOCGEN_OUTPUT,
         NewDocGenProcessor.DOCGEN_EXTENSION,
@@ -203,7 +204,16 @@ public abstract class NewDocGenProcessor extends AbstractProcessor {
                 } else {
                     state.forEach((doc, m) -> {
                         m.forEach((gen, w) -> {
-                            String content = postProcess(gen.getName(), w.render());
+                            String artifactId = null;
+                            if (doc instanceof FileDoc) {
+                                String n = ((FileDoc) doc).relativePath;
+                                //确保asciidoc目录下，以artifactId开头，则可以找到
+                                Matcher matcher = VERTX_PATTERN.matcher(n);
+                                if (matcher.matches()) {
+                                    artifactId = matcher.group(1);
+                                }
+                            }
+                            String content = postProcess(gen.getName(), w.render(), artifactId);
                             write(gen, doc, content);
                         });
                     });
@@ -517,7 +527,7 @@ public abstract class NewDocGenProcessor extends AbstractProcessor {
         }
     }
 
-
+    private static final Pattern VERTX_PATTERN = Pattern.compile("(vertx-[^\\\\]*).*");
     private static final Pattern LINK_PATTERN = Pattern.compile("\\{@link\\s([^}]+)\\}");
     private static final Pattern METHOD_LINK_PATTERN = Pattern.compile(
             "^([$_\\w]+\\.)*[$_\\w]+" +
@@ -705,8 +715,8 @@ public abstract class NewDocGenProcessor extends AbstractProcessor {
         }
     }
 
-    protected String postProcess(String name, String content) {
-        String processed = applyVariableSubstitution(content);
+    protected String postProcess(String name, String content, String artifactId) {
+        String processed = applyVariableSubstitution(content, artifactId);
         processed = applyPostProcessors(name, processed);
         return processed;
     }
@@ -717,7 +727,7 @@ public abstract class NewDocGenProcessor extends AbstractProcessor {
             outputOpt = outputOpt.replace("$lang", generator.getName());
             String relativeName = doc.resolveRelativeFileName(generator);
             try {
-                File dir = new File(outputOpt, generator.getName());
+                File dir = new File(outputOpt);
                 for (int i = relativeName.indexOf('/'); i != -1; i = relativeName.indexOf('/', i + 1)) {
                     dir = new File(dir, relativeName.substring(0, i));
                     relativeName = relativeName.substring(i + 1);
@@ -789,9 +799,12 @@ public abstract class NewDocGenProcessor extends AbstractProcessor {
      * @param content the content
      * @return the content with variable values
      */
-    public String applyVariableSubstitution(String content) {
+    public String applyVariableSubstitution(String content, String artifactId) {
         for (Map.Entry<String, String> entry : processingEnv.getOptions().entrySet()) {
             content = content.replace("${" + entry.getKey() + "}", entry.getValue());
+        }
+        if (artifactId != null) {
+            content = content.replace("${maven.artifactId}", artifactId);
         }
         return content;
     }
