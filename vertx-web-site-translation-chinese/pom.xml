@@ -12,15 +12,6 @@
   <artifactId>vertx-web-site-translation-chinese</artifactId>
 
 
-  <properties>
-    <vertx.version>3.6.0-SNAPSHOT</vertx.version>
-    <vertx.docs.version>3.6.0-SNAPSHOT</vertx.docs.version>
-    <vertx.download.version>3.6.0-SNAPSHOT</vertx.download.version>
-    <asciidoc.path>/kotlin</asciidoc.path>
-    <host>vertx.tk</host>
-    <highlightjs.version>8.7</highlightjs.version>
-  </properties>
-
   <dependencies>
     <!--这个依赖是为了按配置的docgen.generators来生成对应语言的文档-->
     <dependency>

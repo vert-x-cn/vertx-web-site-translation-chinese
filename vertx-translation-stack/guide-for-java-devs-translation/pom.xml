@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>vertx-translation-stack</artifactId>
+    <groupId>tk.okou</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>guide-for-java-devs-translation</artifactId>
+
+  <repositories>
+    <repository>
+      <id>JitPack</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.vert-x3</groupId>
+      <artifactId>vertx-guide-for-java-devs</artifactId>
+      <version>1.3.0</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+          <execution>
+            <id>unpack-asciidoc</id>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </execution>
+          <!-- Unpack Java guide -->
+          <execution>
+            <id>unpack-source</id>
+            <configuration>
+              <includeGroupIds>com.github.vert-x3</includeGroupIds>
+              <includeArtifactIds>vertx-guide-for-java-devs</includeArtifactIds>
+              <includeTypes>zip</includeTypes>
+              <includeClassifiers>docs</includeClassifiers>
+              <outputDirectory>${project.build.directory}/docs/guide-for-java-devs</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
