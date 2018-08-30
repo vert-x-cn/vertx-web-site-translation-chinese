@@ -12,6 +12,8 @@
   <artifactId>vertx-circuit-breaker-translation</artifactId>
   <properties>
     <module>vertx-circuit-breaker</module>
+    <scala.dependency>vertx-circuit-breaker-scala_2.12</scala.dependency>
+    <docgen.generators>js,kotlin,ruby,groovy</docgen.generators>
   </properties>
 
   <dependencies>
@@ -25,6 +27,12 @@
       <groupId>io.vertx</groupId>
       <artifactId>${module}</artifactId>
       <version>${vertx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-core</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -67,7 +75,7 @@
       <version>${vertx.version}</version>
     </dependency>
   </dependencies>
-
+  
   <build>
     <plugins>
       <plugin>
@@ -79,6 +87,9 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
+        <configuration>
+          <addCompileSourceRoots>true</addCompileSourceRoots>
+        </configuration>
         <dependencies>
           <dependency>
             <groupId>io.vertx</groupId>
@@ -97,6 +108,26 @@
             </exclusions>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>generate-asciidoc</id>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-java-asciidoc</id>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-scala-asciidoc</id>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
