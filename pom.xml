@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
   <modules>
-    <!--<module>vertx-web-site-translation-chinese</module>-->
+    <module>vertx-web-site-translation-chinese</module>
     <module>vertx-codegen-options</module>
     <module>vertx-translation-stack</module>
   </modules>

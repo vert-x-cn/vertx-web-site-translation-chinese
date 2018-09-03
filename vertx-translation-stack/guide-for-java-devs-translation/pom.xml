@@ -32,6 +32,19 @@
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.0.2</version>
+        <dependencies>
+          <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.version}</version>
+            <classifier>sources</classifier>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>unpack-asciidoc</id>
@@ -42,15 +55,22 @@
           <!-- Unpack Java guide -->
           <execution>
             <id>unpack-source</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
             <configuration>
               <includeGroupIds>com.github.vert-x3</includeGroupIds>
               <includeArtifactIds>vertx-guide-for-java-devs</includeArtifactIds>
               <includeTypes>zip</includeTypes>
               <includeClassifiers>docs</includeClassifiers>
-              <outputDirectory>${project.build.directory}/docs/guide-for-java-devs</outputDirectory>
+              <outputDirectory>${asciidoc.path}/guide-for-java-devs</outputDirectory>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

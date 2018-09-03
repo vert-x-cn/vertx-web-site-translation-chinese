@@ -11,620 +11,523 @@
 
   <artifactId>vertx-web-site-translation-chinese</artifactId>
 
+  <properties>
+    <host>vertx.tk</host>
+    <vertx.download.version>${vertx.version}</vertx.download.version>
+    <asciidoctorj-pdf.version>1.5.0-alpha.15</asciidoctorj-pdf.version>
+    <asciidoctor-maven-plugin.version>1.5.5</asciidoctor-maven-plugin.version>
+    <asciidoctorj.version>1.5.5</asciidoctorj.version>
+  </properties>
 
   <dependencies>
-    <!--这个依赖是为了按配置的docgen.generators来生成对应语言的文档-->
     <dependency>
       <groupId>tk.okou</groupId>
-      <artifactId>vertx-codegen-options</artifactId>
+      <artifactId>guide-for-java-devs-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <!--vertx-lang-groovy依赖了vertx-lang-groovy-codegen，而这个依赖里有生成groovy文档需要的GroovyDocGenerator-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-groovy</artifactId>
-      <version>${vertx.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <!--groovy 的override在这个依赖里-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-groovy</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <!--生成js的文档，需要这个依赖里的JSDocGenerator-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-js</artifactId>
-      <version>${vertx.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <!--js 的override在这个依赖里-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-js</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <!--生成kotlin文档，需要这个依赖里的KotlinDocGenerator-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-kotlin-codegen</artifactId>
-      <version>${vertx.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <!--kotlin 的override在这个依赖里-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-kotlin</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <!--生成ruby文档，需要这个依赖里的RubyDocGenerator-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ruby-codegen</artifactId>
-      <version>${vertx.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <!--ruby 的override在这个依赖里-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ruby</artifactId>
-      <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ceylon</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-amqp-bridge-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--生成ruby文档，需要这个依赖里的CeylonDocGenerator-->
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ceylon-doc</artifactId>
-      <version>${vertx.docs.version}</version>
-    </dependency>
-    <!--生成scala文档，需要这个依赖里的ScalaDocGenerator-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala_2.12</artifactId>
-      <version>${vertx.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala-docs_2.12</artifactId>
-      <version>${vertx.version}</version>
-      <scope>provided</scope>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-common-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--scala 的override在这个依赖里-->
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala_2.12</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-htdigest-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-htpasswd-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-jdbc-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-jwt-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-mongo-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-oauth2-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-auth-shiro-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-bridge-common-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-camel-bridge-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-circuit-breaker-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <!--<dependency>-->
-    <!--<groupId>io.vertx</groupId>-->
-    <!--<artifactId>vertx-codegen</artifactId>-->
-    <!--<scope>provided</scope>-->
+    <!--<groupId>tk.okou</groupId>-->
+    <!--<artifactId>vertx-config-consul-translation</artifactId>-->
+    <!--<version>1.0-SNAPSHOT</version>-->
     <!--</dependency>-->
-
-    <!--生成文档的工具DocGenProcessor需要这个依赖，且生成java文档，需要这个依赖里的JavaDocGenerator-->
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-docgen</artifactId>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <!--examples翻译成其他语言需要这个依赖里对应语言的Lang-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-codetrans</artifactId>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <!--文档依赖开始-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-amqp-bridge</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-common</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-htdigest</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-htpasswd</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jdbc</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jwt</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-mongo</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-oauth2</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-shiro</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-bridge-common</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-camel-bridge</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-circuit-breaker</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-consul</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-git</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-hocon</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-kubernetes-configmap</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-redis</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-spring-config-server</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-vault</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-yaml</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-config-zookeeper</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-consul-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-core</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <type>jar</type>
-    </dependency>
-    <!--vertx-docker-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-dropwizard-metrics</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-grpc</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-hazelcast</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-health-check</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-http-service-factory</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-ignite</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-infinispan</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-jdbc-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-junit5</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-jwt</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-kafka-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-kotlin-coroutines</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-git-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mail-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-hocon-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mail-service</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-      <type>jar</type>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-kubernetes-configmap-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-maven-service-factory</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-redis-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-micrometer-metrics</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-service</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mqtt</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mysql-postgresql-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rabbitmq-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-reactive-streams</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-redis-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery-backend-consul</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery-backend-redis</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery-backend-zookeeper</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery-bridge-consul</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery-bridge-docker-links</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery-bridge-kubernetes</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-spring-config-server-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
     <!--<dependency>-->
-    <!--<groupId>io.vertx</groupId>-->
-    <!--<artifactId>vertx-service-discovery-bridge-zookeeper</artifactId>-->
-    <!--<classifier>sources</classifier>-->
-    <!--<version>${vertx.version}</version>-->
-    <!--<optional>true</optional>-->
+    <!--<groupId>tk.okou</groupId>-->
+    <!--<artifactId>vertx-config-vault-translation</artifactId>-->
+    <!--<version>1.0-SNAPSHOT</version>-->
     <!--</dependency>-->
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-factory</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-yaml-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-proxy</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-zookeeper-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-shell</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sockjs-service-proxy</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sql-common</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-manager</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-consul-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
-      <exclusions>
-        <exclusion>
-          <groupId>io.vertx</groupId>
-          <artifactId>vertx-stack-manager</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
+    <!--<dependency>-->
+    <!--<groupId>tk.okou</groupId>-->
+    <!--<artifactId>vertx-consul-discovery-translation</artifactId>-->
+    <!--<version>1.0-SNAPSHOT</version>-->
+    <!--</dependency>-->
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-stomp</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sync</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-consul-service-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-tcp-eventbus-bridge</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-core-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
     </dependency>
+    <!--<dependency>-->
+    <!--<groupId>tk.okou</groupId>-->
+    <!--<artifactId>vertx-docker-translation</artifactId>-->
+    <!--<version>1.0-SNAPSHOT</version>-->
+    <!--</dependency>-->
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-unit</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-api-contract</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-dropwizard-metrics-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-client</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-zookeeper</artifactId>
-      <version>${vertx.docs.version}</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-grpc-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>com.github.vert-x3</groupId>
-      <artifactId>vertx-guide-for-java-devs</artifactId>
-      <version>1.3.0</version>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-hazelcast-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-health-check-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-http-service-factory-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-ignite-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-infinispan-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-jdbc-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-junit5-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-jwt-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-kafka-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-lang-kotlin-coroutines-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-mail-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-mail-service-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-maven-service-factory-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-micrometer-metrics-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-mongo-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-mongo-service-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-mqtt-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-mysql-postgresql-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-proton-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-rabbitmq-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-reactive-streams-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-redis-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>tk.okou</groupId>-->
+    <!--<artifactId>vertx-rx-translation</artifactId>-->
+    <!--<version>1.0-SNAPSHOT</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>tk.okou</groupId>-->
+    <!--<artifactId>vertx-service-discovery-backend-consul-translation</artifactId>-->
+    <!--<version>1.0-SNAPSHOT</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-backend-redis-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-backend-zookeeper-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-bridge-consul-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-bridge-docker-links-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-bridge-kubernetes-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-bridge-zookeeper-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-factory-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-proxy-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-shell-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-sockjs-service-proxy-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-sql-common-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>tk.okou</groupId>-->
+    <!--<artifactId>vertx-stack-manager-translation</artifactId>-->
+    <!--<version>1.0-SNAPSHOT</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-stomp-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-sync-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-tcp-eventbus-bridge-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-unit-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-web-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-web-api-contract-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-web-client-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-zookeeper-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
@@ -632,197 +535,6 @@
       <groupId>org.webjars</groupId>
       <artifactId>highlightjs</artifactId>
       <version>${highlightjs.version}</version>
-    </dependency>
-
-
-    <!--文档依赖结束-->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-core</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-kotlin</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java2</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-factory</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-proxy</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ceylon-stack</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-stack-docker</artifactId>
-      <version>${vertx.docs.version}</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
-      <exclusions>
-        <!--vertx-stack-docker依赖vertx-stack-manager-full，这个文件太大了，而且我们不需要，所以排除-->
-        <exclusion>
-          <groupId>io.vertx</groupId>
-          <artifactId>vertx-stack-manager</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-    </dependency>
-
-
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-common</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-freemarker</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-handlebars</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-jade</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-mvel</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-pebble</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-rocker</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-thymeleaf</artifactId>
-      <classifier>sources</classifier>
-      <version>${vertx.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>2.4.7</version>
-    </dependency>
-    <dependency>
-      <groupId>com.netflix.hystrix</groupId>
-      <artifactId>hystrix-core</artifactId>
-      <version>1.5.2</version>
-      <exclusions>
-        <exclusion>
-          <groupId>io.reactivex</groupId>
-          <artifactId>rxjava</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.8.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.8.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.21</version>
-    </dependency>
-
-    <!-- Transitive dependencies declared as optional in other modules, and needed for instance in docgen -->
-    <dependency>
-      <groupId>io.micrometer</groupId>
-      <artifactId>micrometer-registry-prometheus</artifactId>
-      <version>1.0.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.micrometer</groupId>
-      <artifactId>micrometer-registry-influx</artifactId>
-      <version>1.0.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.micrometer</groupId>
-      <artifactId>micrometer-registry-jmx</artifactId>
-      <version>1.0.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.micrometer</groupId>
-      <artifactId>micrometer-registry-graphite</artifactId>
-      <version>1.0.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.10.0</version>
     </dependency>
   </dependencies>
 
@@ -865,19 +577,19 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.0.2</version>
         <executions>
-          <!-- Unpack Java guide -->
+          <!-- 解压adoc文件 -->
           <execution>
-            <id>unpack-java-guide</id>
+            <id>unpack-asciidoc</id>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
             <phase>generate-sources</phase>
             <configuration>
-              <includeGroupIds>com.github.vert-x3</includeGroupIds>
-              <includeArtifactIds>vertx-guide-for-java-devs</includeArtifactIds>
-              <includeTypes>zip</includeTypes>
+              <markersDirectory>${project.build.directory}/markers/unpack-asciidoc</markersDirectory>
+              <includeGroupIds>tk.okou</includeGroupIds>
+              <!--<includes>**/*.adoc,images/**</includes>-->
               <includeClassifiers>docs</includeClassifiers>
-              <outputDirectory>${project.build.directory}/docs/guide-for-java-devs</outputDirectory>
+              <outputDirectory>${project.build.directory}/docs</outputDirectory>
             </configuration>
           </execution>
           <!-- unpack webjars -->
@@ -895,395 +607,179 @@
               <outputDirectory>${project.build.directory}/webjars</outputDirectory>
             </configuration>
           </execution>
-          <execution>
-            <!--解压出来的java文件是用来生成apidocs的-->
-            <id>unpack-sources</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <markersDirectory>${project.build.directory}/java-unpack-sources-markers</markersDirectory>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <includeClassifiers>sources</includeClassifiers>
-              <includes>**/*.java,examples/**/*.java</includes>
-              <excludes>
-                **/impl/**/*.java,io/vertx/groovy/**,examples/**,**\/package-info.java
-              </excludes>
-              <outputDirectory>${project.build.directory}/sources/java</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <!--按照vertx-stack-generation的逻辑来生成对应语言的文档  https://github.com/vert-x3/vertx-stack-generation-->
-            <id>unpack-stack-generation-source</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <markersDirectory>${project.build.directory}/java-unpack-markers</markersDirectory>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <includeArtifactIds>
-                vertx-core,
-                vertx-unit,
-                vertx-bridge-common,
-                vertx-sql-common,
-                vertx-mongo-client,
-                vertx-mongo-service,
-                vertx-jdbc-client,
-                vertx-auth-common,
-                vertx-auth-jdbc,
-                vertx-auth-htdigest,
-                vertx-auth-htpasswd,
-                vertx-auth-jwt,
-                vertx-auth-mongo,
-                vertx-auth-oauth2,
-                vertx-auth-shiro,
-                vertx-jwt,
-                vertx-web-common,
-                vertx-web-client,
-                vertx-web,
-                vertx-web-templ-freemarker,
-                vertx-web-templ-handlebars,
-                vertx-web-templ-jade,
-                vertx-web-templ-mvel,
-                vertx-web-templ-pebble,
-                vertx-web-templ-rocker,
-                vertx-web-templ-thymeleaf,
-                vertx-circuit-breaker,
-                vertx-dropwizard-metrics,
-                vertx-redis-client,
-                vertx-stomp,
-                vertx-mail-client,
-                vertx-consul-client,
-                vertx-service-discovery,
-                vertx-service-discovery-backend-consul,
-                vertx-service-discovery-backend-redis,
-                vertx-service-discovery-backend-zookeeper,
-                vertx-service-discovery-bridge-consul,
-                vertx-service-discovery-bridge-docker,
-                vertx-service-discovery-bridge-kubernetes,
-                vertx-service-discovery-bridge-zookeeper,
-                vertx-service-discovery-bridge-docker-links,
-                vertx-config,
-                vertx-config-git,
-                vertx-config-hocon,
-                vertx-config-kubernetes-configmap,
-                vertx-config-redis,
-                vertx-config-spring-config-server,
-                vertx-config-zookeeper,
-                vertx-config-yaml,
-                vertx-config-vault,
-                vertx-config-consul,
-                vertx-amqp-bridge,
-                vertx-kafka-client,
-                vertx-mqtt,
-                vertx-mysql-postgresql-client,
-                vertx-rabbitmq-client,
-                vertx-health-check,
-                vertx-shell,
-                vertx-micrometer-metrics
-              </includeArtifactIds>
-              <includeClassifiers>sources</includeClassifiers>
-              <includeTypes>jar</includeTypes>
-              <includes>io/vertx/**/*.java,examples/**/*.java</includes>
-              <excludes>
-                **/impl/**/*.java,io/vertx/groovy/**,io/vertx/reactivex/**,io/vertx/rxjava/**,examples/override/**
-              </excludes>
-              <outputDirectory>${project.build.directory}/sources/stack-generation-source/java</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>unpack-asciidoc</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <markersDirectory>${project.build.directory}/asciidoc-unpack-markers</markersDirectory>
-              <!--与vertx-stack-generation不同，因为java的文档不是从docs.zip里解压的，所以这里需要把images也全部导出-->
-              <includes>*.adoc,images/**</includes>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <includeArtifactIds>
-                vertx-core,
-                vertx-unit,
-                vertx-bridge-common,
-                vertx-sql-common,
-                vertx-mongo-client,
-                vertx-mongo-service,
-                vertx-jdbc-client,
-                vertx-auth-common,
-                vertx-auth-jdbc,
-                vertx-auth-htdigest,
-                vertx-auth-htpasswd,
-                vertx-auth-jwt,
-                vertx-auth-mongo,
-                vertx-auth-oauth2,
-                vertx-auth-shiro,
-                vertx-jwt,
-                vertx-web-common,
-                vertx-web-client,
-                vertx-web,
-                vertx-web-templ-freemarker,
-                vertx-web-templ-handlebars,
-                vertx-web-templ-jade,
-                vertx-web-templ-mvel,
-                vertx-web-templ-pebble,
-                vertx-web-templ-rocker,
-                vertx-web-templ-thymeleaf,
-                vertx-circuit-breaker,
-                vertx-dropwizard-metrics,
-                vertx-redis-client,
-                vertx-stomp,
-                vertx-mail-client,
-                vertx-consul-client,
-                vertx-service-discovery,
-                vertx-service-discovery-backend-consul,
-                vertx-service-discovery-backend-redis,
-                vertx-service-discovery-backend-zookeeper,
-                vertx-service-discovery-bridge-consul,
-                vertx-service-discovery-bridge-docker,
-                vertx-service-discovery-bridge-kubernetes,
-                vertx-service-discovery-bridge-zookeeper,
-                vertx-service-discovery-bridge-docker-links,
-                vertx-config,
-                vertx-config-git,
-                vertx-config-hocon,
-                vertx-config-kubernetes-configmap,
-                vertx-config-redis,
-                vertx-config-spring-config-server,
-                vertx-config-zookeeper,
-                vertx-config-yaml,
-                vertx-config-vault,
-                vertx-config-consul,
-                vertx-amqp-bridge,
-                vertx-kafka-client,
-                vertx-mqtt,
-                vertx-mysql-postgresql-client,
-                vertx-rabbitmq-client,
-                vertx-health-check,
-                vertx-shell,
-                vertx-micrometer-metrics
-              </includeArtifactIds>
-              <includeClassifiers>sources</includeClassifiers>
-              <outputDirectory>${project.build.directory}/sources/stack-generation-source/asciidoc</outputDirectory>
-              <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
-              <stripVersion>true</stripVersion>
-              <stripClassifier>true</stripClassifier>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>unpack-docs</id>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <markersDirectory>${project.build.directory}/docs-unpack-markers</markersDirectory>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <useSubDirectoryPerArtifact>true</useSubDirectoryPerArtifact>
-              <includeClassifiers>docs</includeClassifiers>
-              <stripClassifier>true</stripClassifier>
-              <stripVersion>true</stripVersion>
-              <outputDirectory>${project.build.directory}/sources/docs</outputDirectory>
-            </configuration>
-          </execution>
         </executions>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>${asciidoctor-maven-plugin.version}</version>
         <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-pdf</artifactId>
+            <version>${asciidoctorj-pdf.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj</artifactId>
+            <version>${asciidoctorj.version}</version>
+          </dependency>
         </dependencies>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>mkdir</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <target name="mkdirs">
-                <!--这里创建文件夹，如果存在则不会创建。目的是为了后面复制的时候确保有文件夹存在-->
-                <mkdir dir="${project.basedir}/src/main/translation/origin/guide-for-java-devs"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-amqp-bridge"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-common"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-htdigest"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-htpasswd"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-jdbc"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-jwt"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-mongo"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-oauth2"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-auth-shiro"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-bridge-common"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-camel-bridge"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-circuit-breaker"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-consul"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-git"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-hocon"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-kubernetes-configmap"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-redis"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-spring-config-server"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-vault"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-yaml"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-config-zookeeper"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-consul-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-consul-discovery"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-consul-service"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-core"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-docker"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-dropwizard-metrics"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-grpc"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-hazelcast"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-health-check"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-http-service-factory"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-ignite"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-infinispan"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-jdbc-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-junit5"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-jwt"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-kafka-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-lang-kotlin-coroutines"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-mail-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-mail-service"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-maven-service-factory"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-micrometer-metrics"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-mongo-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-mongo-service"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-mqtt"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-mysql-postgresql-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-proton"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-rabbitmq-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-reactive-streams"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-redis-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-rx"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery-backend-consul"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery-backend-redis"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery-backend-zookeeper"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery-bridge-consul"/>
-                <mkdir
-                  dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery-bridge-docker-links"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery-bridge-kubernetes"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-discovery-bridge-zookeeper"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-factory"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-service-proxy"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-shell"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-sockjs-service-proxy"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-sql-common"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-stack-manager"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-stomp"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-sync"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-tcp-eventbus-bridge"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-unit"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-web"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-web-api-contract"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-web-client"/>
-                <mkdir dir="${project.basedir}/src/main/translation/origin/vertx-zookeeper"/>
-              </target>
-            </configuration>
-          </execution>
-          <!-- Remove the -source-jar suffix in unpacked asciidoc -->
-          <execution>
-            <id>copy images</id>
-            <phase>generate-sources</phase>
-            <configuration>
-              <target name="Remove the -source-jar prefix in unpackage asciidoc">
-                <move todir="${project.build.directory}/sources/stack-generation-source/asciidoc">
-                  <fileset dir="${project.build.directory}/sources/stack-generation-source/asciidoc">
-                    <include name="**/*"/>
-                  </fileset>
-                  <mapper type="regexp" from="^(.*)-sources-jar(.*)$" to="\1\2"/>
-                </move>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- 生成java-apidocs -->
-      <!--<plugin>-->
-      <!--<artifactId>maven-javadoc-plugin</artifactId>-->
-      <!--<version>2.9.1</version>-->
-      <!--<executions>-->
-      <!--<execution>-->
-      <!--<goals>-->
-      <!--<goal>javadoc</goal>-->
-      <!--</goals>-->
-      <!--<phase>process-resources</phase>-->
-      <!--<configuration>-->
-      <!--<reportOutputDirectory>${project.build.directory}/docs/</reportOutputDirectory>-->
-      <!--<additionalparam>-Xdoclint:none</additionalparam>-->
-      <!--<sourcepath>${project.build.directory}/sources/java</sourcepath>-->
-      <!--<detectLinks/>-->
-      <!--<detectJavaApiLink/>-->
-      <!--<links>-->
-      <!--<link>http://docs.hazelcast.org/docs/3.5/javadoc/</link>-->
-      <!--<link>http://reactivex.io/RxJava/1.x/javadoc/</link>-->
-      <!--<link>http://reactivex.io/RxJava/javadoc/</link>-->
-      <!--<link>http://netty.io/4.1/api/</link>-->
-      <!--<link>http://fasterxml.github.com/jackson-annotations/javadoc/2.9/</link>-->
-      <!--<link>http://fasterxml.github.io/jackson-core/javadoc/2.9/</link>-->
-      <!--<link>http://fasterxml.github.io/jackson-databind/javadoc/2.9/</link>-->
-      <!--<link>http://www.grpc.io/grpc-java/javadoc/</link>-->
-      <!--</links>-->
-      <!--</configuration>-->
-      <!--</execution>-->
-      <!--</executions>-->
-      <!--</plugin>-->
-      <plugin>
-        <groupId>org.bsc.maven</groupId>
-        <artifactId>maven-processor-plugin</artifactId>
-        <version>3.1.0</version>
         <configuration>
-          <systemProperties>
-            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n
-            </java.util.logging.SimpleFormatter.format>
-            <mvel2.disable.jit>true</mvel2.disable.jit>
-          </systemProperties>
+          <doctype>book</doctype>
+          <relativeBaseDir>true</relativeBaseDir>
+          <preserveDirectories>true</preserveDirectories>
+          <imagesDir>images@</imagesDir>
+          <eruby>erb</eruby>
+          <templateDir>${basedir}/src/main/docs/templates</templateDir>
         </configuration>
         <executions>
           <execution>
-            <id>generate-stack-generation</id>
+            <id>process-vertx-docs</id>
             <goals>
-              <goal>process</goal>
+              <goal>process-asciidoc</goal>
             </goals>
             <phase>generate-sources</phase>
             <configuration>
-              <sourceDirectory>${project.build.directory}/sources/stack-generation-source/java</sourceDirectory>
-              <processors>
-                <processor>io.vertx.docgen.CustomDocGenProcessor</processor>
-              </processors>
-              <optionMap>
-                <docgen.source>${project.build.directory}/sources/stack-generation-source/asciidoc</docgen.source>
-                <docgen.output>${project.build.directory}/asciidoc/$lang</docgen.output>
-                <docgen.generators>js,groovy,kotlin,ruby,java</docgen.generators>
-                <maven.groupId>io.vertx</maven.groupId>
-                <maven.version>${vertx.version}</maven.version>
-              </optionMap>
+              <backend>html</backend>
+              <attributes>
+                <toc>left</toc>
+                <stylesheet>/stylesheets/docs.css</stylesheet>
+                <linkcss></linkcss>
+                <sourceHighlighter>prettify</sourceHighlighter>
+              </attributes>
+              <sourceDirectory>${project.build.directory}/docs</sourceDirectory>
+              <outputDirectory>${project.build.directory}/docs-generated</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>process-site-docs</id>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <backend>html</backend>
+              <attributes>
+                <toc>left</toc>
+                <stylesheet>/stylesheets/docs.css</stylesheet>
+                <linkcss></linkcss>
+                <sourceHighlighter>prettify</sourceHighlighter>
+              </attributes>
+              <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
+              <outputDirectory>${project.build.directory}/docs-generated</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>guide-for-java-devs-to-html</id>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <backend>html</backend>
+              <attributes>
+                <toc>left</toc>
+                <stylesheet>/stylesheets/docs.css</stylesheet>
+                <linkcss></linkcss>
+                <rendered-pdf-link>guide-for-java-devs.pdf</rendered-pdf-link>
+                <sourceHighlighter>prettify</sourceHighlighter>
+              </attributes>
+              <sourceDirectory>${project.build.directory}/docs/guide-for-java-devs</sourceDirectory>
+              <sourceDocumentName>index.adoc</sourceDocumentName>
+              <outputDirectory>${project.build.directory}/docs-generated/guide-for-java-devs-override
+              </outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>guide-for-java-devs-to-pdf</id>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <backend>pdf</backend>
+              <sourceHighlighter>rouge</sourceHighlighter>
+              <attributes>
+                <icons>font</icons>
+                <autofit-option></autofit-option>
+                <toc></toc>
+                <toclevels>4</toclevels>
+                <sectnums></sectnums>
+                <front-cover-image>cover.pdf</front-cover-image>
+              </attributes>
+              <sourceDirectory>${project.build.directory}/docs/guide-for-java-devs</sourceDirectory>
+              <sourceDocumentName>index.adoc</sourceDocumentName>
+              <outputDirectory>${project.build.directory}/docs-generated/guide-for-java-devs</outputDirectory>
             </configuration>
           </execution>
         </executions>
       </plugin>
 
-      <!-- Run it to preview docs : mvn asciidoctor:process-asciidoc -->
-      <!--<plugin>-->
-      <!--<groupId>org.asciidoctor</groupId>-->
-      <!--<artifactId>asciidoctor-maven-plugin</artifactId>-->
-      <!--<configuration>-->
-      <!--<attributes>-->
-      <!--<toc>left</toc>-->
-      <!--</attributes>-->
-      <!--<sourceDirectory>${project.build.directory}/docs</sourceDirectory>-->
-      <!--<outputDirectory>${project.build.directory}/html</outputDirectory>-->
-      <!--</configuration>-->
-      <!--</plugin>-->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <configuration>
+              <target>
+                <!-- Copy assets from webjars to site dir -->
+                <copy todir="${project.build.directory}/site/javascripts/styles"
+                      file="${project.build.directory}/webjars/META-INF/resources/webjars/highlightjs/${highlightjs.version}/styles/rainbow.min.css"/>
+                <!-- create a nojekyll file -->
+                <touch file="${project.build.directory}/site/.nojekyll"/>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>generate-sources</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>0.0.28</version>
+        <executions>
+          <!-- install node.js -->
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <nodeVersion>v4.2.2</nodeVersion>
+              <npmVersion>3.4.1</npmVersion>
+            </configuration>
+          </execution>
+
+          <!-- install npm modules -->
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+
+          <!-- run gulp -->
+          <execution>
+            <id>gulp</id>
+            <goals>
+              <goal>gulp</goal>
+            </goals>
+            <phase>generate-sources</phase>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 

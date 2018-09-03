@@ -1,5 +1,5 @@
 {
-  "version": "${project.version}",
+  "version": "${vertx.version}",
   "download": "${vertx.download.version}",
   "host": "${host}"
 }
