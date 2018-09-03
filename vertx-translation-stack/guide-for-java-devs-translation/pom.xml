@@ -69,8 +69,28 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-translation</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="复制翻译文档">
+                <copy todir="${project.build.directory}/asciidoc/guide-for-java-devs" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/translation"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
