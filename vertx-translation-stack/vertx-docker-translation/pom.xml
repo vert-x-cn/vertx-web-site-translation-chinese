@@ -19,14 +19,16 @@
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>${module}</artifactId>
+      <artifactId>vertx-stack-docker</artifactId>
       <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>${module}</artifactId>
-      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+      <exclusions>
+        <exclusion>
+          <groupId>io.vertx</groupId>
+          <artifactId>vertx-stack-manager</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -75,45 +77,56 @@
       <version>${vertx.version}</version>
     </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.bsc.maven</groupId>
-        <artifactId>maven-processor-plugin</artifactId>
-        <configuration>
-          <addCompileSourceRoots>true</addCompileSourceRoots>
-        </configuration>
         <executions>
+          <!-- 解压adoc文件 -->
           <execution>
-            <id>generate-asciidoc</id>
+            <id>unpack-asciidoc</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
             <configuration>
-              <skip>true</skip>
-            </configuration>
-          </execution>
-          <execution>
-            <id>generate-java-asciidoc</id>
-            <configuration>
-              <skip>true</skip>
-            </configuration>
-          </execution>
-          <execution>
-            <id>generate-scala-asciidoc</id>
-            <configuration>
-              <skip>true</skip>
+              <markersDirectory>${project.build.directory}/markers/unpack-asciidoc</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>
+                vertx-stack-docker
+              </includeArtifactIds>
+              <includes>**/*.adoc</includes>
+              <includeClassifiers>docs</includeClassifiers>
+              <includeTypes>zip</includeTypes>
+              <excludes>override/**</excludes>
+              <outputDirectory>${project.build.directory}/asciidoc/vertx-docker</outputDirectory>
             </configuration>
           </execution>
         </executions>
       </plugin>
-       <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-       </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-translation</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="复制翻译文档">
+                <copy todir="${project.build.directory}/asciidoc/vertx-docker" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/translation"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 </project>

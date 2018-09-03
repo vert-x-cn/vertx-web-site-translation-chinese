@@ -74,22 +74,199 @@
       <artifactId>vertx-lang-scala_2.12</artifactId>
       <version>${vertx.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-git</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-hocon</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-kubernetes-configmap</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-redis</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-spring-config-server</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-vault</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-consul</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-yaml</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-zookeeper</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-git-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-hocon-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-kubernetes-configmap-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-redis-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-spring-config-server-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-vault-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-consul-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-yaml-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-zookeeper-translation</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <!-- 解压examples源码 -->
+          <execution>
+            <id>unpack-examples</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/markers/unpack-examples</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>
+                ${module},
+                vertx-config-git,
+                vertx-config-hocon,
+                vertx-config-kubernetes-configmap,
+                vertx-config-redis,
+                vertx-config-spring-config-server,
+                vertx-config-vault,
+                vertx-config-consul,
+                vertx-config-yaml,
+                vertx-config-zookeeper
+              </includeArtifactIds>
+              <includes>examples/**/*.java,example/**/*.java</includes>
+              <includeClassifiers>sources</includeClassifiers>
+              <outputDirectory>${project.build.directory}/sources/java</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>unpack-config-stack</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/markers/unpack-config-stack</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>
+                vertx-config-git,
+                vertx-config-hocon,
+                vertx-config-kubernetes-configmap,
+                vertx-config-redis,
+                vertx-config-spring-config-server,
+                vertx-config-vault,
+                vertx-config-consul,
+                vertx-config-yaml,
+                vertx-config-zookeeper
+              </includeArtifactIds>
+              <includes>**/*.adoc</includes>
+              <includeClassifiers>sources</includeClassifiers>
+              <excludes>override/**,dataobjects.adoc</excludes>
+              <outputDirectory>${project.build.directory}/sources/stack-asciidoc</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-stack-translation</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="复制stack翻译文档">
+                <copy todir="${project.build.directory}/sources/stack-asciidoc" overwrite="true">
+                  <fileset dir="${project.basedir}/../vertx-config-git-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-hocon-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-kubernetes-configmap-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-redis-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-spring-config-server-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-vault-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-consul-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-yaml-translation/src/main/translation"/>
+                  <fileset dir="${project.basedir}/../vertx-config-zookeeper-translation/src/main/translation"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <configuration>
-          <addCompileSourceRoots>true</addCompileSourceRoots>
-        </configuration>
         <executions>
           <execution>
             <id>generate-asciidoc</id>
@@ -109,11 +286,51 @@
               <skip>false</skip>
             </configuration>
           </execution>
+
+          <execution>
+            <id>generate-java-stack-asciidoc</id>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <sourceDirectory>${project.build.directory}/sources/java</sourceDirectory>
+              <processors>
+                <processor>io.vertx.docgen.JavaDocGenProcessor</processor>
+              </processors>
+              <optionMap>
+                <docgen.source>${project.build.directory}/sources/stack-asciidoc</docgen.source>
+                <docgen.output>${asciidoc.path}/${module}/$lang</docgen.output>
+                <maven.groupId>io.vertx</maven.groupId>
+                <maven.version>${vertx.version}</maven.version>
+              </optionMap>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-scala-stack-asciidoc</id>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <sourceDirectory>${project.build.directory}/sources/java</sourceDirectory>
+              <processors>
+                <processor>io.vertx.docgen.CustomDocGenProcessor</processor>
+              </processors>
+              <optionMap>
+                <docgen.source>${project.build.directory}/sources/stack-asciidoc</docgen.source>
+                <docgen.output>${asciidoc.path}/${module}/$lang</docgen.output>
+                <docgen.generators>scala</docgen.generators>
+                <maven.groupId>io.vertx</maven.groupId>
+                <maven.version>${vertx.version}</maven.version>
+              </optionMap>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
-       <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-       </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 </project>

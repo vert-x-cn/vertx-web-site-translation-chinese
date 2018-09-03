@@ -118,11 +118,11 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>tk.okou</groupId>-->
-    <!--<artifactId>vertx-config-consul-translation</artifactId>-->
-    <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-consul-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-git-translation</artifactId>
@@ -158,11 +158,11 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>tk.okou</groupId>-->
-    <!--<artifactId>vertx-config-vault-translation</artifactId>-->
-    <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-config-vault-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-yaml-translation</artifactId>
@@ -203,11 +203,11 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>tk.okou</groupId>-->
-    <!--<artifactId>vertx-docker-translation</artifactId>-->
-    <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-docker-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-dropwizard-metrics-translation</artifactId>
@@ -376,11 +376,11 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>tk.okou</groupId>-->
-    <!--<artifactId>vertx-rx-translation</artifactId>-->
-    <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-rx-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-translation</artifactId>
@@ -388,11 +388,11 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>tk.okou</groupId>-->
-    <!--<artifactId>vertx-service-discovery-backend-consul-translation</artifactId>-->
-    <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-service-discovery-backend-consul-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-backend-redis-translation</artifactId>
@@ -470,11 +470,11 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
-    <!--<dependency>-->
-    <!--<groupId>tk.okou</groupId>-->
-    <!--<artifactId>vertx-stack-manager-translation</artifactId>-->
-    <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-stack-manager-translation</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-stomp-translation</artifactId>
@@ -536,6 +536,44 @@
       <artifactId>highlightjs</artifactId>
       <version>${highlightjs.version}</version>
     </dependency>
+
+
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-ceylon</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-js</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-kotlin</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-ruby</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-scala-docs_2.12</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
   </dependencies>
 
   <repositories>
@@ -577,21 +615,6 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.0.2</version>
         <executions>
-          <!-- 解压adoc文件 -->
-          <execution>
-            <id>unpack-asciidoc</id>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <markersDirectory>${project.build.directory}/markers/unpack-asciidoc</markersDirectory>
-              <includeGroupIds>tk.okou</includeGroupIds>
-              <!--<includes>**/*.adoc,images/**</includes>-->
-              <includeClassifiers>docs</includeClassifiers>
-              <outputDirectory>${project.build.directory}/docs</outputDirectory>
-            </configuration>
-          </execution>
           <!-- unpack webjars -->
           <execution>
             <id>unpack-webjars</id>
@@ -607,9 +630,85 @@
               <outputDirectory>${project.build.directory}/webjars</outputDirectory>
             </configuration>
           </execution>
+          <execution>
+            <id>unpack-apidoc</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>
+                vertx-lang-kotlin,
+                vertx-lang-js,
+                vertx-lang-ceylon,
+                vertx-lang-scala-docs_2.12,
+                vertx-lang-ruby
+              </includeArtifactIds>
+              <includeClassifiers>docs</includeClassifiers>
+              <includeTypes>zip</includeTypes>
+              <includes>ceylondoc/**,jsdoc/**,kdoc/**,scaladocs/**,yardoc/**</includes>
+              <outputDirectory>${project.build.directory}/docs</outputDirectory>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <id>copy-asciidoc</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <target>
+                <copy todir="${project.build.directory}/docs">
+                  <fileset dir="${project.basedir}/../vertx-translation-stack">
+                    <include name="vertx-*/target/asciidoc/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^vertx-[^\\]*\\target\\asciidoc\\(.*)" to="\1"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <configuration>
+              <target>
+                <!-- Copy assets from webjars to site dir -->
+                <copy todir="${project.build.directory}/site/javascripts/styles"
+                      file="${project.build.directory}/webjars/META-INF/resources/webjars/highlightjs/${highlightjs.version}/styles/rainbow.min.css"/>
+                <!-- create a nojekyll file -->
+                <touch file="${project.build.directory}/site/.nojekyll"/>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>generate-sources</phase>
+          </execution>
+          <execution>
+            <id>fix-guide-for-java-devs-files</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <target>
+                <move file="${project.build.directory}/docs-generated/guide-for-java-devs-override/index.html"
+                      todir="${project.build.directory}/docs-generated/guide-for-java-devs"
+                      overwrite="true"/>
+                <move file="${project.build.directory}/docs-generated/guide-for-java-devs/index.pdf"
+                      tofile="${project.build.directory}/docs-generated/guide-for-java-devs/guide-for-java-devs.pdf"/>
+                <delete dir="${project.build.directory}/docs-generated/guide-for-java-devs-override"/>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>org.asciidoctor</groupId>
@@ -714,28 +813,6 @@
               <sourceDocumentName>index.adoc</sourceDocumentName>
               <outputDirectory>${project.build.directory}/docs-generated/guide-for-java-devs</outputDirectory>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <configuration>
-              <target>
-                <!-- Copy assets from webjars to site dir -->
-                <copy todir="${project.build.directory}/site/javascripts/styles"
-                      file="${project.build.directory}/webjars/META-INF/resources/webjars/highlightjs/${highlightjs.version}/styles/rainbow.min.css"/>
-                <!-- create a nojekyll file -->
-                <touch file="${project.build.directory}/site/.nojekyll"/>
-              </target>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <phase>generate-sources</phase>
           </execution>
         </executions>
       </plugin>

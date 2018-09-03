@@ -17,12 +17,12 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>${module}</artifactId>
-      <version>${vertx.version}</version>
-      <classifier>sources</classifier>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>io.vertx</groupId>-->
+      <!--<artifactId>${module}</artifactId>-->
+      <!--<version>${vertx.version}</version>-->
+      <!--<classifier>sources</classifier>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>${module}</artifactId>

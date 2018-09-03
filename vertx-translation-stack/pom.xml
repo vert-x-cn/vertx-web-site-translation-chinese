@@ -32,7 +32,7 @@
   </dependencies>
 
   <modules>
-    <module>guide-for-java-devs-translation</module>
+    <module>vertx-guide-for-java-devs-translation</module>
     <module>vertx-amqp-bridge-translation</module>
     <module>vertx-auth-common-translation</module>
     <module>vertx-auth-htdigest-translation</module>
@@ -46,20 +46,20 @@
     <module>vertx-camel-bridge-translation</module>
     <module>vertx-circuit-breaker-translation</module>
     <module>vertx-config-translation</module>
-    <!--<module>vertx-config-consul-translation</module>-->
+    <module>vertx-config-consul-translation</module>
     <module>vertx-config-git-translation</module>
     <module>vertx-config-hocon-translation</module>
     <module>vertx-config-kubernetes-configmap-translation</module>
     <module>vertx-config-redis-translation</module>
     <module>vertx-config-spring-config-server-translation</module>
-    <!--<module>vertx-config-vault-translation</module>-->
+    <module>vertx-config-vault-translation</module>
     <module>vertx-config-yaml-translation</module>
     <module>vertx-config-zookeeper-translation</module>
     <module>vertx-consul-client-translation</module>
     <!--<module>vertx-consul-discovery-translation</module>-->
     <module>vertx-consul-service-translation</module>
     <module>vertx-core-translation</module>
-    <!--<module>vertx-docker-translation</module>-->
+    <module>vertx-docker-translation</module>
     <module>vertx-dropwizard-metrics-translation</module>
     <module>vertx-grpc-translation</module>
     <module>vertx-hazelcast-translation</module>
@@ -84,9 +84,9 @@
     <module>vertx-rabbitmq-client-translation</module>
     <module>vertx-reactive-streams-translation</module>
     <module>vertx-redis-client-translation</module>
-    <!--<module>vertx-rx-translation</module>-->
+    <module>vertx-rx-translation</module>
     <module>vertx-service-discovery-translation</module>
-    <!--<module>vertx-service-discovery-backend-consul-translation</module>-->
+    <module>vertx-service-discovery-backend-consul-translation</module>
     <module>vertx-service-discovery-backend-redis-translation</module>
     <module>vertx-service-discovery-backend-zookeeper-translation</module>
     <module>vertx-service-discovery-bridge-consul-translation</module>
@@ -98,7 +98,7 @@
     <module>vertx-shell-translation</module>
     <module>vertx-sockjs-service-proxy-translation</module>
     <module>vertx-sql-common-translation</module>
-    <!--<module>vertx-stack-manager-translation</module>-->
+    <module>vertx-stack-manager-translation</module>
     <module>vertx-stomp-translation</module>
     <module>vertx-sync-translation</module>
     <module>vertx-tcp-eventbus-bridge-translation</module>
