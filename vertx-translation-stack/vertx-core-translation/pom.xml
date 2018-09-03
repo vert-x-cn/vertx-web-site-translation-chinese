@@ -74,15 +74,152 @@
       <artifactId>vertx-lang-scala_2.12</artifactId>
       <version>${vertx.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-groovy</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-js</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-kotlin</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-ruby</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-scala_2.12</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-core</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
   </dependencies>
   
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-override</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/markers/unpack-override</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includes>**/override/*.adoc</includes>
+              <includeClassifiers>docs</includeClassifiers>
+              <includeTypes>zip</includeTypes>
+              <outputDirectory>${project.build.directory}/sources/override</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>mkdir-override</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="创建override文件夹">
+                <mkdir dir="${project.basedir}/src/main/override/groovy"/>
+                <mkdir dir="${project.basedir}/src/main/override/java"/>
+                <mkdir dir="${project.basedir}/src/main/override/js"/>
+                <mkdir dir="${project.basedir}/src/main/override/kotlin"/>
+                <mkdir dir="${project.basedir}/src/main/override/ruby"/>
+                <mkdir dir="${project.basedir}/src/main/override/scala"/>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-override</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="复制override文档">
+                <copy todir="${project.build.directory}/asciidoc/${module}/groovy/override" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/vertx-core/groovy/override"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/java/override" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/java/java/override"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/js/override" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/vertx-core/js/override"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/kotlin/override" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/vertx-core/kotlin/override"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/ruby/override" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/vertx-core/ruby/override"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/scala/override" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/scala/override"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-translation-override</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="复制override翻译文档">
+                <copy todir="${project.build.directory}/asciidoc/${module}/groovy/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/groovy"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/java/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/java"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/js/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/js"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/kotlin/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/kotlin"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/ruby/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/ruby"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/scala/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/scala"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.bsc.maven</groupId>

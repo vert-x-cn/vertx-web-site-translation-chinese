@@ -128,6 +128,7 @@
                 <includeArtifactIds>${module}</includeArtifactIds>
                 <includes>**/*.adoc</includes>
                 <includeClassifiers>sources</includeClassifiers>
+                <excludes>override/**</excludes>
                 <outputDirectory>${project.build.directory}/sources/asciidoc</outputDirectory>
               </configuration>
             </execution>
@@ -201,7 +202,7 @@
               </configuration>
             </execution>
             <execution>
-              <id>translation-override</id>
+              <id>copy-translation</id>
               <phase>generate-sources</phase>
               <goals>
                 <goal>run</goal>

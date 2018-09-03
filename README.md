@@ -14,4 +14,8 @@ mvn clean install
 
 每个模块的翻译，需要到指定模块下的`src/main/translation`目录完成。git不管理空文件夹，因此，未翻译的模块，该目录在clone之后，理论上是不存在的，在构建之后，会自动创建。也可以手动创建。
 
+###说明
+
+vertx-core有个override需要翻译，翻译的文件在`src/main/override`目录完成
+
 
