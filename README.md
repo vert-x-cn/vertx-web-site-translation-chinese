@@ -2,13 +2,13 @@
 
 # vert.x官网翻译项目 
 
-##构建
+## 构建
 
 ```bash
 mvn clean compile
 ```
 
-
+vertx-web-site-translation-chinese依赖vertx-translation-stack的所有子模块，在所有子模块处理完之后，会到子模块的target/asciidoc目录下拷贝处理完的文件到vertx-web-site-translation-chinese的target/docs目录下，然后进行site操作
 
 ## 翻译
 
