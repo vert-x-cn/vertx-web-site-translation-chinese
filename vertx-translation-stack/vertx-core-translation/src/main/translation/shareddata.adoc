@@ -1,0 +1,117 @@
+== 使用 Vert.x 共享数据
+
+共享数据（Shared Data）包含的功能允许您可以安全地在应用程序的不同部分之间、同一 Vert.x 实例中的不同应用程序之间或集群中的不同 Vert.x 实例之间安全地共享数据。
+
+共享数据包括：
+
+ * synchronous shared maps (local)
+ * asynchronous maps (local or cluster-wide)
+ * asynchronous locks (local or cluster-wide)
+ * asynchronous counters (local or cluster-wide)
+
+IMPORTANT: 分布式数据结构的行为取决于您使用的集群管理器，网络分区面临的备份（复制）和行为由集群管理器和它的配置来定义。请参阅集群管理器文档以及底层框架手册。
+
+=== 本地共享Map
+
+本地共享Map {@link io.vertx.core.shareddata.LocalMap Local shared maps} 允许您在同一个 Vert.x 实例中的不同 Event Loop（如不同的 Verticle 中）之间安全共享数据。
+
+本地共享Map仅允许将某些数据类型作为键值和值，这些类型必须是不可变的，或可以像 {@link io.vertx.core.buffer.Buffer} 那样复制某些其他类型。在后一种情况中，键/值将被复制，然后再放到Map中。
+
+这样，我们可以确保在Vert.x应用程序不同线程之间 **没有共享访问可变状态**，因此您不必担心需要通过同步访问来保护该状态。
+
+以下是使用 `LocalMap` 的示例：
+
+[source,$lang]
+----
+{@link examples.SharedDataExamples#example1}
+----
+
+=== 集群范围异步Map
+
+集群范围异步Map(Cluster-wide asynchronous maps)允许从集群的任何节点将数据放到 Map 中，并从任何其他节点读取。
+
+IMPORTANT: In clustered mode, asynchronous shared maps rely on distributed data structures provided by the cluster manager.
+Beware that the latency relative to asynchronous shared map operations can be much higher in clustered than in local mode.
+
+这使得它们对于托管Vert.x Web应用程序的服务器场中的会话状态存储非常有用。
+
+您可以使用 {@link io.vertx.core.shareddata.SharedData#getAsyncMap(java.lang.String,io.vertx.core.Handler)} 方法获取
+{@link io.vertx.core.shareddata.AsyncMap} 的实例。
+
+获取Map的过程是异步的，返回结果可以传给您指定的处理器中。以下是一个例子：
+
+[source,$lang]
+----
+{@link examples.SharedDataExamples#example2}
+----
+
+==== 将数据放入Map
+
+您可以使用 {@link io.vertx.core.shareddata.AsyncMap#put(java.lang.Object,java.lang.Object,io.vertx.core.Handler)} 方法将数据放入Map。
+
+`put`方法是异步的，一旦完成它会通知处理器：
+
+[source,$lang]
+----
+{@link examples.SharedDataExamples#example3}
+----
+
+==== 从Map读取数据
+
+您可以使用 {@link io.vertx.core.shareddata.AsyncMap#get(java.lang.Object,io.vertx.core.Handler)} 方法从Map读取数据。
+
+`get` 方法也是异步的，一段时间过后它会通知处理器并传入结果。
+
+[source,$lang]
+----
+{@link examples.SharedDataExamples#example4}
+----
+
+===== 其他Map操作
+
+您还可以从异步Map中删除条目、清除Map、读取它的大小。
+
+有关更多信息，请参阅 {@link io.vertx.core.shareddata.AsyncMap API 文档} 。
+
+=== 集群范围锁
+
+集群范围锁 {@link io.vertx.core.shareddata.Lock Asynchronous locks} 允许您在集群中获取独占锁 —— 当您想要在任何时间只在集群一个节点上执行某些操作或访问资源时，这很有用。
+
+集群范围锁具有异步API，它和大多数等待锁释放的阻塞调用线程的API锁不相同。
+
+可使用 {@link io.vertx.core.shareddata.SharedData#getLock(java.lang.String,io.vertx.core.Handler)} 方法获取锁。
+
+它不会阻塞，但当锁可用时，将 {@link io.vertx.core.shareddata.Lock} 的实例传入处理器并调用它，表示您现在拥有该锁。
+
+若您拥有的锁没有其他调用者，集群上的任何地方都可以获得该锁。
+
+当您用完锁后，您可以调用  {@link io.vertx.core.shareddata.Lock#release()} 方法来释放它，以便另一个调用者可获得它。
+
+[source,$lang]
+----
+{@link examples.SharedDataExamples#example5}
+----
+
+您可以为锁设置一个超时，若在超时时间期间无法获取锁，将会进入失败状态，处理器会去处理对应的异常：
+
+[source,$lang]
+----
+{@link examples.SharedDataExamples#example6}
+----
+
+=== 集群范围计数器
+
+很多时候我们需要在集群范围内维护一个原子计数器。
+
+您可以用 {@link io.vertx.core.shareddata.Counter} 来做到这一点。
+
+您可以通过 {@link io.vertx.core.shareddata.SharedData#getCounter(java.lang.String,io.vertx.core.Handler)} 方法获取一个实例：
+
+[source,$lang]
+----
+{@link examples.SharedDataExamples#example7}
+----
+
+一旦您有了一个实例，您可以获取当前的计数，以原子方式递增、递减，并使用各种方法添加一个值。
+
+有更多信息，请参阅 {@link io.vertx.core.shareddata.Counter API 文档}

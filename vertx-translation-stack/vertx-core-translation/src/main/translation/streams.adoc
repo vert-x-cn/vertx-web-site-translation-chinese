@@ -1,0 +1,111 @@
+
+== 流
+
+Vert.x有多个对象可以用于文件的读取和写入。
+
+在以前的版本中，只能通过操作指定的 {@link io.vertx.core.buffer.Buffer}
+对象来实现文件读写。从现在开始，流不再与 `Buffer` 耦合，它们可以和任意类型的对象一起工作。
+
+在 Vert.x 中，写调用是立即返回的，而写操作的实际是在内部队列中排队写入。
+
+不难看出，若写入对象的速度比实际写入底层数据资源速度快，那么写入队列就会无限增长，最终导致内存耗尽。
+
+为了解决这个问题，Vert.x API中的一些对象提供了简单的流程控制（回压）功能。
+
+任何可控制的写入流对象都实现了 {@link io.vertx.core.streams.WriteStream} 接口，相应的，任何可控制的读取流对象都实现了
+ {@link io.vertx.core.streams.ReadStream} 接口。
+
+让我们举个例子，我们要从`ReadStream`中读取数据，然后将数据写入`WriteStream`。
+
+一个非常简单的例子是从 {@link io.vertx.core.net.NetSocket} 读取然后写回到同一个 `NetSocket` - 因为 `NetSocket` 既实现了`ReadStream`也实现了`WriteStream` 接口。
+请注意，这些操作适用于任何实现了`ReadStream`和 `WriteStream` 接口的对象，包括HTTP 请求、HTTP 响应、异步文件 I/O 和 WebSocket等。
+
+一个最简单的方法是直接获取已经读取的数据，并立即将其写入`NetSocket`：
+
+[source,$lang]
+----
+{@link examples.StreamsExamples#pump1(io.vertx.core.Vertx)}
+----
+
+上面的例子有一个问题：如果从Socket读取数据的速度比写回Socket的速度快，那么它将在`NetSocket`的写队列中不断堆积，最终耗尽内存。
+这是有可能会发生，例如，若Socket另一端的客户端读取速度不够快，无法快速地向连接的另一端回压。
+
+由于 `NetSocket` 实现了 `WriteStream` 接口，我们可以在写入之前检查 `WriteStream` 是否已满：
+
+[source,$lang]
+----
+{@link examples.StreamsExamples#pump2(io.vertx.core.Vertx)}
+----
+
+这个例子不会耗尽内存，但如果写入队列已满，我们最终会丢失数据。我们真正想要做的是在写入队列已满时暂停读取 `NetSocket`：
+
+[source,$lang]
+----
+{@link examples.StreamsExamples#pump3(io.vertx.core.Vertx)}
+----
+
+我们已经快达到我们的目标，但还没有完全实现。现在 `NetSocket` 在文件已满时会暂停，但是当写队列处理完成时，我们需要取消暂停：
+
+[source,$lang]
+----
+{@link examples.StreamsExamples#pump4(io.vertx.core.Vertx)}
+----
+
+在这里，我们的目标实现了。当写队列准备好接收更多的数据时， {@link io.vertx.core.streams.WriteStream#drainHandler}
+事件处理器将被调用，它会恢复`NetSocket`的状态，允许读取更多的数据。
+
+在编写Vert.x 应用程序时，这样做是很常见的，因此我们提供了一个名为 {@link io.vertx.core.streams.Pump} 的帮助类，它为您完成所有这些艰苦的工作。
+您只需要给 `ReadStream` 追加上 `WriteStream`，然后启动它：
+
+[source,$lang]
+----
+{@link examples.StreamsExamples#pump5(io.vertx.core.Vertx)}
+----
+
+这和更加详细的例子完全一样。
+
+现在我们来看看 `ReadStream` 和 `WriteStream` 的方法。
+
+=== ReadStream
+
+`ReadStream`（可读流） 接口的实现类包括： {@link io.vertx.core.http.HttpClientResponse}, {@link io.vertx.core.datagram.DatagramSocket},
+{@link io.vertx.core.http.HttpClientRequest}, {@link io.vertx.core.http.HttpServerFileUpload},
+{@link io.vertx.core.http.HttpServerRequest}, {@link io.vertx.core.eventbus.MessageConsumer},
+{@link io.vertx.core.net.NetSocket}, {@link io.vertx.core.http.WebSocket}, {@link io.vertx.core.TimeoutStream},
+{@link io.vertx.core.file.AsyncFile}.
+
+函数：
+
+- {@link io.vertx.core.streams.ReadStream#handler}: 设置一个处理器，它将从`ReadStream`读取项
+- {@link io.vertx.core.streams.ReadStream#pause}: 暂停处理器，暂停时，处理器中将不会受到任何项
+- {@link io.vertx.core.streams.ReadStream#resume}: 恢复处理器，若任何项到达则处理器将被调用
+- {@link io.vertx.core.streams.ReadStream#exceptionHandler}: 若ReadStream发生异常，将被调用
+- {@link io.vertx.core.streams.ReadStream#endHandler}: 当流到达时将被调用。这有可能是到达了描述文件的EOF、达到HTTP请求的请求结束、或TCP Socket的连接被关闭
+
+=== WriteStream
+
+`WriteStream`（可写流）接口的实现类包括： {@link io.vertx.core.http.HttpClientRequest}, {@link io.vertx.core.http.HttpServerResponse}
+{@link io.vertx.core.http.WebSocket}, {@link io.vertx.core.net.NetSocket}, {@link io.vertx.core.file.AsyncFile},
+and {@link io.vertx.core.eventbus.MessageProducer}
+
+函数：
+
+- {@link io.vertx.core.streams.WriteStream#write}: 写入一个对象到 `WriteStream`，该方法将永远不会阻塞，内部是排队写入并且底层资源是异步写入。
+- {@link io.vertx.core.streams.WriteStream#setWriteQueueMaxSize}: 设置写入队列被认为是 *full* 的对象的数量——方法 {@link io.vertx.core.streams.WriteStream#writeQueueFull()} 返回`true`。注意，当写队列被认为已满时，若写（操作）被调用则数据依然会被接收和排队。实际数量取决于流的实现，对于 {@link io.vertx.core.buffer.Buffer} ，尺寸代表实际写入的字节数，而并非缓冲区的数量。
+- {@link io.vertx.core.streams.WriteStream#writeQueueFull}: 若写队列被认为已满，则返回`true`。
+- {@link io.vertx.core.streams.WriteStream#exceptionHandler}: 若`WriteStream`发生异常，则被调用。
+- {@link io.vertx.core.streams.WriteStream#drainHandler}: 若`WriteStream`被认为不再满，则处理器将被调用。
+
+=== 泵
+
+泵（Pump）的实例有以下几种方法：
+
+- {@link io.vertx.core.streams.Pump#start}: 启动泵。
+- {@link io.vertx.core.streams.Pump#stop}:
+停止泵，当泵启动时它要处于停止模式。
+- {@link io.vertx.core.streams.Pump#setWriteQueueMaxSize}:
+与 `WriteStream` 接口的 {@link io.vertx.core.streams.WriteStream#setWriteQueueMaxSize} 方法相同。
+
+一个泵可以启动和停止多次。
+
+当泵首次创建时，它不会启动，您需要调用 `start()` 方法来启动它。
