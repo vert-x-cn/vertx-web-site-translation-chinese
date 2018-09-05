@@ -37,3 +37,8 @@ gulp有个task，源文件为`vertx-web-site-translation-chinese`模块的`src/m
 
 需要构建成功，需要在本地搭建http服务，并添加对应文件使gulp请求能通过
 
+### 当前翻译版本
+
+目前在逐步将[VertxChina](https://github.com/VertxChina/vertx-translation-chinese)里的翻译复制到这里来
+
+翻译文档的版本为3.4.2，而当前项目版本为3.6.0，因此可能会有部分差错

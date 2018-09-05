@@ -40,7 +40,7 @@ for non blocking address resolution.
 
 === lookup4
 
-尝试查找给定名称的A（ipv4）记录。第一个返回的（记录）将会被使用，因此它的操作方式与操作系统上使用`nslookup`类似。
+尝试查找给定名称的A（ipv4）记录。第一个返回的（记录）将会被使用，因此它的操作方式与操作系统上使用 `nslookup` 类似。
 
 要查找 `vertx.io` 的A记录，您需要像下面那样做：
 
@@ -62,9 +62,9 @@ for non blocking address resolution.
 
 === resolveA
 
-尝试解析给定名称的所有A（ipv4）记录，这与在unix操作系统上使用`dig`类似。
+尝试解析给定名称的所有A（ipv4）记录，这与在unix操作系统上使用 `dig` 类似。
 
-要查找`vertx.io`的所有A记录，您通常会执行以下操作：
+要查找 `vertx.io` 的所有A记录，您通常会执行以下操作：
 
 [source,$lang]
 ----
@@ -73,9 +73,9 @@ for non blocking address resolution.
 
 === resolveAAAA
 
-尝试解析给定名称的所有AAAA（ipv6）记录，这与在Unix操作系统上使用`dig`类似。
+尝试解析给定名称的所有AAAA（ipv6）记录，这与在Unix操作系统上使用 `dig` 类似。
 
-要查找`vertx.io`的所有AAAA记录，您通常会执行以下操作：
+要查找 `vertx.io` 的所有AAAA记录，您通常会执行以下操作：
 
 
 [source,$lang]
@@ -85,9 +85,9 @@ for non blocking address resolution.
 
 === resolveCNAME
 
-尝试解析给定名称的所有CNAME记录，这与在Unix操作系统上使用`dig`类似。
+尝试解析给定名称的所有CNAME记录，这与在Unix操作系统上使用 `dig` 类似。
 
-要查找`vertx.io`的所有CNAME记录，您通常会执行以下操作：
+要查找 `vertx.io` 的所有CNAME记录，您通常会执行以下操作：
 
 [source,$lang]
 ----
@@ -98,7 +98,7 @@ for non blocking address resolution.
 
 尝试解析给定名称的所有MX记录，MX记录用于定义哪个邮件服务器接受给定域的电子邮件。
 
-要查找您常用执行的`vertx.io`的所有MX记录：
+要查找您常用执行的 `vertx.io` 的所有MX记录：
 
 [source,$lang]
 ----
@@ -106,7 +106,6 @@ for non blocking address resolution.
 ----
 
 请注意，列表将包含按照它们优先级排序的 {@link io.vertx.core.dns.MxRecord} ，这意味着列表中优先级低的MX记录会第一个优先出现在列表中。
-means MX records with smaller priority coming first in the List.
 
 {@link io.vertx.core.dns.MxRecord} 允许您通过下边提供的方法访问MX记录的优先级和名称：
 
@@ -119,7 +118,7 @@ means MX records with smaller priority coming first in the List.
 
 尝试解析给定名称的所有TXT记录，TXT记录通常用于定义域的额外信息。
 
-要解析`vertx.io`的所有TXT记录，您可以使用下边几行：
+要解析 `vertx.io` 的所有TXT记录，您可以使用下边几行：
 
 [source,$lang]
 ----
@@ -130,7 +129,7 @@ means MX records with smaller priority coming first in the List.
 
 尝试解析给定名称的所有NS记录，NS记录指定哪个DNS服务器托管给定域的DNS信息。
 
-要解析`vertx.io`的所有NS记录，您可以使用下边几行：
+要解析 `vertx.io` 的所有NS记录，您可以使用下边几行：
 
 [source,$lang]
 ----
@@ -141,7 +140,7 @@ means MX records with smaller priority coming first in the List.
 
 尝试解析给定名称的所有SRV记录，SRV记录用于定义服务端口和主机名等额外信息。一些协议需要这个额外信息。
 
-要查找`vertx.io`的所有SRV记录，您通常会执行以下操作：
+要查找 `vertx.io` 的所有SRV记录，您通常会执行以下操作：
 
 [source,$lang]
 ----
@@ -162,9 +161,9 @@ means MX records with smaller priority coming first in the List.
 
 === resolvePTR
 
-尝试解析给定名称的PTR记录，PTR记录将`ipaddress`映射到名称。
+尝试解析给定名称的PTR记录，PTR记录将 `ipaddress` 映射到名称。
 
-要解析IP地址`10.0.0.1`的PTR记录，您将使用`1.0.0.10.in-addr.arpa`的PTR概念。
+要解析IP地址 `10.0.0.1` 的PTR记录，您将使用 `1.0.0.10.in-addr.arpa` 的PTR概念。
 
 [source,$lang]
 ----

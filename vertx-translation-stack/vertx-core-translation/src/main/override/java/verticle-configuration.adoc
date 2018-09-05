@@ -13,7 +13,7 @@ vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options);
 传入之后，这个配置可以通过 `link:../../apidocs/io/vertx/core/Context.html[Context]` 对象或使用
 `link:../../apidocs/io/vertx/core/AbstractVerticle.html#config--[config]` 方法访问。
 
-这个配置会以 JSON 对象（`JsonObject`）的形式返回，因此您可以用下边代码读取数据：
+这个配置会以 JSON 对象（`JsonObject`） 的形式返回，因此您可以用下边代码读取数据：
 
 [source,java]
 ----

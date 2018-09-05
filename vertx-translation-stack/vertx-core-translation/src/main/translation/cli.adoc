@@ -4,11 +4,11 @@ Vert.x Core提供了一个用于解析传递给程序的命令行参数API。它
 
 Vert.x CLI提供了一个描述命令行界面的模型，同时也是一个解析器，这个解析器可支持不同的语法：
 
-* 类似POSIX选项（即`tar -zxvf foo.tar.gz`）
-* 类似GNU选项（即`du --human-readable --max-depth=1`）
-* 类似Java属性（即`java -Djava.awt.headless=true -Djava.net.useSystemProxies=true Foo`）
-* 具有附加值的短选项（即`gcc -O2 foo.c`）
-* 单个连字符的长选项（即`ant -projecthelp`）
+* 类似POSIX选项（即 `tar -zxvf foo.tar.gz` ）
+* 类似GNU选项（即 `du --human-readable --max-depth=1` ）
+* 类似Java属性（即 `java -Djava.awt.headless=true -Djava.net.useSystemProxies=true Foo` ）
+* 具有附加值的短选项（即 `gcc -O2 foo.c` ）
+* 单个连字符的长选项（即 `ant -projecthelp` ）
 
 使用CLI API的三个步骤如下：
 
@@ -25,7 +25,7 @@ Vert.x CLI提供了一个描述命令行界面的模型，同时也是一个解�
 {@link examples.cli.CLIExamples#example1}
 ----
 
-您可以看到，您可以使用 {@link io.vertx.core.cli.CLI#create(java.lang.String)} 创建一个新的{@link io.vertx.core.cli.CLI} 。
+您可以看到，您可以使用 {@link io.vertx.core.cli.CLI#create(java.lang.String)} 创建一个新的 {@link io.vertx.core.cli.CLI} 。
 传递的字符串是 {@code CLI} 的名称。创建后，您可以设置摘要和描述，摘要的目的是简短（一行），而描述可以包含更多细节。每个选项和参数也使用
 {@link io.vertx.core.cli.CLI#addArgument(io.vertx.core.cli.Argument)} 和
 {@link io.vertx.core.cli.CLI#addOption(io.vertx.core.cli.Option)} 方法添加到 {@code CLI} 对象上。
@@ -34,7 +34,7 @@ Vert.x CLI提供了一个描述命令行界面的模型，同时也是一个解�
 
 {@link io.vertx.core.cli.Option} 是由用户命令行中存在的 *键* 标识的命令行参数。选项至少必须有一个长名或一个短名。
 长名称通常使用 `--` 前缀，而短名称与单个 `-` 一起使用。选项可以获取用法中显示的描述（见下文）。选项可以接受0、1或几个值。
-接受0值的选项是一个标志(`flag`)，必须使用
+接受0值的选项是一个标志( `flag` )，必须使用
 {@link io.vertx.core.cli.Option#setFlag(boolean)} 声明。默认情况下，选项会接受一个值，但是您可以使用
  {@link io.vertx.core.cli.Option#setMultiValued(boolean)} 方法配置该选项接收多个值：
 
@@ -70,7 +70,7 @@ Vert.x CLI提供了一个描述命令行界面的模型，同时也是一个解�
 
 ==== 参数
 
-和选项不同，参数不具有 *键* 并由其索引标识。例如，在`java com.acme.Foo`中，`com.acme.Foo`是一个参数。
+和选项不同，参数不具有 *键* 并由其索引标识。例如，在 `java com.acme.Foo` 中， `com.acme.Foo` 是一个参数。
 
 参数没有名称，使用基于 0 的索引进行标识。第一个参数的索引为 0：
 

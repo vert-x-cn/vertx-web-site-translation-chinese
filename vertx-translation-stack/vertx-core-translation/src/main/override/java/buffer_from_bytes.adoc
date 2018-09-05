@@ -1,4 +1,4 @@
-从字节数组 `byte[]` 创建 `Buffer`：
+从字节数组 `byte[]` 创建 `Buffer` ：
 
 [source,java]
 ----

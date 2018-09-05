@@ -13,7 +13,7 @@
   <properties>
     <module>vertx-core</module>
     <scala.dependency>vertx-lang-scala_2.12</scala.dependency>
-    <docgen.generators>js,kotlin,ruby,groovy</docgen.generators>
+    <docgen.generators>js,kotlin,ruby,groovy,ceylon</docgen.generators>
   </properties>
 
   <dependencies>
@@ -75,6 +75,13 @@
       <version>${vertx.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-ceylon</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-groovy</artifactId>
@@ -152,6 +159,7 @@
             </goals>
             <configuration>
               <target name="创建override文件夹">
+                <mkdir dir="${project.basedir}/src/main/override/ceylon"/>
                 <mkdir dir="${project.basedir}/src/main/override/groovy"/>
                 <mkdir dir="${project.basedir}/src/main/override/java"/>
                 <mkdir dir="${project.basedir}/src/main/override/js"/>
@@ -169,6 +177,9 @@
             </goals>
             <configuration>
               <target name="复制override文档">
+                <copy todir="${project.build.directory}/asciidoc/${module}/ceylon/override" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/vertx-core/ceylon/override"/>
+                </copy>
                 <copy todir="${project.build.directory}/asciidoc/${module}/groovy/override" overwrite="true">
                   <fileset dir="${project.build.directory}/sources/override/vertx-core/groovy/override"/>
                 </copy>
@@ -198,6 +209,9 @@
             </goals>
             <configuration>
               <target name="复制override翻译文档">
+                <copy todir="${project.build.directory}/asciidoc/${module}/ceylon/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/ceylon"/>
+                </copy>
                 <copy todir="${project.build.directory}/asciidoc/${module}/groovy/override" overwrite="true">
                   <fileset dir="${project.basedir}/src/main/override/groovy"/>
                 </copy>

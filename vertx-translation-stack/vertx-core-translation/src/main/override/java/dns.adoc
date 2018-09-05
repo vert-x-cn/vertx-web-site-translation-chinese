@@ -1,10 +1,10 @@
 === 错误处理
 
-如前边部分所述，`DnsClient` 允许您传递一个`Handler`，一旦查询完成将会传入一个`AsyncResult`给`Handler`并通知它。
-在出现错误的情况下，通知中将包含一个`DnsException`，该异常会包含一个说明为何失败的
-`link:../../apidocs/io/vertx/core/dns/DnsResponseCode.html[DnsResponseCode]`。此`DnsResponseCode`可用于更详细检查原因。
+如前边部分所述， `DnsClient` 允许您传递一个 `Handler` ，一旦查询完成将会传入一个 `AsyncResult` 给 `Handler` 并通知它。
+在出现错误的情况下，通知中将包含一个 `DnsException` ，该异常会包含一个说明为何失败的
+`link:../../apidocs/io/vertx/core/dns/DnsResponseCode.html[DnsResponseCode]` 。此 `DnsResponseCode` 可用于更详细检查原因。
 
-可能的`DnsResponseCode`值是：
+可能的 `DnsResponseCode` 值是：
 
 - `link:../../apidocs/io/vertx/core/dns/DnsResponseCode.html#NOERROR[NOERROR]` 没有找到给定查询的记录
 - `link:../../apidocs/io/vertx/core/dns/DnsResponseCode.html#FORMERROR[FORMERROR]` 格式错误

@@ -23,8 +23,8 @@ Vert.x CLI可以转换的类：
 
 * 具有单个
 {@link java.lang.String} 参数的构造函数，例如 {@link java.io.File} 或 {@link io.vertx.core.json.JsonObject}
-* 使用静态的`from`或`fromString`方法
-* 使用静态`valueOf`方法，如基础类型和枚举
+* 使用静态的 `from` 或 `fromString` 方法
+* 使用静态 `valueOf` 方法，如基础类型和枚举
 
 此外，您可以实现自己的转换器（ {@link io.vertx.core.cli.converters.Converter} ）并指定CLI使用此转换器：
 
@@ -33,7 +33,7 @@ Vert.x CLI可以转换的类：
 {@link examples.cli.TypedCLIExamples#example3}
 ----
 
-对于布尔值，布尔值将被评定为`true`:`on`，`yes`，`1`，`true`。
+对于布尔值，布尔值将被评定为 `true` : `on` ， `yes` ， `1` ， `true` 。
 
 若您的一个选项是 `enum` 类型，则（系统）会自动计算一组选项。
 

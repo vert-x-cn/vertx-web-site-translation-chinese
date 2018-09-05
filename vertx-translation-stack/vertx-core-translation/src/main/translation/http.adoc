@@ -27,7 +27,7 @@ Vert.x 支持 HTTP/1.0、HTTP/1.1 和 HTTP/2 协议。
 
 === 配置 HTTP/2 服务端
 
-Vert.x支持 TLS `h2`和TCP `h2c`之上的 HTTP/2 协议。
+Vert.x支持 TLS `h2` 和TCP `h2c` 之上的 HTTP/2 协议。
 
 - `h2` 表示使用了TLS的应用层协议协商(ALPN)协议来协商的 HTTP/2 协议
 - `h2c` 表示在TCP层上使用明文形式的 HTTP/2 协议，这样的连接是使用 HTTP/1.1升级 请求或者直接建立
@@ -45,11 +45,11 @@ ALPN是一个TLS的扩展，它在客户端和服务器开始交换数据之前�
 
 通常情况，ALPN会对 `h2` 协议达成一致，尽管服务器或客户端决定了仍然使用 HTTP/1.1 协议。
 
-要处理 `h2c` 请求，TLS必须被禁用，服务器将升级到 HTTP/2 以满足任何希望升级到 HTTP/2 的 HTTP/1.1 请求。它还将接受以 `PRI*HTTP/2.0\r\nSM\r\n` 开始的`h2c`直接连接。
+要处理 `h2c` 请求，TLS必须被禁用，服务器将升级到 HTTP/2 以满足任何希望升级到 HTTP/2 的 HTTP/1.1 请求。它还将接受以 `PRI*HTTP/2.0\r\nSM\r\n` 开始的 `h2c` 直接连接。
 
-WARNING: 大多数浏览器不支持 `h2c`，所以在建站时，您应该使用 `h2` 而不是 `h2c`。
+WARNING: 大多数浏览器不支持 `h2c` ，所以在建站时，您应该使用 `h2` 而不是 `h2c` 。
 
-当服务器接受 HTTP/2 连接时， 它会向客户端发送其 {@link io.vertx.core.http.HttpServerOptions#getInitialSettings 初始设置}。定义客户端如何使用连接，服务器的默认初始设置为：
+当服务器接受 HTTP/2 连接时， 它会向客户端发送其 {@link io.vertx.core.http.HttpServerOptions#getInitialSettings 初始设置} 。定义客户端如何使用连接，服务器的默认初始设置为：
 
 - {@link io.vertx.core.http.Http2Settings#getMaxConcurrentStreams} ：按照 HTTP/2 RFC建议推荐值为 {@code 100}
 - 其他默认的 HTTP/2 的设置
@@ -86,7 +86,7 @@ NOTE: *Worker Verticle 和 HTTP/2 不兼容。*
 {@link examples.HTTPExamples#example4}
 ----
 
-默认主机名是`0.0.0.0`，它表示：监听所有可用地址；默认端口号是`80`。
+默认主机名是 `0.0.0.0` ，它表示：监听所有可用地址；默认端口号是 `80` 。
 
 实际的绑定也是异步的，因此服务器也许并没有在调用 `listen` 方法返回时监听，而是在一段时间过后才监听。
 
@@ -114,8 +114,8 @@ NOTE: *Worker Verticle 和 HTTP/2 不兼容。*
 
 如果请求包含请求体，那么该请求体将在请求处理器被调用后的某个时间到达服务器。
 
-服务请求对象允许您检索 {@link io.vertx.core.http.HttpServerRequest#uri},
-{@link io.vertx.core.http.HttpServerRequest#path}, {@link io.vertx.core.http.HttpServerRequest#params} 和
+服务请求对象允许您检索 {@link io.vertx.core.http.HttpServerRequest#uri} ,
+{@link io.vertx.core.http.HttpServerRequest#path} , {@link io.vertx.core.http.HttpServerRequest#params} 和
 {@link io.vertx.core.http.HttpServerRequest#headers} 等其他信息。
 
 每一个服务请求对象和一个服务响应对象绑定，您可以用
@@ -186,7 +186,7 @@ NOTE: *Worker Verticle 和 HTTP/2 不兼容。*
 
 使用 {@link io.vertx.core.http.HttpServerRequest#host} 方法返回 HTTP 请求中的主机名。
 
-对于 HTTP/1.x 请求返回请求头中的 `host` 值，对于 HTTP/1 请求则返回伪头中的`:authority`的值。
+对于 HTTP/1.x 请求返回请求头中的 `host` 值，对于 HTTP/1 请求则返回伪头中的 `:authority` 的值。
 
 ==== 请求参数
 
@@ -241,7 +241,7 @@ HTTP请求通常包含我们需要读取的主体。如前所述，当请求头�
 {@link examples.HTTPExamples#example10}
 ----
 
-这是一个常见的情况，Vert.x为您提供了一个 {@link io.vertx.core.http.HttpServerRequest#bodyHandler} 方法来执行此操作。当所有请求体被收到时，`bodyHandler` 绑定的处理器会被调用一次：
+这是一个常见的情况，Vert.x为您提供了一个 {@link io.vertx.core.http.HttpServerRequest#bodyHandler} 方法来执行此操作。当所有请求体被收到时， `bodyHandler` 绑定的处理器会被调用一次：
 
 [source,$lang]
 ----
@@ -344,7 +344,7 @@ HTTP/2 帧不受流量控制限制 —— 当接收到自定义帧时，不论�
 
 ==== 设置状态码和消息
 
-默认的 HTTP 状态响应码为 `200`，表示 `OK`。
+默认的 HTTP 状态响应码为 `200` ，表示 `OK` 。
 
 可使用 {@link io.vertx.core.http.HttpServerResponse#setStatusCode} 方法设置不同状态代码。
 
@@ -400,7 +400,7 @@ NOTE: 对于 HTTP/2 中的状态不会在响应中描述 —— 因为协议不�
 {@link examples.HTTPExamples#example19}
 ----
 
-您也可以和调用`write`方法一样传 `String` 或 `Buffer` 给 `end` 方法。这种情况，它和先调用带 `String` 或 `Buffer` 参数的 `write` 方法，之后调用无参 `end` 方法一样。例如：
+您也可以和调用 `write` 方法一样传 `String` 或 `Buffer` 给 `end` 方法。这种情况，它和先调用带 `String` 或 `Buffer` 参数的 `write` 方法，之后调用无参 `end` 方法一样。例如：
 
 [source,$lang]
 ----
@@ -513,8 +513,8 @@ WARNING: 若您要直接使用 Vert.x 编写 Web 服务器，请注意，您想�
 ==== Pumping 响应
 
 服务端响应 `HttpServerResponse` 也是一个 {@link io.vertx.core.streams.WriteStream} 实例，因此您可以从任何
-{@link io.vertx.core.streams.ReadStream} 向其泵送数据，如 {@link io.vertx.core.file.AsyncFile}, {@link io.vertx.core.net.NetSocket},
-{@link io.vertx.core.http.WebSocket} 或 {@link io.vertx.core.http.HttpServerRequest}.
+{@link io.vertx.core.streams.ReadStream} 向其泵送数据，如 {@link io.vertx.core.file.AsyncFile} , {@link io.vertx.core.net.NetSocket} ,
+{@link io.vertx.core.http.WebSocket} 或 {@link io.vertx.core.http.HttpServerRequest} 。
 
 这儿有一个例子，它回应了任何 PUT 方法的响应中的请求体，它为请求体使用了 Pump，所以即使 HTTP 请求体很大并填满了内存，任何时候它依旧会工作：
 
@@ -577,7 +577,7 @@ HTTP/2 规范中定义了可用的 http://httpwg.org/specs/rfc7540.html#ErrorCod
 
 当服务器准备推送响应时，推送响应处理器会被调用，并会发送响应。
 
-推送响应处理器客户能会接收到失败，如：客户端可能取消推送，因为它已经在缓存中包含了 `main.js`，并不在需要它。
+推送响应处理器客户能会接收到失败，如：客户端可能取消推送，因为它已经在缓存中包含了 `main.js` ，并不在需要它。
 
 您必须在响应结束之前调用 {@link io.vertx.core.http.HttpServerResponse#push} 方法，但是在推送响应过后依然可以写响应。
 
@@ -585,7 +585,7 @@ HTTP/2 规范中定义了可用的 http://httpwg.org/specs/rfc7540.html#ErrorCod
 
 You can set an {@link io.vertx.core.http.HttpServer#exceptionHandler(io.vertx.core.Handler)} to receive any
 exceptions that happens before the connection is passed to the {@link io.vertx.core.http.HttpServer#requestHandler(io.vertx.core.Handler)}
-or to the {@link io.vertx.core.http.HttpServer#websocketHandler(io.vertx.core.Handler)}, e.g during the TLS handshake.
+or to the {@link io.vertx.core.http.HttpServer#websocketHandler(io.vertx.core.Handler)} , e.g during the TLS handshake.
 
 === HTTP 压缩
 
@@ -605,7 +605,7 @@ Vert.x 支持 HTTP 压缩。
 
 若找到这样的请求头，服务器将使用所支持的压缩算法之一自动压缩响应正文并发送回客户端。
 
-Whenever the response needs to be sent without compression you can set the header `content-encoding` to `identity`:
+Whenever the response needs to be sent without compression you can set the header `content-encoding` to `identity` :
 
 [source,$lang]
 ----
@@ -737,7 +737,7 @@ HTTP 客户端是很灵活的，您可以通过各种方式发出请求。
 {@link examples.HTTPExamples#example34}
 ----
 
-可以用UTF-8编码方式编码字符串和以指定方式编码编码字符串、或写`Buffer`的方法：
+可以用UTF-8编码方式编码字符串和以指定方式编码编码字符串、或写 `Buffer` 的方法：
 
 [source,$lang]
 ----
@@ -757,9 +757,9 @@ HTTP 客户端是很灵活的，您可以通过各种方式发出请求。
 
 带请求体的非分块 HTTP 请求需要提供 `Content-Length` 头。
 
-因此，若您不使用 HTTP 分块，则必须在写入请求之前设置`Content-Length`头，否则会出错。
+因此，若您不使用 HTTP 分块，则必须在写入请求之前设置 `Content-Length` 头，否则会出错。
 
-若您在调用其中一个 `end` 方法处理 String 或 Buffer，在写入请求体之前，Vert.x 将自动计算并设置 `Content-Length`。
+若您在调用其中一个 `end` 方法处理 String 或 Buffer，在写入请求体之前，Vert.x 将自动计算并设置 `Content-Length` 。
 
 若您在使用HTTP 分块模式，则不需要 `Content-Length` 头，因此您不必先计算大小。
 
@@ -817,7 +817,7 @@ Vert.x 支持 http://en.wikipedia.org/wiki/Chunked_transfer_encoding[HTTP Chunke
 
 您可使用 {@link io.vertx.core.http.HttpClientRequest#setChunked(boolean)} 将HTTP 请求设置成分块模式。
 
-在分块模式下，每次调用 `write` 方法将导致新的块被写入到报文，这种模式中，无需先设置请求头中的 `Content-Length`。
+在分块模式下，每次调用 `write` 方法将导致新的块被写入到报文，这种模式中，无需先设置请求头中的 `Content-Length` 。
 
 [source,$lang]
 ----
@@ -891,7 +891,7 @@ HTTP/2 在请求/响应期间随时支持流重置：
 {@link examples.HTTP2Examples#example10}
 ----
 
-默认情况，发送 `NO_ERROR(0)`错误代码，可发送另一个代码：
+默认情况，发送 `NO_ERROR(0)` 错误代码，可发送另一个代码：
 
 [source,$lang]
 ----
@@ -975,11 +975,11 @@ HTTP 响应可包含头信息。您可以使用 {@link io.vertx.core.http.HttpCl
 
 您可以通过 {@link io.vertx.core.http.HttpClientResponse#cookies()} 方法从响应中获取 Cookie 列表。
 
-或者您可以在响应中自己解析`Set-Cookie`头。
+或者您可以在响应中自己解析 `Set-Cookie` 头。
 
 ==== 30x 重定向处理器
 
-客户端可配置成遵循HTTP 重定向：当客户端接收到 `301`、`302`、`303` 或 `307` 状态代码时，它遵循由 `Location` 响应头提供的重定向，并且响应处理器将传递重定向响应以替代原始响应。
+客户端可配置成遵循HTTP 重定向：当客户端接收到 `301` 、 `302` 、 `303` 或 `307` 状态代码时，它遵循由 `Location` 响应头提供的重定向，并且响应处理器将传递重定向响应以替代原始响应。
 
 这有个例子：
 
@@ -990,12 +990,12 @@ HTTP 响应可包含头信息。您可以使用 {@link io.vertx.core.http.HttpCl
 
 重定向策略如下：
 
-* 当接收到 `301`、`302` 或 `303` 状态代码时，使用 GET 方法执行重定向
+* 当接收到 `301` 、 `302` 或 `303` 状态代码时，使用 GET 方法执行重定向
 * 当接收到 `307` 状态代码时，使用相同的 HTTP 方法和缓存的请求体执行重定向
 
 WARNING: 随后的重定向会缓存请求体。
 
-默认情况最大的重定向数为 `16`，您可使用 {@link io.vertx.core.http.HttpClientOptions#setMaxRedirects(int)} 方法设置。
+默认情况最大的重定向数为 `16` ，您可使用 {@link io.vertx.core.http.HttpClientOptions#setMaxRedirects(int)} 方法设置。
 
 [source,$lang]
 ----
@@ -1021,7 +1021,7 @@ WARNING: 随后的重定向会缓存请求体。
 
 大多数原始请求设置将会传播（拷贝）到新请求中：
 
-* 请求头，除非您已经设置了一些头（包括 {@link io.vertx.core.http.HttpClientRequest#setHost}）
+* 请求头，除非您已经设置了一些头（包括 {@link io.vertx.core.http.HttpClientRequest#setHost} ）
 * 请求体，除非返回的请求使用了 `GET` 方法
 * 响应处理器
 * 请求异常处理器
@@ -1029,7 +1029,7 @@ WARNING: 随后的重定向会缓存请求体。
 
 ==== 100-Continue 处理
 
-根据 http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html[HTTP/1.1 规范] ，一个客户端可以设置请求头 `Expect: 100-Continue`，并且在发送剩余请求体之前先发送请求头。
+根据 http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html[HTTP/1.1 规范] ，一个客户端可以设置请求头 `Expect: 100-Continue` ，并且在发送剩余请求体之前先发送请求头。
 
 然后服务器可以通过回复临时响应状态 `Status: 100 (Continue)` 来告诉客户端可以发送请求的剩余部分。
 
@@ -1052,7 +1052,7 @@ Vert.x 允许您在客户端请求对象中设置一个 {@link io.vertx.core.htt
 
 这个可通过 {@link io.vertx.core.http.HttpServerOptions#setHandle100ContinueAutomatically(boolean)} 方法来设置。
 
-若您想要决定是否手动发送持续响应，那么此属性可设置成`false`（默认值），然后您可以通过检查头信息并且调用 {@link io.vertx.core.http.HttpServerResponse#writeContinue()}
+若您想要决定是否手动发送持续响应，那么此属性可设置成 `false` （默认值），然后您可以通过检查头信息并且调用 {@link io.vertx.core.http.HttpServerResponse#writeContinue()}
 方法让客户端持续发送请求体：
 
 [source,$lang]
@@ -1060,7 +1060,7 @@ Vert.x 允许您在客户端请求对象中设置一个 {@link io.vertx.core.htt
 {@link examples.HTTPExamples#example50_1}
 ----
 
-您也可以通过直接发送故障状态代码来拒绝该请求：这种情况下，请求体应该被忽略或连接应该被关闭（`100-Continue` 是一个性能提示，并不是逻辑协议约束）：
+您也可以通过直接发送故障状态代码来拒绝该请求：这种情况下，请求体应该被忽略或连接应该被关闭（ `100-Continue` 是一个性能提示，并不是逻辑协议约束）：
 
 [source,$lang]
 ----
@@ -1085,13 +1085,13 @@ Vert.x 允许您在客户端请求对象中设置一个 {@link io.vertx.core.htt
 {@link examples.HTTP2Examples#example14}
 ----
 
-若没有设置任何处理器时，任何被推送的流将被客户端自动重置流（错误代码 `8`）。
+若没有设置任何处理器时，任何被推送的流将被客户端自动重置流（错误代码 `8` ）。
 
 ==== 接收自定义 HTTP/2 帧
 
 HTTP/2 是用于 HTTP 请求/响应模型的具有各种帧的一个帧协议，该协议允许发送和接收其他类型的帧。
 
-要接收自定义帧，您可以在请求中使用 `customFrameHandler`，每次自定义帧到达时就会调用它。以下是一个例子：
+要接收自定义帧，您可以在请求中使用 `customFrameHandler` ，每次自定义帧到达时就会调用它。以下是一个例子：
 
 [source,$lang]
 ----
@@ -1127,7 +1127,7 @@ HTTP 的 Keep Alive 允许单个 HTTP 连接用于多个请求。当您向同一
 对于 HTTP/1.x 版本，HTTP 客户端支持连接池，它允许您重用请求之间的连接。
 
 为了连接池（能）工作，配置客户端时，keep alive 必须通过 {@link io.vertx.core.http.HttpClientOptions#setKeepAlive(boolean)}
-方法设置成`true`。默认值为`true`。
+方法设置成 `true` 。默认值为 `true` 。
 
 当 keep alive 启用时，Vert.x 将为每一个发送的 HTTP/1.0 请求添加一个 `Connection: Keep-Alive` 头。
 当 keep alive 禁用时，Vert.x 将为每一个 HTTP/1.1 请求添加一个 `Connection: Close` 头 —— 表示在响应完成后连接将被关闭。
@@ -1318,7 +1318,7 @@ NOTE: 此功能仅适用于HTTP/2协议。
 
 === HttpClient 使用说明
 
-`HttpClient`可以在一个 Verticle 中使用或者嵌入使用。
+`HttpClient` 可以在一个 Verticle 中使用或者嵌入使用。
 
 在 Verticle 中使用时，Verticle *应该使用自己的客户端实例*。
 
@@ -1347,11 +1347,7 @@ Reusing a connection with a different context: an HttpClient is probably shared 
 ----
 
 这个服务正在监听 `8080` 端口。所以，当这个 Verticle 被实例化多次，如运行以下命令：
-
-----
-`vertx run io.vertx.examples.http.sharing.HttpServerVerticle -instances 2`,
-----
-
+`vertx run io.vertx.examples.http.sharing.HttpServerVerticle -instances 2` ,
 将会发生什么？如果两个 Verticle 都绑定到同一个端口，您将收到一个 Socket 异常。幸运的是，Vert.x 可以为您处理这种情况。在与现有服务端相同的主机和端口上部署另一个服务器时，实际上并不会尝试创建在同一主机/端口上监听的新服务端，它只绑定一次到Socket，当接收到请求时，会按照轮询策略调用服务端的请求处理函数。
 
 我们现在想象一个客户端，如下：
@@ -1391,14 +1387,14 @@ SSL可以通过每个请求的 {@link io.vertx.core.http.RequestOptions} 来启�
 
 {@link io.vertx.core.http.RequestOptions#setSsl(boolean)} 将覆盖默认客户端设置：
 
-* 即使客户端配置成使用 SSL/TLS，该值设置成`false`将禁用SSL/TLS。
-* 即使客户端配置成不使用 SSL/TLS，该值设置成`true`将启用SSL/TLS，实际的客户端SSL/TLS（如受信、密钥/证书、密码、ALPN 等）将被重用。
+* 即使客户端配置成使用 SSL/TLS，该值设置成 `false` 将禁用SSL/TLS。
+* 即使客户端配置成不使用 SSL/TLS，该值设置成 `true` 将启用SSL/TLS，实际的客户端SSL/TLS（如受信、密钥/证书、密码、ALPN 等）将被重用。
 
 同样， {@link io.vertx.core.http.HttpClient#requestAbs(io.vertx.core.http.HttpMethod,java.lang.String)} 方法也会（在调用时）覆盖默认客户端设置。
 
 ==== Server Name Indication (SNI)
 
-Vert.x http servers can be configured to use SNI in exactly the same way as {@linkplain io.vertx.core.net net servers}.
+Vert.x http servers can be configured to use SNI in exactly the same way as {@linkplain io.vertx.core.net net servers} .
 
 Vert.x http client will present the actual hostname as _server name_ during the TLS handshake.
 
@@ -1416,7 +1412,7 @@ Vert.x HTTP 客户端和服务端都支持 WebSocket。
 
 第一种方法需要在服务端实例上提供一个 {@link io.vertx.core.http.HttpServer#websocketHandler(io.vertx.core.Handler)} 。
 
-当对服务端创建 WebSocket 连接时，Vert.x 将向 `Handler`传入一个
+当对服务端创建 WebSocket 连接时，Vert.x 将向 `Handler` 传入一个
 {@link io.vertx.core.http.ServerWebSocket} 实例，在其中去处理它。
 
 [source,$lang]
@@ -1442,8 +1438,8 @@ Vert.x HTTP 客户端和服务端都支持 WebSocket。
 
 ===== 服务端 WebSocket
 
-{@link io.vertx.core.http.ServerWebSocket} 实例能够让您读取在WebSocket 握手中的HTTP 请求的 {@link io.vertx.core.http.ServerWebSocket#headers() headers},
-{@link io.vertx.core.http.ServerWebSocket#path() path}, {@link io.vertx.core.http.ServerWebSocket#query() query} 和
+{@link io.vertx.core.http.ServerWebSocket} 实例能够让您读取在WebSocket 握手中的HTTP 请求的 {@link io.vertx.core.http.ServerWebSocket#headers() headers} ,
+{@link io.vertx.core.http.ServerWebSocket#path() path} , {@link io.vertx.core.http.ServerWebSocket#query() query} 和
 {@link io.vertx.core.http.ServerWebSocket#uri() URI} 。
 
 ==== 客户端 WebSocket
@@ -1528,7 +1524,7 @@ WebSocket 消息可以由多个帧组成，在这种情况下，第一帧是二�
 
 HTTP 客户端支持通过HTTP 代理（如Squid）或 *SOCKS4a* 或 *SOCKS5* 代理访问 HTTP/HTTPS 的 URL。CONNECT 协议使用 HTTP/1.x，但可以连接到 HTTP/1.x 和 HTTP/2 服务器。
 
-到 `h2c`（未加密HTTP/2服务器）的连接可能不受 HTTP 代理支持，因为代理仅支持 HTTP/1.1。
+到 `h2c` （未加密HTTP/2服务器）的连接可能不受 HTTP 代理支持，因为代理仅支持 HTTP/1.1。
 
 您可以通过 {@link io.vertx.core.http.HttpClientOptions} 中的
 {@link io.vertx.core.net.ProxyOptions} 对象配置来配置代理（包括代理类型、主机名、端口和可选用户名和密码）。

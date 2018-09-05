@@ -49,7 +49,7 @@ Beware that the latency relative to asynchronous shared map operations can be mu
 
 您可以使用 {@link io.vertx.core.shareddata.AsyncMap#put(java.lang.Object,java.lang.Object,io.vertx.core.Handler)} 方法将数据放入Map。
 
-`put`方法是异步的，一旦完成它会通知处理器：
+`put` 方法是异步的，一旦完成它会通知处理器：
 
 [source,$lang]
 ----

@@ -72,7 +72,7 @@ request.bodyHandler(buff -> {
 请注意上述代码直接使用了 Jackson 的 `ObjectMapper#convertValue()` 来执行映射。
 关于字段和构造函数的可见性的影响、对象引用的序列化和反序列化的问题等等可参考 Jackson 的文档获取更多信息。
 
-在最简单的情况下，如果 Java 类中所有的字段都是 `public`（或者有 `public` 的 getter/setter）时，
+在最简单的情况下，如果 Java 类中所有的字段都是 `public` （或者有 `public` 的 getter/setter）时，
 并且有一个 `public` 的默认构造函数（或不定义构造函数），`mapFrom` 和 `mapTo` 都应该成功。
 
 只要不存在对象的循环引用，嵌套的 Java 对象可以被序列化/反序列化为嵌套的JSON对象。

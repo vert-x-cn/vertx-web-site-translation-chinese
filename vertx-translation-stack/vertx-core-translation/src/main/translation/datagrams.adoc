@@ -18,7 +18,7 @@ UDP是无连接的传输，这意味着您与远程客户端没有建立持续�
 
 依照UDP的本质，它最适合一些允许丢弃数据包的应用（如监视应用程序）。
 
-其优点是与TCP相比具有更少的开销，而且可以由`NetServer`和`NetClient`处理（参考前文）。
+其优点是与TCP相比具有更少的开销，而且可以由 `NetServer` 和 `NetClient` 处理（参考前文）。
 
 === 创建 DatagramSocket
 
@@ -50,12 +50,12 @@ UDP是无连接的传输，这意味着您与远程客户端没有建立持续�
 
 这样您就可以接收到被发送至 {@link io.vertx.core.datagram.DatagramPacket} 所监听的地址和端口的 {@link io.vertx.core.datagram.DatagramSocket} 。
 
-除此之外，您还要设置一个`Handler`，每接收到一个 {@link io.vertx.core.datagram.DatagramPacket} 时它都会被调用。
+除此之外，您还要设置一个 `Handler` ，每接收到一个 {@link io.vertx.core.datagram.DatagramPacket} 时它都会被调用。
 
 {@link io.vertx.core.datagram.DatagramPacket} 有以下方法：
 
-- {@link io.vertx.core.datagram.DatagramPacket#sender()}: 表示数据发送方的`InetSocketAddress`。
-- {@link io.vertx.core.datagram.DatagramPacket#data()}: 保存接收数据的`Buffer`。
+- {@link io.vertx.core.datagram.DatagramPacket#sender()}: 表示数据发送方的 `InetSocketAddress` 。
+- {@link io.vertx.core.datagram.DatagramPacket#data()}: 保存接收数据的 `Buffer` 。
 
 当您需要监听一个特定地址和端口时，您可以像下边这样：
 
@@ -89,7 +89,7 @@ UDP是无连接的传输，这意味着您与远程客户端没有建立持续�
 
 ===== 接收多播数据包
 
-若要接收特定多播组的数据包，您需要通过调用 {@link io.vertx.core.datagram.DatagramSocket} 的`listen(...)`方法来绑定一个地址并且加入多播组，并加入多播组。
+若要接收特定多播组的数据包，您需要通过调用 {@link io.vertx.core.datagram.DatagramSocket} 的 `listen(...)` 方法来绑定一个地址并且加入多播组，并加入多播组。
 
 这样，您将能够接收到被发送到
 {@link io.vertx.core.datagram.DatagramSocket} 所监听的地址和端口的数据报，同时也可以接收被发送到该多播组的数据报。
@@ -98,10 +98,10 @@ UDP是无连接的传输，这意味着您与远程客户端没有建立持续�
 
 {@link io.vertx.core.datagram.DatagramPacket} 有以下方法：
 
-- `sender()`: 表示数据报发送方的`InetSocketAddress`
-- `data()`: 保存接收数据的`Buffer`
+- `sender()` : 表示数据报发送方的 `InetSocketAddress`
+- `data()` : 保存接收数据的 `Buffer`
 
-因此，要监听指定的地址和端口、并且接收多播组`230.0.0.1`的数据报，您将执行如下操作：
+因此，要监听指定的地址和端口、并且接收多播组 `230.0.0.1` 的数据报，您将执行如下操作：
 
 [source,$lang]
 ----
@@ -129,7 +129,7 @@ UDP是无连接的传输，这意味着您与远程客户端没有建立持续�
 
 这是专家级别的技巧。
 
-要屏蔽来自特定地址的多播，您可以在 `DatagramSocket` 上调用 `blockMulticastGroup(...)`，如下所示：
+要屏蔽来自特定地址的多播，您可以在 `DatagramSocket` 上调用 `blockMulticastGroup(...)` ，如下所示：
 
 [source,$lang]
 ----
@@ -143,15 +143,15 @@ UDP是无连接的传输，这意味着您与远程客户端没有建立持续�
 
 - {@link io.vertx.core.datagram.DatagramSocketOptions#setSendBufferSize(int)} 以字节为单位设置发送缓冲区的大小。
 - {@link io.vertx.core.datagram.DatagramSocketOptions#setReceiveBufferSize(int)} 设置TCP接收缓冲区大小（以字节为单位）。
-- {@link io.vertx.core.datagram.DatagramSocketOptions#setReuseAddress(boolean)} 若为`true`，则`TIME_WAIT`状态中的地址在关闭后可重用。
+- {@link io.vertx.core.datagram.DatagramSocketOptions#setReuseAddress(boolean)} 若为 `true` ，则 `TIME_WAIT` 状态中的地址在关闭后可重用。
 - {@link io.vertx.core.datagram.DatagramSocketOptions#setTrafficClass(int)}
-- {@link io.vertx.core.datagram.DatagramSocketOptions#setBroadcast(boolean)} 设置或清除`SO_BROADCAST`套接字选项，设置此选项时，数据报（UDP）数据包可能会发送到本地接口的广播地址。
-- {@link io.vertx.core.datagram.DatagramSocketOptions#setMulticastNetworkInterface(java.lang.String)} 设置或清除`IP_MULTICAST_LOOP`套接字选项，设置此选项时，多播数据包也将在本地接口上接收。
-- {@link io.vertx.core.datagram.DatagramSocketOptions#setMulticastTimeToLive(int)} 设置`IP_MULTICAST_TTL`套接字选项。TTL表示“活动时间”，单这种情况下，它指定允许数据包经过的IP跳数，特别是用于多播流量。转发数据包的每个路由器或网管会递减TTL，如果路由器将TTL递减为0，则不会再转发。
+- {@link io.vertx.core.datagram.DatagramSocketOptions#setBroadcast(boolean)} 设置或清除 `SO_BROADCAST` 套接字选项，设置此选项时，数据报（UDP）数据包可能会发送到本地接口的广播地址。
+- {@link io.vertx.core.datagram.DatagramSocketOptions#setMulticastNetworkInterface(java.lang.String)} 设置或清除 `IP_MULTICAST_LOOP` 套接字选项，设置此选项时，多播数据包也将在本地接口上接收。
+- {@link io.vertx.core.datagram.DatagramSocketOptions#setMulticastTimeToLive(int)} 设置 `IP_MULTICAST_TTL` 套接字选项。TTL表示“活动时间”，单这种情况下，它指定允许数据包经过的IP跳数，特别是用于多播流量。转发数据包的每个路由器或网管会递减TTL，如果路由器将TTL递减为0，则不会再转发。
 
 ==== DatagramSocket本地地址
 
-Y若您在调用`listen(...)`之前已经绑定了
+Y若您在调用 `listen(...)` 之前已经绑定了
 bound the {@link io.vertx.core.datagram.DatagramSocket} ，您可以通过调用
 {@link io.vertx.core.datagram.DatagramSocket#localAddress()} 来查找套接字的本地地址（即UDP Socket这边的地址，它将返回一个InetSocketAddress，否则返回null。
 

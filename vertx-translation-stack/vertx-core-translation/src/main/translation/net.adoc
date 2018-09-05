@@ -40,7 +40,7 @@ Vert.x允许您很容易编写非阻塞的TCP客户端和服务器。
 {@link examples.NetExamples#example4}
 ----
 
-默认主机名是 `0.0.0.0`，它表示：监听所有可用地址。默认端口号是 `0`，这也是一个特殊值，它告诉服务器随机选择并监听一个本地没有被占用的端口。
+默认主机名是 `0.0.0.0` ，它表示：监听所有可用地址。默认端口号是 `0` ，这也是一个特殊值，它告诉服务器随机选择并监听一个本地没有被占用的端口。
 
 实际的绑定也是异步的，因此服务器在调用了 `listen` 方法的一段时间之后才会实际开始监听。
 
@@ -53,7 +53,7 @@ Vert.x允许您很容易编写非阻塞的TCP客户端和服务器。
 
 === 监听随机端口
 
-若设置监听端口为`0`，服务器将随机寻找一个没有使用的端口来监听。
+若设置监听端口为 `0` ，服务器将随机寻找一个没有使用的端口来监听。
 
 可以调用 {@link io.vertx.core.net.NetServer#actualPort()} 方法来获得服务器实际监听的端口：
 
@@ -64,7 +64,7 @@ Vert.x允许您很容易编写非阻塞的TCP客户端和服务器。
 
 === 接收传入连接的通知
 
-若您想要在连接创建完时收到通知，则需要设置一个 {@link io.vertx.core.net.NetServer#connectHandler(io.vertx.core.Handler)}:
+若您想要在连接创建完时收到通知，则需要设置一个 {@link io.vertx.core.net.NetServer#connectHandler(io.vertx.core.Handler)} :
 
 [source,$lang]
 ----
@@ -306,14 +306,14 @@ SSL/TLS 服务端通常向客户端提供证书，以便验证服务端的身份
 {@link examples.NetExamples#example17}
 ----
 
-或者，您可以自己读取密钥库到一个`Buffer`，并将它直接提供给 `JksOptions`：
+或者，您可以自己读取密钥库到一个 `Buffer` ，并将它直接提供给 `JksOptions` ：
 
 [source,$lang]
 ----
 {@link examples.NetExamples#example18}
 ----
 
-PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为`.pfx`或`.p12`扩展名）也可以用与JKS密钥存储相似的方式加载：
+PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为 `.pfx` 或 `.p12` 扩展名）也可以用与JKS密钥存储相似的方式加载：
 
 [source,$lang]
 ----
@@ -327,7 +327,7 @@ PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常
 {@link examples.NetExamples#example20}
 ----
 
-另外一种分别提供服务器私钥和证书的方法是使用`.pem`文件。
+另外一种分别提供服务器私钥和证书的方法是使用 `.pem` 文件。
 
 [source,$lang]
 ----
@@ -361,14 +361,14 @@ SSL/TLS 服务端可以使用证书颁发机构来验证客户端的身份。
 {@link examples.NetExamples#example23}
 ----
 
-或者您可以自己读取受信存储到`Buffer`，并将它直接提供：
+或者您可以自己读取受信存储到 `Buffer` ，并将它直接提供：
 
 [source,$lang]
 ----
 {@link examples.NetExamples#example24}
 ----
 
-PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为`.pfx`或`.p12`扩展名）也可以用与JKS密钥存储相似的方式加载：
+PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为 `.pfx` 或 `.p12` 扩展名）也可以用与JKS密钥存储相似的方式加载：
 
 [source,$lang]
 ----
@@ -400,12 +400,12 @@ PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常
 
 客户端也可以轻松地配置为SSL。使用SSL和使用标准套接字具有完全相同的API。
 
-若要启用 `NetClient` 上的SSL，可调用函数 `setSSL(true)`。
+若要启用 `NetClient` 上的SSL，可调用函数 `setSSL(true)` 。
 
 ==== 客户端受信配置
 
-若客户端将 {@link io.vertx.core.net.ClientOptionsBase#setTrustAll trustALl} 设置为 `true`，则客户端将信任所有服务端证书。
-连接仍然会被加密，但这种模式很容易受到中间人攻击。即您无法确定您正连接到谁，请谨慎使用。默认值为`false`。
+若客户端将 {@link io.vertx.core.net.ClientOptionsBase#setTrustAll trustALl} 设置为 `true` ，则客户端将信任所有服务端证书。
+连接仍然会被加密，但这种模式很容易受到中间人攻击。即您无法确定您正连接到谁，请谨慎使用。默认值为 `false` 。
 
 [source,$lang]
 ----
@@ -434,14 +434,14 @@ PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常
 {@link examples.NetExamples#example30}
 ----
 
-它也支持`Buffer`的配置：
+它也支持 `Buffer` 的配置：
 
 [source,$lang]
 ----
 {@link examples.NetExamples#example31}
 ----
 
-PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为`.pfx`或`.p12`扩展名）也可以用与JKS密钥存储相似的方式加载：
+PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为 `.pfx` 或 `.p12` 扩展名）也可以用与JKS密钥存储相似的方式加载：
 
 [source,$lang]
 ----
@@ -455,7 +455,7 @@ PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常
 {@link examples.NetExamples#example33}
 ----
 
-另一种提供服务器证书颁发机构的方法是使用一个`.pem`文件列表。
+另一种提供服务器证书颁发机构的方法是使用一个 `.pem` 文件列表。
 
 [source,$lang]
 ----
@@ -487,7 +487,7 @@ PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常
 {@link examples.NetExamples#example37}
 ----
 
-PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为`.pfx`或`.p12`扩展名）也可以用与JKS密钥存储相似的方式加载：
+PKCS＃12格式的密钥/证书 (http://en.wikipedia.org/wiki/PKCS_12) ，通常为 `.pfx` 或 `.p12` 扩展名）也可以用与JKS密钥存储相似的方式加载：
 
 [source,$lang]
 ----
@@ -555,7 +555,7 @@ the crl list to use:
 {@link examples.NetExamples#example42}
 ----
 
-也支持通过`Buffer`来配置：
+也支持通过 `Buffer` 来配置：
 
 [source,$lang]
 ----
@@ -615,7 +615,7 @@ When SNI is active the server uses
 When the server additionally requires client authentication:
 
 * if {@link io.vertx.core.net.JksOptions} were used to set the trust options
- ({@link io.vertx.core.net.NetServerOptions#setTrustOptions options}) then an exact match with the trust store
+ ( {@link io.vertx.core.net.NetServerOptions#setTrustOptions options} ) then an exact match with the trust store
  alias is done
 * otherwise the available CA certificates are used in the same way as if no SNI is in place
 
