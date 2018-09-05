@@ -43,27 +43,17 @@ stickyheader: true
       <div class="col-sm-7 code-samples">
         <!-- code samples -->
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#ws_jphp" data-toggle="tab">Php</a></li>
-          <li><a href="#ws_java" data-toggle="tab">Java</a></li>
+          <li class="active"><a href="#ws_java" data-toggle="tab">Java</a></li>
           <li><a href="#ws_js" data-toggle="tab">JavaScript</a></li>
           <li><a href="#ws_groovy" data-toggle="tab">Groovy</a></li>
           <li><a href="#ws_ruby" data-toggle="tab">Ruby</a></li>
           <li><a href="#ws_ceylon" data-toggle="tab">Ceylon</a></li>
           <li><a href="#ws_scala" data-toggle="tab">Scala</a></li>
           <li><a href="#ws_kotlin" data-toggle="tab">Kotlin</a></li>
+          <li><a href="#ws_jphp" data-toggle="tab">Php</a></li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane active" id="ws_jphp">
-            <pre class="prettyprint"><code class="php">
-$vertx->createHttpServer()
-  ->requestHandler(function ($req) {
-    $req->response()
-      ->putHeader("content-type", "text/plain")
-      ->end("Hello from Vert.x!");
-})->listen(8080);
-</code></pre>
-          </div>
-          <div class="tab-pane" id="ws_java">
+          <div class="tab-pane active" id="ws_java">
             <pre class="prettyprint"><code class="java">
 import io.vertx.core.AbstractVerticle;
 public class Server extends AbstractVerticle {
@@ -148,12 +138,22 @@ class Server : AbstractVerticle() {
   }
 }</code></pre>
           </div>
+          <div class="tab-pane" id="ws_jphp">
+            <pre class="prettyprint"><code class="php">
+$vertx->createHttpServer()
+  ->requestHandler(function ($req) {
+    $req->response()
+      ->putHeader("content-type", "text/plain")
+      ->end("Hello from Vert.x!");
+})->listen(8080);
+</code></pre>
+          </div>
         </div>
       </div>
-      <div class="col-sm-6 text-right">
+      <div class="col-sm-5 text-right">
         <h2>Polyglot</h2>
-        <p>You can use Vert.x with multiple languages including <strong>Php</strong>, <strong>Java</strong>, <strong>JavaScript</strong>,
-          <strong>Groovy</strong>, <strong>Ruby</strong>, <strong>Ceylon</strong>, <strong>Scala</strong> and <strong>Kotlin</strong>.</p>
+        <p>You can use Vert.x with multiple languages including <strong>Java</strong>, <strong>JavaScript</strong>,
+          <strong>Groovy</strong>, <strong>Ruby</strong>, <strong>Ceylon</strong>, <strong>Scala</strong>, <strong>Kotlin</strong> and <strong>Php</strong>.</p>
         <p>Vert.x doesn't preach about what language is <em>best</em> &mdash; you choose the languages <em>you</em> want
           based on the task at hand and the skill-set of your team.</p>
         <p>We provide <em>idiomatic</em> APIs for every language that Vert.x supports.</p>

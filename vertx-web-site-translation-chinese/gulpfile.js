@@ -82,13 +82,11 @@ var paths = {
   src: "src/site",
   src_gen: "src/generated",
   site: "target/site",
-  vertx2: "src/main/vertx2",
   target_asciidoctor_bs_themes: "target/asciidoctor-bs-themes",
   target_distributioninfo: "target/distribution-info/distribution-info.json",
   target_docs: "target/site/docs",
   target_scripts: "target/site/javascripts",
   target_stylesheets: "target/site/stylesheets",
-  target_vertx2: "vertx2",
   templates: "src/main/templates"
 };
 
@@ -365,12 +363,6 @@ function build(done, dev) {
     // minify HTML
     .use(htmlMinifier())
 
-    // copy old Vert.x 2 website
-    .use(assets({
-      source: paths.vertx2,
-      destination: paths.target_vertx2
-    }))
-
     // build site
     .build(done);
 }
@@ -487,7 +479,7 @@ gulp.task("check-links", ["site-dev"], function(done) {
     crawler.parseScriptTags = false;
     crawler.interval = 10;
     crawler.addFetchCondition(function(parsedURL) {
-      return ["/vertx2/", "/feed.xml"].every(function(prefix) {
+      return ["/feed.xml"].every(function(prefix) {
         return parsedURL.path.indexOf(prefix) != 0;
       });
     });

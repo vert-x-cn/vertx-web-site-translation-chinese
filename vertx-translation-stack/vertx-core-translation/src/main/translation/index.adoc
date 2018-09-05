@@ -1,4 +1,4 @@
-= Vert.x Core Manual
+= Vert.x Core 手册
 :toc: left
 
 Vert.x 的核心 Java API 被我们称为 *Vert.x Core*
