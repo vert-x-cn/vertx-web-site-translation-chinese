@@ -1,0 +1,11 @@
+==== 设置消息头
+
+在 Event Bus 上发送的消息可包含头信息。这可通过在发送或发布时提供的
+`link:../../apidocs/io/vertx/core/eventbus/DeliveryOptions.html[DeliveryOptions]` 来指定。例如：
+
+[source,java]
+----
+DeliveryOptions options = new DeliveryOptions();
+options.addHeader("some-header", "some-value");
+eventBus.send("news.uk.sport", "Yay! Someone kicked a ball", options);
+----

@@ -1,0 +1,159 @@
+Vert.x Core提供了一个用于解析传递给程序的命令行参数API。它还可以打印帮助信息——详细说明命令行工具可用的选项。
+即使这些功能远离Vert.x Core主题，该API也可在 {@link io.vertx.core.Launcher}  类中使用，可以在 fat-jar 和 `vertx` 命令行工具中使用。
+另外，它支持多语言（可用于任何支持的语言），并可在Vert.x Shell中使用。
+
+Vert.x CLI提供了一个描述命令行界面的模型，同时也是一个解析器，这个解析器可支持不同的语法：
+
+* 类似POSIX选项（即 `tar -zxvf foo.tar.gz` ）
+* 类似GNU选项（即 `du --human-readable --max-depth=1` ）
+* 类似Java属性（即 `java -Djava.awt.headless=true -Djava.net.useSystemProxies=true Foo` ）
+* 具有附加值的短选项（即 `gcc -O2 foo.c` ）
+* 单个连字符的长选项（即 `ant -projecthelp` ）
+
+使用CLI API的三个步骤如下：
+
+1. 定义命令行接口
+2. 解析用户命令行
+3. 查询/审问
+
+=== 定义阶段
+
+每个命令行界面必须定义将要使用的选项和参数集合。它也需要一个名字。CLI API使用 {@link io.vertx.core.cli.Option} 和 {@link io.vertx.core.cli.Argument} 类来描述选项和参数：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example1}
+----
+
+您可以看到，您可以使用 {@link io.vertx.core.cli.CLI#create(java.lang.String)} 创建一个新的 {@link io.vertx.core.cli.CLI} 。
+传递的字符串是 {@code CLI} 的名称。创建后，您可以设置摘要和描述，摘要的目的是简短（一行），而描述可以包含更多细节。每个选项和参数也使用
+{@link io.vertx.core.cli.CLI#addArgument(io.vertx.core.cli.Argument)} 和
+{@link io.vertx.core.cli.CLI#addOption(io.vertx.core.cli.Option)} 方法添加到 {@code CLI} 对象上。
+
+==== 选项
+
+{@link io.vertx.core.cli.Option} 是由用户命令行中存在的 *键* 标识的命令行参数。选项至少必须有一个长名或一个短名。
+长名称通常使用 `--` 前缀，而短名称与单个 `-` 一起使用。选项可以获取用法中显示的描述（见下文）。选项可以接受0、1或几个值。
+接受0值的选项是一个标志( `flag` )，必须使用
+{@link io.vertx.core.cli.Option#setFlag(boolean)} 声明。默认情况下，选项会接受一个值，但是您可以使用
+ {@link io.vertx.core.cli.Option#setMultiValued(boolean)} 方法配置该选项接收多个值：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example2}
+----
+
+选项可以标记为必填项，在用户命令行中未设置必填选项在解析阶段会引发异常：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example3}
+----
+
+非必填选项可以具有默认值，如果用户没有在命令行中设置该选项，即将使用该值：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example4}
+----
+
+可以使用 {@link io.vertx.core.cli.Option#setHidden(boolean)} 方法隐藏选项，隐藏选项不在用法中列出，但仍可在用户命令行中使用（针对高级用户）。
+
+如果选项值被限制为一个固定集合，您可以设置不同的可接受选项：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example41}
+----
+
+也可以从JSON表单中实例化选项。
+
+==== 参数
+
+和选项不同，参数不具有 *键* 并由其索引标识。例如，在 `java com.acme.Foo` 中， `com.acme.Foo` 是一个参数。
+
+参数没有名称，使用基于 0 的索引进行标识。第一个参数的索引为 0：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example5}
+----
+
+如果不设置参数索引，则基于声明顺序会自动计算。
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example51}
+----
+
+`argName` 是可选的，并在消息中使用。
+
+相比选项， {@link io.vertx.core.cli.Argument} 可以：
+
+* 使用 {@link io.vertx.core.cli.Argument#setHidden(boolean)} 隐藏
+* 使用 {@link io.vertx.core.cli.Argument#setRequired(boolean)} 设置必填
+* 使用 {@link io.vertx.core.cli.Argument#setDefaultValue(java.lang.String)} 设置默认值
+* 使用 {@link io.vertx.core.cli.Argument#setMultiValued(boolean)} 设置接收多个值——只有最后一个参数可以是多值的。
+
+参数也可以从JSON表单中实例化。
+
+==== 生成 usage 信息
+
+一旦您的 {@link io.vertx.core.cli.CLI} 实例配置好后，您可以生成 *usage* 信息：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example6}
+----
+
+上边生成的 *usage* 信息如下：
+
+[source]
+----
+Usage: copy [-R] source target
+
+A command line interface to copy files.
+
+  -R,--directory   enables directory support
+----
+
+若需要调整 usage 信息，请查阅 {@link io.vertx.core.cli.UsageMessageFormatter} 类的文档。
+
+=== 解析阶段
+
+一旦您的 {@link io.vertx.core.cli.CLI} 实例配置好后，您可以解析用户命令行来解析每个选项和参数：实例配置好后，您可以解析用户命令行来解析每个选项和参数：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example7}
+----
+
+{@link io.vertx.core.cli.CLI#parse(java.util.List)} 解析方法返回包含值的 {@link io.vertx.core.cli.CommandLine}
+对象。默认情况下，它验证用户命令行，并检查每个必填选项和参数的设置以及每个选项接收的值的数量。
+您可以通过传递 `false` 作为 {@link io.vertx.core.cli.CLI#parse(java.util.List,boolean)} 的第二个参数来禁用验证。
+如果要检查参数或选项，即使解析的命令行无效，这也是有用的。
+
+您可以使用 {@link io.vertx.core.cli.CommandLine#isValid()}
+来检查 {@link io.vertx.core.cli.CommandLine} 是否有效。
+
+=== 查询/审问阶段
+
+解析后，您可以从 {@link io.vertx.core.cli.CLI#parse(java.util.List)} 方法返回的
+{@link io.vertx.core.cli.CommandLine} 对象中读取选项和参数的值：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example8}
+----
+
+您的一个选项可以被标记为“帮助”。如果用户命令行启用“帮助”选项，验证将不会失败，但是可以让您有机会检查用户是否需要帮助：
+
+[source,$lang]
+----
+{@link examples.cli.CLIExamples#example9}
+----
+
+[language,java]
+----
+include::cli-for-java.adoc[]
+----
