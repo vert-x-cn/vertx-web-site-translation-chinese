@@ -26,9 +26,9 @@ Vert.x CLI提供了一个描述命令行界面的模型，同时也是一个解�
 ----
 
 您可以看到，您可以使用 {@link io.vertx.core.cli.CLI#create(java.lang.String)} 创建一个新的 {@link io.vertx.core.cli.CLI} 。
-传递的字符串是 {@code CLI} 的名称。创建后，您可以设置摘要和描述，摘要的目的是简短（一行），而描述可以包含更多细节。每个选项和参数也使用
+传递的字符串是 `CLI` 的名称。创建后，您可以设置摘要和描述，摘要的目的是简短（一行），而描述可以包含更多细节。每个选项和参数也使用
 {@link io.vertx.core.cli.CLI#addArgument(io.vertx.core.cli.Argument)} 和
-{@link io.vertx.core.cli.CLI#addOption(io.vertx.core.cli.Option)} 方法添加到 {@code CLI} 对象上。
+{@link io.vertx.core.cli.CLI#addOption(io.vertx.core.cli.Option)} 方法添加到 `CLI` 对象上。
 
 ==== 选项
 

@@ -48,13 +48,13 @@ include::override/buffer_from_bytes.adoc[]
 
 === 向Buffer写入数据
 
-向 `Buffer` 写入数据的方式有两种：追加和随机写入。任何一种情况下 `Buffer` 都会自动进行扩容，所以不可能在使用 `Buffer` 时遇到 {@code IndexOutOfBoundsException} 。
+向 `Buffer` 写入数据的方式有两种：追加和随机写入。任何一种情况下 `Buffer` 都会自动进行扩容，所以不可能在使用 `Buffer` 时遇到 `IndexOutOfBoundsException` 。
 
 ==== 追加到Buffer
 
-您可以使用 {@code appendXXX} 方法追加数据到 `Buffer` 。 `Buffer` 类提供了追加各种不同类型数据的追加写入方法。
+您可以使用 `appendXXX` 方法追加数据到 `Buffer` 。 `Buffer` 类提供了追加各种不同类型数据的追加写入方法。
 
-因为 {@code appendXXX} 方法的返回值就是 Buffer 自身，所以它可以链式地调用:
+因为 `appendXXX` 方法的返回值就是 Buffer 自身，所以它可以链式地调用:
 
 [source,$lang]
 ----
@@ -63,7 +63,7 @@ include::override/buffer_from_bytes.adoc[]
 
 ==== 随机访问写Buffer
 
-您还可以指定一个索引值，通过 {@code setXXX} 方法写入数据到 `Buffer` ，它也存在各种不同数据类型的方法。
+您还可以指定一个索引值，通过 `setXXX` 方法写入数据到 `Buffer` ，它也存在各种不同数据类型的方法。
 所有的 set 方法都会将索引值作为第一个参数 —— 这表示 `Buffer` 中开始写入数据的位置。
 
 `Buffer` 始终根据需要进行自动扩容。
@@ -75,7 +75,7 @@ include::override/buffer_from_bytes.adoc[]
 
 === 从Buffer中读取
 
-可使用 {@code getXXX} 方法从 Buffer 中读取数据，它存在各种不同数据类型的方法，这些方法的第一个参数是从哪里获取数据的索引（获取位置）。
+可使用 `getXXX` 方法从 Buffer 中读取数据，它存在各种不同数据类型的方法，这些方法的第一个参数是从哪里获取数据的索引（获取位置）。
 
 [source,$lang]
 ----
@@ -84,8 +84,8 @@ include::override/buffer_from_bytes.adoc[]
 
 === 使用无符号数
 
-可使用 {@code getUnsignedXXX} ,
-{@code appendUnsignedXXX} 和 {@code setUnsignedXXX} 方法将无符号数从 `Buffer` 中读取或追加/设置到 `Buffer` 里。这对以优化网络协议和最小化带宽消耗为目的实现的编解码器是很有用的。
+可使用 `getUnsignedXXX` ,
+`appendUnsignedXXX` 和 `setUnsignedXXX` 方法将无符号数从 `Buffer` 中读取或追加/设置到 `Buffer` 里。这对以优化网络协议和最小化带宽消耗为目的实现的编解码器是很有用的。
 
 下边例子中，值 200 被设置到了仅占用一个字节的特定位置：
 

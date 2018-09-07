@@ -332,7 +332,7 @@
                   <stylesheet>/stylesheets/docs.css</stylesheet>
                   <linkcss></linkcss>
                   <sourceHighlighter>prettify</sourceHighlighter>
-                  <modulepath>${artifactId}</modulepath>
+                  <modulepath>${project.artifactId}</modulepath>
                 </attributes>
                 <sourceDirectory>${project.build.directory}/asciidoc</sourceDirectory>
                 <outputDirectory>${project.build.directory}/docs-generated</outputDirectory>

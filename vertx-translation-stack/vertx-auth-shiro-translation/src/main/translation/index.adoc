@@ -111,12 +111,12 @@ LDAP auth realm从一个LDAP服务器上获取 用户/角色/权限 信息。
 接下来的这些配置属性是用来配置一个LDAP realm：
 
 `ldap_user_dn_template`:: 这是用来决定实际的查找使用当通过一个特定的id来查找一个用户的时候。一个例子是 `uid={0},ou=users,dc=foo,dc=com` -这个元素 `{0}` 是创建实际的查找时替换成用户的id。这个设置是强制的。
-`ldap_url`:: 这个url是设置LDAP服务器。这个url必须以`ldap://`开头，端口也必须要指定。这是一个示例 `ldap://myldapserver.mycompany.com:10389`
+`ldap_url`:: 这个url是设置LDAP服务器。这个url必须以 `ldap://` 开头，端口也必须要指定。这是一个示例 `ldap://myldapserver.mycompany.com:10389`
 `ldap_authentication_mechanism`:: Sets the type of LDAP authentication mechanism to use when connecting to the LDAP server.
 `ldap_context_factory_class_name`:: The name of the ContextFactory class to use. This defaults to the SUN LDAP JNDI implementation
 but can be overridden to use custom LDAP factories.
 `ldap_pooling_enabled`:: Sets whether or not connection pooling should be used when possible and appropriate.
-`ldap_referral`:: Sets the LDAP referral behavior when creating a connection.  Defaults to {@code follow}.  See the Sun/Oracle LDAP
+`ldap_referral`:: Sets the LDAP referral behavior when creating a connection.  Defaults to `follow`.  See the Sun/Oracle LDAP
 referral documentation for more: http://java.sun.com/products/jndi/tutorial/ldap/referral/jndi.html
 `ldap_system_username`:: Sets the system username that will be used when creating an LDAP connection used for authorization
 queries. The user must have the ability to query for authorization data for any application user.

@@ -51,7 +51,7 @@ WARNING: 大多数浏览器不支持 `h2c` ，所以在建站时，您应该使�
 
 当服务器接受 HTTP/2 连接时， 它会向客户端发送其 {@link io.vertx.core.http.HttpServerOptions#getInitialSettings 初始设置} 。定义客户端如何使用连接，服务器的默认初始设置为：
 
-- {@link io.vertx.core.http.Http2Settings#getMaxConcurrentStreams} ：按照 HTTP/2 RFC建议推荐值为 {@code 100}
+- {@link io.vertx.core.http.Http2Settings#getMaxConcurrentStreams} ：按照 HTTP/2 RFC建议推荐值为 `100`
 - 其他默认的 HTTP/2 的设置
 
 NOTE: *Worker Verticle 和 HTTP/2 不兼容。*

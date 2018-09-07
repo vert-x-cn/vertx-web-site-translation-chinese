@@ -81,6 +81,22 @@
       <classifier>docs</classifier>
       <type>zip</type>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-client</artifactId>
+      <version>${vertx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-common</artifactId>
+      <version>${vertx.version}</version>
+    </dependency>
   </dependencies>
   
   <build>
@@ -94,6 +110,16 @@
               <excludes>
                 override/**/*.adoc
               </excludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>unpack-examples</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <includeArtifactIds>${module},vertx-rx-java</includeArtifactIds>
             </configuration>
           </execution>
           <execution>

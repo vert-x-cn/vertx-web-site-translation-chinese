@@ -74,15 +74,109 @@
       <artifactId>vertx-lang-scala_2.12</artifactId>
       <version>${vertx.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java</artifactId>
+      <version>${vertx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rx-java</artifactId>
+      <version>${vertx.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-common</artifactId>
+      <version>${vertx.version}</version>
+    </dependency>
   </dependencies>
   
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-examples</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <includeArtifactIds>${module},vertx-rx-java</includeArtifactIds>
+            </configuration>
+          </execution>
+          <execution>
+            <id>unpack-rx-override</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <markersDirectory>${project.build.directory}/markers/unpack-rx-override</markersDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>vertx-rx-java</includeArtifactIds>
+              <includes>vertx-web-client/**/*.adoc</includes>
+              <includeClassifiers>docs</includeClassifiers>
+              <includeTypes>zip</includeTypes>
+              <excludes>override/**</excludes>
+              <outputDirectory>${project.build.directory}/sources/override</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>mkdir-rx-override</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="创建rx translation文件夹">
+                <mkdir dir="${project.basedir}/src/main/rx"/>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-rx</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="复制rx文档">
+                <copy todir="${project.build.directory}/sources/asciidoc/" overwrite="true">
+                  <fileset dir="${project.build.directory}/sources/override/vertx-web-client/java/"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-rx-translation</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="复制rx翻译文档">
+                <copy todir="${project.build.directory}/sources/asciidoc/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/rx"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.bsc.maven</groupId>

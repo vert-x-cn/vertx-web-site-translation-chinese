@@ -47,7 +47,7 @@ object.put("foo", "bar").put("num", 123).put("mybool", true);
 
 ==== 从 JSON 对象获取值
 
-您可使用 {@code getXXX} 方法从JSON对象中获取值。例如：
+您可使用 `getXXX` 方法从JSON对象中获取值。例如：
 
 [source,java]
 ----
@@ -115,7 +115,7 @@ array.add("foo").add(123).add(false);
 
 ==== 从 JSON 数组中获取值
 
-您可使用 {@code getXXX} 方法从JSON 数组中获取值。例如：
+您可使用 `getXXX` 方法从JSON 数组中获取值。例如：
 
 [source,java]
 ----
