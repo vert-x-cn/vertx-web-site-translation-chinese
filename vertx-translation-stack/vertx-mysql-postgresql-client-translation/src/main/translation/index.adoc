@@ -1,0 +1,225 @@
+= Vert.x MySQL / PostgreSQL client
+
+此异步 MySQL/PostgreSQL 客户端给需要与 MySQL 或 PostgreSQL 数据库交互的 Vert.x 应用提供了相应的接口。
+
+Vert.x MySQL/PostgreSQL Client（以下简称客户端）底层实现基于 Mauricio Linhares 写的异步驱动 https://github.com/mauricio/postgresql-async[async driver] 。
+此组件让 Vert.x 应用能够以异步、非阻塞的方式访问 MySQL 或者 PostgreSQL 数据库。
+
+== 使用 Vert.x MySQL/PostgreSQL 客户端
+
+这部分内容阐述了如何在您的应用中配置 Vert.x MySQL/PostgreSQL 客户端。
+
+=== 在常规应用中
+
+要使用 Vert.x MySQL / PostgreSQL 客户端，您需要把下面的 jar 包加入 `CLASSPATH`:
+
+* ${maven.artifactId} ${maven.version} (此客户端)
+* scala-library 2.11.4
+* the postgress-async-2.11 和 mysdql-async-2.11 ，来自 https://github.com/mauricio/postgresql-async
+* joda time
+
+所有这些都可以从 Maven 中心库下载。
+
+=== 在打包成 fat jar 的应用中
+
+如果您使用 Maven 或者 Gradle 构建 _Fat-jar_ 应用，只需要加入下面的依赖：
+
+* Maven (在 `pom.xml` 文件中):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-mysql-postgresql-client</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (在 `build.gradle` 文件中):
+
+[source,groovy,subs="+attributes"]
+----
+compile 'io.vertx:vertx-mysql-postgresql-client:${maven.version}'
+----
+
+=== 在使用 Vert.x 环境的应用中
+
+如果您使用 Vert.x 环境，需要把上面列出的 jar 包加入到  `$VERTX_HOME/lib`  路径下。
+
+或者，您可以编辑位于 `$VERTX_HOME` 路径下的`vertx-stack.json` 文件，
+并且设置 `vertx-mysql-postgresql-client` 的依赖为 `"included": true`。
+完成后，执行命令：`vertx resolve --dir=lib --stack= ./vertx-stack.json`，就会下载此客户端及它的依赖。
+
+== 创建客户端对象
+
+有几种方式来创建客户端，我们一起来看下。
+
+=== 使用默认共享连接池
+
+大部分情况下，您都将希望不同的客户端实例（`AsyncSQLClient`）共享一个连接池。
+
+考虑这样一种情况：您在部署 Verticle 时，设置了 Verticle 拥有多个实例化的对象，
+但是您希望每个 Verticle 实例能够共享同一个数据源，而不是单独为每个 Verticle 实例设置不同的数据源。
+
+要解决上面的问题，您可以这么做：
+
+[source,java]
+----
+{@link examples.MySQLPostgreSQLExamples#exampleCreateDefault}
+----
+
+只有在第一次调用 {@link io.vertx.ext.asyncsql.MySQLClient#createShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject)}
+或者 {@link io.vertx.ext.asyncsql.PostgreSQLClient#createShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject)}
+方法的时候，才会真正地根据 `config` 参数创建一个数据源。
+
+之后再调用此方法，只会返回一个新的客户端实例，但使用的是相同的数据源。这时 `config` 参数也就不再有作用。
+
+=== 指定数据源名称
+
+您还可以像下面这样，在创建一个客户端实例的时候指定数据源的名称：
+
+[source,java]
+----
+{@link examples.MySQLPostgreSQLExamples#exampleCreatePoolName}
+----
+
+如果不同的客户端对象使用了相同的 Vert.x 对象和相同的数据源名称，那么它们将共享数据源。
+
+只有在第一次调用 {@link io.vertx.ext.asyncsql.MySQLClient#createShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject, String)}
+或者 {@link io.vertx.ext.asyncsql.PostgreSQLClient#createShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject, String)}
+方法的时候，才会真正的根据 `config` 参数创建一个数据源。
+
+之后再调用此方法，只会返回一个新的客户端对象，但使用的是相同的数据源。这时 `config` 参数也就不再有作用。
+
+当我们希望不同含义的客户端对象拥有不同的数据源时，可以采用这种方式来创建它的对象，比如它们要与不同的数据库进行交互。
+
+=== 创建不共享数据源的客户端对象
+
+在大部分情况下，我们会希望在不同的客户端实例之间共享数据源。但有时候，却恰恰相反。
+
+这时，可以调用 {@link io.vertx.ext.asyncsql.MySQLClient#createNonShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject)}
+或者 {@link io.vertx.ext.asyncsql.PostgreSQLClient#createNonShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject)} 方法：
+
+[source,java]
+----
+{@link examples.MySQLPostgreSQLExamples#exampleCreateNonShared}
+----
+
+每次调用此方法，就相当于在调用 {@link io.vertx.ext.asyncsql.MySQLClient#createShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject, String)}
+或者 {@link io.vertx.ext.asyncsql.PostgreSQLClient#createShared(io.vertx.core.Vertx, io.vertx.core.json.JsonObject, String)}
+方法时加上了具有唯一名称的数据源参数。
+
+== 关闭客户端
+
+您可以较长时间的持有客户端对象（比如在 Verticle 的整个生命周期里），可一旦不再使用，就应该使用
+{@link io.vertx.ext.asyncsql.AsyncSQLClient#close(io.vertx.core.Handler)} 或者
+{@link io.vertx.ext.asyncsql.AsyncSQLClient#close()} 方法来关闭它。
+
+== 获取数据库连接
+
+您可以使用 {@link io.vertx.ext.asyncsql.AsyncSQLClient#getConnection(io.vertx.core.Handler)} 方法来获得数据库连接。
+
+此方法从连接池中获取一个数据库连接，并返回给回调方法：
+
+[source,java]
+----
+{@link examples.MySQLPostgreSQLExamples#example4}
+----
+
+*一旦您用完一个数据库连接后，请确保关闭它。*
+
+获取的连接，是接口 {@link io.vertx.ext.sql.SQLConnection} 的一个实现。但是 {@link io.vertx.ext.sql.SQLConnection} 是一个通用接口，不只是在此客户端中有用到。
+
+您可以在 `link:../../vertx-sql-common/$lang/[Vert.x Common SQL Interface 文档]` 中了解如何去使用它。
+
+=== Configuring reconnections
+
+This service is able to recover from temporary database outages, such as those which occur during a database restart or
+brief loss of network connectivity. You can configure the expected behaviour when acquiring connections via the
+following properties:
+
+* `maxConnectionRetries`
+* `connectionRetryDelay`
+
+When the internal connection pool attempts to acquire an open connection and fails, it will retry up to
+`maxConnectionRetries` times, with a delay of `connectionRetryDelay` milliseconds between each attempt.
+If all attempts fail, any clients waiting for connections from the pool will be notified with an Error, indicating that
+a Connection could not be acquired. Note that clients will not be notified with an Error until a full round of attempts
+fail, which may be some time after the initial connection attempt.
+
+If `maxConnectionRetries` is set to `0`, the internal connection pool will not perform any reconnection (default). If
+`maxConnectionRetries` is set to `-1`, the internal connection pool will attempt to acquire new connections indefinitely,
+so any call to {@link io.vertx.ext.asyncsql.AsyncSQLClient#getConnection(io.vertx.core.Handler)}
+may be indefinitely waiting for a successful acquisition.
+
+Once a full round of acquisition attempts fails, the internal connection pool will remain active, and will try
+again to acquire connections in response to future requests for connections.
+
+Note that if a database restart occurs, a pool may contain previously acquired but now stale Connections that will only be
+detected and purged lazily, when the pool attempts to reuse them.
+
+=== 日期和时间戳
+
+只要您从数据库从获取时间格式的数据，此客户端都将会隐式将它们转换成 ISO 8601（ `yyyy-MM-ddTHH:mm:ss.SSS` ）格式的字符串。MySQL 会舍弃毫秒项，所以您会看到 `.000`。
+
+=== 最后插入的数据id
+
+在表中插入新数据时，您也许希望获得数据库的自增长id。JDBC API 通常都会让您从数据库连接中得到最后一个插入的 id。在 MySQL 中，
+可以按照 JDBC API 描述的方式获得最后插入的 id，而在 PostgreSQL 中，您可以使用
+http://www.postgresql.org/docs/current/static/sql-insert.html["RETURNING" clause] 。
+您可以选择使用其中的一个 `query` 方法来获取返回的列。
+
+=== 存储过程
+
+`call` 和 `callWithParams` 方法目前暂未实现。
+
+== 配置参数
+
+PostgreSql 和 MySql 客户端的配置参数一样：
+
+----
+{
+  "host" : <主机地址>,
+  "port" : <端口>,
+  "maxPoolSize" : <最大连接数>,
+  "username" : <用户名>,
+  "password" : <密码>,
+  "database" : <数据库名称>,
+  "charset" : <编码>,
+  "connectTimeout" : <timeout-in-milliseconds>,
+  "testTimeout" : <timeout-in-milliseconds>,
+  "queryTimeout" : <查询超时时间-毫秒>,
+  "maxConnectionRetries" : <maximum-number-of-connection-retries>,
+  "connectionRetryDelay" : <delay-in-milliseconds>,
+  "sslMode" : <"disable"|"prefer"|"require"|"verify-ca"|"verify-full">,
+  "sslRootCert" : <path to file with certificate>
+}
+----
+
+`host`:: 数据库主机地址，默认为 `localhost`。
+`port`:: 数据库端口，PostgreSQL 默认为 `5432`，MySQL 默认为 `3306` 。
+`maxPoolSize`:: 最大连接数。默认为  `10`。
+`username`:: 数据库用户名，PostgreSQL 默认为 `postgres` ，MySQL 默认为 `root` 。
+`password`:: 数据库密码，默认不设置。
+`database`:: 数据库名称，默认为 `testdb`。
+`charset`:: 编码格式，默认为 `UTF-8`。
+`connectTimeout`:: The timeout to wait for connecting to the database. Defaults to `10000` (= 10 seconds).
+`testTimeout`:: The timeout for connection tests performed by pools. Defaults to `10000` (= 10 seconds).
+`queryTimeout`:: 查询超时时间（毫秒），默认为 `10000` (= 10秒)。
+`maxConnectionRetries`:: Maximum number of connection retries. Defaults to `0` (no retries). +
+   Special values:
+   -1 ::: Unlimited number of connection retries
+   0  ::: No connection retries will be done
+`connectionRetryDelay`:: Delay in milliseconds between each retry attempt. Defaults to `5000` (= 5 seconds).
+`sslMode` :: If you want to enable SSL support you should enable this parameter.
+             For example to connect Heroku you will need to use *prefer*.
+
+   "disable" ::: only try a non-SSL connection
+   "prefer"  ::: first try an SSL connection; if that fails, try a non-SSL connection
+   "require"  ::: only try an SSL connection, but don't verify Certificate Authority
+   "verify-ca"  ::: only try an SSL connection, and verify that the server certificate is issued by a trusted
+                    certificate authority (CA)
+   "verify-full"  ::: only try an SSL connection, verify that the server certificate is issued by a trusted CA and
+                      that the server host name matches that in the certificate
+`sslRootCert` :: Path to SSL root certificate file. Is used if you want to verify privately issued certificate.
+                 Refer to https://github.com/mauricio/postgresql-async[postgresql-async] documentation for more details.

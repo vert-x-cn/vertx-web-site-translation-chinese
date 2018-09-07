@@ -1,0 +1,20 @@
+== RxJava API
+
+
+Vert.x Kafka Client 组件也提供Rx风格的API。
+
+[source,java]
+----
+Observable<KafkaConsumerRecord<String, Long>> observable = consumer.toObservable();
+
+observable
+  .map(record -> record.value())
+  .buffer(256)
+  .map(
+  list -> list.stream().mapToDouble(n -> n).average()
+).subscribe(val -> {
+
+  // 获取到一个平均值
+
+});
+----

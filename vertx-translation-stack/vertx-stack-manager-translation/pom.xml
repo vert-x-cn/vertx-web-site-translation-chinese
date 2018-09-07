@@ -110,7 +110,7 @@
             </goals>
             <configuration>
               <target name="复制翻译文档">
-                <copy todir="${project.build.directory}/asciidoc/${module}" overwrite="true">
+                <copy todir="${project.build.directory}/asciidoc/${module}/stack-manager/" overwrite="true">
                   <fileset dir="${project.basedir}/src/main/translation"/>
                 </copy>
               </target>
@@ -118,9 +118,10 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.asciidoctor</groupId>-->
+        <!--<artifactId>asciidoctor-maven-plugin</artifactId>-->
+      <!--</plugin>-->
     </plugins>
   </build>
 </project>

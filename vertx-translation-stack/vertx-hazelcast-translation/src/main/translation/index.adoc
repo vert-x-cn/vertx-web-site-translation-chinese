@@ -1,0 +1,412 @@
+= Hazelcast Cluster Manager
+
+`HazelcastClusterManager` 是基于 http://hazelcast.org[Hazelcast] 实现 。
+
+它是Vert.x 中集群管理器中的默认实现。由于 Vert.x 集群管理的可插拔性，也可轻易切换至其它的集群管理器。
+
+This implementation is packaged inside:
+
+* Maven (在 `pom.xml` 文件中):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>${maven.artifactId}</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (在 `build.gradle` 文件中):
+
+[source,groovy,subs="+attributes"]
+----
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+----
+
+Vert.x 集群管理器包含以下几个功能：
+
+* 发现并管理集群中的节点
+* 管理集群端的主题订阅清单（这样就可以轻松得知集群中的那些节点订阅了那些 EventBus 地址）
+* 分布式 Map 支持
+* 分布式锁
+* 分布式计数器
+
+Vert.x 集群器并不处理节点之间的通信，在 Vert.x 中节点中的通信是直接由 TCP 链接处理的。
+
+== 使用 Hazelcast cluster manager
+
+如果通过命令行来使用 Vert.x，对应集群管理器 `jar` 包( `${maven.artifactId}-${maven.version}` )应该在 Vert.x 中安装包中。
+
+如果在 `Maven` 或者 `Gradle` 工程中使用 Vert.x ，只需要在工程依赖中加上相应的 `ClusterManager` 实现依赖：`${maven.groupId}:${maven.artifactId}:${maven.version}`。
+
+如果 `HazelcastClusterManager` 在 `classpath` 中，Vert.x将自动检测到，并将其作为集群管理。需要注意的是，要确保 Vert.x 的 `classpath` 中没有其它的 `ClusterManager` 实现 `jar` 包。
+
+当然在内嵌 Vert.x 时，通过编程的方式创建 Vert.x 集群模式实例，调用 `setClusterManager` 方法显式指定集群管理器。
+
+[source,$lang]
+----
+{@link examples.Examples#example1()}
+----
+
+[#configcluster]
+== 配置 Hazelcast cluster manager
+
+通常情况下，集群管理器的相关配置是由打包的jar中的默认配置文件
+https://github.com/vert-x3/vertx-hazelcast/blob/master/src/main/resources/default-cluster.xml[`default-cluster.xml`]
+决定的。
+
+如果要覆盖此配置，可以在 `classpath` 中添加一个 `cluster.xml` 文件。如果想在 fat jar 中内嵌 `cluster.xml` ，
+此文件必须在 fat jar 的根目录中。如果此文件是一个外部文件，则必须将其添加至 `classpath` 中。举个例子：
+
+[source]
+----
+# cluster.xml 在当前路径中
+java -jar ... -cp . -cluster
+vertx run MyVerticle -cp . -cluster
+
+# cluster.xml 在 conf 目录中
+java -jar ... -cp conf -cluster
+----
+
+还有一种方式来覆盖默认的配置文件，那就是利用系统配置 `vertx.hazelcast.config` 来实现：
+
+[source]
+----
+# 指定一个外部文件为自定义配置文件
+java -Dvertx.hazelcast.config=./config/my-cluster-config.xml -jar ... -cluster
+
+# 从 classpath 中加载一个文件为自定义配置文件
+java -Dvertx.hazelcast.config=classpath:my/package/config/my-cluster-config.xml -jar ... -cluster
+----
+
+如果 `vertx.hazelcast.config` 值不为空时，将覆盖 `classpath` 中所有的 `cluster.xml` 文件，
+但是如果加载 `vertx.hazelcast.config` 失败时，系统将选取 `classpath` 任意一个 `cluster.xml` ，甚至直接使用默认配置。
+
+CAUTION: Vert.x 并不支持 -Dhazelcast.config 设置方式，请不要使用。
+
+The xml file is a Hazelcast configuration file and is described in detail in the documentation on the Hazelcast
+web-site.
+
+同时也可以通过编程的形式达到配置的目的：
+
+[source,$lang]
+----
+{@link examples.Examples#example2()}
+----
+
+Hazelcast支持多种不同的传输协议，包括组播和TCP。默认配置中采用组播传输协议，因此您必须在网络上启用组播才能使其工作。
+
+具体详细配置，请参阅 http://hazelcast.org[Hazelcast 文档] 。
+For full documentation on how to configure the transport differently or use a different transport please consult the
+Hazelcast documentation.
+
+== 使用已存在的 Hazelcast 集群
+
+可以在集群管理器通过设置 `HazelcastInstance` 来复用现有集群：
+
+[source,$lang]
+----
+{@link examples.Examples#example3(com.hazelcast.core.HazelcastInstance)}
+----
+
+在这种情况下，Vert.x不是 Hazelcast 群集的所有者，所以不要关闭 Vert.x 时关闭 Hazlecast 集群。
+
+请注意，自定义 Hazelcast 实例需要配置：
+
+[source, xml]
+----
+<properties>
+  <property name="hazelcast.shutdownhook.enabled">false</property>
+</properties>
+<multimap name="__vertx.subs">
+  <backup-count>1</backup-count>
+</multimap>
+<map name="__vertx.haInfo">
+  <time-to-live-seconds>0</time-to-live-seconds>
+  <max-idle-seconds>0</max-idle-seconds>
+  <eviction-policy>NONE</eviction-policy>
+  <max-size policy="PER_NODE">0</max-size>
+  <eviction-percentage>25</eviction-percentage>
+  <merge-policy>com.hazelcast.map.merge.LatestUpdateMapMergePolicy</merge-policy>
+</map>
+<semaphore name="__vertx.*">
+  <initial-permits>1</initial-permits>
+</semaphore>
+----
+
+**IMPORTANT** 当 Vert.x 集群使用 HA（高可用或故障转移）时，请不要使用 Hazelcast 客户端，因为他们不会通知他们何时离开集群，同时有可能丢失数据，还有可能将集群置于不一致的状态。更多情况请翻阅 https://github.com/vert-x3/vertx-hazelcast/issues/24[Issue 24]
+
+**IMPORTANT** 同时要确保 Hazelcast 集群 先于 Vert.x 集群启动，后于 Vert.x 集群关闭。同时需要禁用 `shutdownhook` 。参考上述的 xml 配置，或者通过 系统变量来实现。
+
+=== Changing timeout for failed nodes
+
+By default a node will be removed from the cluster if Hazelcast didn't receive a heartbeat for 300 seconds. To change
+this value `hazelcast.max.no.heartbeat.seconds` system property such as in:
+
+----
+-Dhazelcast.max.no.heartbeat.seconds=5
+----
+
+Afterwards a node will be removed from the cluster after 5 seconds without a heartbeat.
+
+See http://docs.hazelcast.org/docs/3.6/manual/html-single/index.html#system-properties[Hazelcast
+system-properties] and
+http://docs.hazelcast.org/docs/3.6/manual/html-single/index.html#configuring-with-system-properties[configuring Hazelcast
+with system properties] for the other properties you can configure.
+
+== 使用 Hazelcast async methods
+Hazelcast 中的 `IMap` 、 `IAtomicLong` 接口(数据结构) 均有异步调用方法，
+其返回值为 `ICompletableFuture<V>`，这与 Vert.x 的线程模型完美契合。
+但是即使这些接口已经存在一段时间，却没有通过 `HazelcastInstance` 公共 API 暴露。
+
+默认情况下，`HazelcastClusterManager` 使用公共 API。当在程序启动时，设置选项`-Dvertx.hazelcast.async-api=true` ，
+将代表系统在与 Hazelcast 集群通讯交互时，将采用 Hazelcast async API 。
+这意味着，`Counter` 计数操作、`AsyncMap`的 `get` `put` `remove` 操作都将通过 Vert.x EventLoop 线程来执行，
+而不是通过 Woker 线程的 `vertx.executeBlocking` 执行。
+
+== 故障排除
+
+如果默认的组播配置不能正常运行，通常有以下原因：
+
+=== 机器禁用组播
+
+MacOS 默认禁用组播。Google一下启用组播。
+
+=== 使用错误的网络接口
+
+如果机器上有多个网络接口（也有可能是在运行 VPN 的情况下），那么 Hazelcast 很有可能是使用了错误的网络接口。
+
+为了确保 Hazelcast 使用正确的网络接口，在配置文件中将 `interface` 设置为指定IP地址，同时确保 enabled 属性设置为 true 。 例如：
+
+----
+<interfaces enabled="true">
+  <interface>192.168.1.20</interface>
+</interfaces>
+----
+
+当运行集群模式时，需要确保 Vert.x 使用正确的网络接口。
+当通过命令行模式时，可以设置 `cluster-host` 参数：
+
+----
+vertx run myverticle.js -cluster -cluster-host your-ip-address
+----
+
+其中 `your-ip-address` 必须与 Hazelcast 中的配置保持一致。
+
+当通过编程模式使用 Vert.x 时，可以调用方法
+{@link io.vertx.core.VertxOptions#setClusterHost(java.lang.String)} 来设置参数
+
+=== 使用VPN
+
+VPN 软件通常通过创建不支持组播的虚拟网络接口来进行工作。在 VPN 环境中，如果 Hazelcast 与 Vert.x 不正确配置的话，VPN 接口将被选择，而不是正确的接口。
+
+所以，如果你的软件运行在 VPN 环境中，参考上述章节，设置正确的网络接口。
+
+=== 组播不可用
+
+在某些情况下，因为特殊的运行环境，可能无法使用组播。在这种情况下，应该配置其他网络传输，例如在 TCP 上使用 TCP 套接字，在亚马逊云上使用 EC2 。
+
+有关 Hazelcast 更多传输方式，以及如何配置它们，请咨询 Hazelcast 文档。
+
+=== 开启日志
+
+在排除故障时，开启 Hazelcast 日志，将会给予很大的帮助。在 `classpath` 中添加 `vertx-default-jul-logging.properties` 文件（默认的JUL记录时），
+这是一个标准 java.util.loging（JUL） 配置文件。具体配置如下：
+
+----
+com.hazelcast.level=INFO
+----
+
+或者
+
+----
+java.util.logging.ConsoleHandler.level=INFO
+java.util.logging.FileHandler.level=INFO
+----
+
+== Hazelcast 日志配置
+
+Hazelcast 的日志默认采用 JDK 实现（参考 JUL）。如果想切换至其他日志库，通过设置 `azelcast.logging.type` 即可达到目的。
+
+----
+-Dhazelcast.logging.type=slf4j
+----
+
+详细文档请参考 http://docs.hazelcast.org/docs/3.6.1/manual/html-single/index.html#logging-configuration[hazelcast documentation] 。
+
+== 使用其他 Hazelcast 版本
+
+当前的 Vert.x HazelcastClusterManager 使用的 Hazelcast 版本为 `3.8.2` 。如果开发者想使用其他版本的 Hazelcast，需要做以下工作：
+
+* 将目标版本的 Hazelcast 依赖添加至 classpath 中
+* 如果是 fat jar 的形式，在构建工具中使用正确的版本
+
+In this later case, you would need in Maven:
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>com.hazelcast</groupId>
+  <artifactId>hazelcast</artifactId>
+  <version>ENTER_YOUR_VERSION_HERE</version>
+</dependency>
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>${maven.artifactId}</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+Depending on the version, you may need to exclude some transitive dependencies.
+
+On Gradle, you can achieve the same overloading using:
+
+[source]
+----
+dependencies {
+ compile ("${maven.groupId}:${maven.artifactId}:${maven.version}"){
+   exclude group: 'com.hazelcast', module: 'hazelcast'
+ }
+ compile "com.hazelcast:hazelcast:ENTER_YOUR_VERSION_HERE"
+}
+----
+
+== Configuring for Kubernetes
+
+On Kubernetes, Hazelcast should be configured to use the https://github.com/hazelcast/hazelcast-kubernetes[Hazelcast Kubernetes] plugin.
+
+First, add the `io.vertx:vertx-hazelcast:${vertx.version}` and `com.hazelcast:hazelcast-kubernetes:${hazelcast-kubernetes-version}`
+dependencies to your project. With Maven it looks like:
+
+[source,xml]
+----
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-hazelcast</artifactId>
+  <version>${vertx.version}</version>
+</dependency>
+<dependency>
+  <groupId>com.hazelcast</groupId>
+  <artifactId>hazelcast-kubernetes</artifactId>
+  <version>${hazelcast-kubernetes-version}</version>
+</dependency>
+<dependency>
+----
+
+The second step is to configure the discovery plugin inside of your Hazelcast configuration, by either providing a custom
+`cluster.xml` file or programmatically, as described in <<configcluster>>.
+
+The following properties have to be changed / added:
+
+[source,xml]
+----
+<hazelcast>
+  <properties>
+    <!-- only necessary prior Hazelcast 3.8 -->
+    <property name="hazelcast.discovery.enabled">true</property>
+  </properties>
+
+  <network>
+    <join>
+      <!-- deactivate normal discovery -->
+      <multicast enabled="false"/>
+      <tcp-ip enabled="false" />
+
+      <!-- activate the Kubernetes plugin -->
+      <discovery-strategies>
+        <discovery-strategy enabled="true"
+            class="com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategy">
+
+          <properties>
+            <!-- configure discovery service API lookup -->
+            <property name="service-dns">MY-SERVICE-DNS-NAME</property>
+            <property name="service-dns-timeout">10</property>
+          </properties>
+        </discovery-strategy>
+      </discovery-strategies>
+    </join>
+  </network>
+</hazelcast>
+----
+
+The `MY-SERVICE-DNS-NAME` value must be a *headless* Kubernetes service name that will be used by Hazelcast to identify all cluster members.
+The format for this field is `MY-SERVICE-NAME.MY-NAMESPACE.svc.cluster.local`.
+A headless service can be created with:
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: MY-NAMESPACE
+  name: MY-SERVICE-NAME
+spec:
+  selector:
+    component: MY-SERVICE-NAME
+  clusterIP: None
+  ports:
+  - name: hz-port-name
+    port: 5701
+    protocol: TCP
+----
+
+
+Then, attach the `component` label to all deployments that should be part of the cluster:
+[source,yaml]
+----
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: MY-NAMESPACE
+spec:
+  template:
+    metadata:
+      labels:
+        component: MY-SERVICE-NAME
+----
+
+
+Further configuration details are available on the https://github.com/hazelcast/hazelcast-kubernetes[Hazelcast Kubernetes Plugin page].
+
+=== Rolling updates
+
+During rolling updates, it is recommended to replace pods one by one.
+
+To do so, we must configure Kubernetes to:
+
+* never start more than one new pod at once
+* forbid more than one unavailable pod during the process
+
+[source,yaml]
+----
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 10
+      intervalSeconds: 20
+      timeoutSeconds: 600
+      maxUnavailable: 1 <1>
+      maxSurge: 1 <2>
+----
+<1> the maximum number of pods that can be unavailable during the update process
+<2> the maximum number of pods that can be created over the desired number of pods
+
+Also, the pod readiness probe must take the cluster state into account.
+Indeed, when a node joins or leaves the cluster, Hazelcast rebalances the data across members, and it is better to avoid concurrent state transfers.
+When the state transfer completes, the cluster goes back to a safe state.
+
+The readiness probe can be implemented with link:../../vertx-health-check/$lang/[Vert.x Health Checks]:
+
+[source,$lang]
+----
+{@link examples.Examples#healthCheck(io.vertx.core.Vertx)}
+----
+
+After creation, it can be exposed over HTTP with a link:../../vertx-web/$lang/[Vert.x Web] router handler:
+
+[source,$lang]
+----
+{@link examples.Examples#healthCheckHandler(io.vertx.core.Vertx, io.vertx.ext.healthchecks.HealthChecks)}
+----
