@@ -14,9 +14,6 @@
   <properties>
     <host>vertx.tk</host>
     <vertx.download.version>${vertx.version}</vertx.download.version>
-    <asciidoctorj-pdf.version>1.5.0-alpha.15</asciidoctorj-pdf.version>
-    <asciidoctor-maven-plugin.version>1.5.5</asciidoctor-maven-plugin.version>
-    <asciidoctorj.version>1.5.5</asciidoctorj.version>
   </properties>
 
   <dependencies>
@@ -748,6 +745,7 @@
                 <stylesheet>/stylesheets/docs.css</stylesheet>
                 <linkcss></linkcss>
                 <sourceHighlighter>prettify</sourceHighlighter>
+                <testttt>xxxxx</testttt>
               </attributes>
               <sourceDirectory>${project.build.directory}/docs</sourceDirectory>
               <outputDirectory>${project.build.directory}/docs-generated</outputDirectory>
