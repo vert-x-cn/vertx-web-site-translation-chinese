@@ -663,11 +663,11 @@
             <phase>generate-sources</phase>
             <configuration>
               <target>
-                <copy todir="${project.build.directory}/docs">
+                <copy todir="${project.build.directory}/docs-generated">
                   <fileset dir="${project.basedir}/../vertx-translation-stack">
-                    <include name="vertx-*/target/asciidoc/**"/>
+                    <include name="vertx-*/target/docs-generated/**"/>
                   </fileset>
-                  <mapper type="regexp" from="^vertx-[^\\]*\\target\\asciidoc\\(.*)" to="\1"/>
+                  <mapper type="regexp" from="^vertx-[^\\]*\\target\\docs-generated\\(.*)" to="\1"/>
                 </copy>
               </target>
             </configuration>
@@ -686,23 +686,6 @@
               <goal>run</goal>
             </goals>
             <phase>generate-sources</phase>
-          </execution>
-          <execution>
-            <id>fix-guide-for-java-devs-files</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <phase>generate-resources</phase>
-            <configuration>
-              <target>
-                <move file="${project.build.directory}/docs-generated/guide-for-java-devs-override/index.html"
-                      todir="${project.build.directory}/docs-generated/guide-for-java-devs"
-                      overwrite="true"/>
-                <move file="${project.build.directory}/docs-generated/guide-for-java-devs/index.pdf"
-                      tofile="${project.build.directory}/docs-generated/guide-for-java-devs/guide-for-java-devs.pdf"/>
-                <delete dir="${project.build.directory}/docs-generated/guide-for-java-devs-override"/>
-              </target>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -733,25 +716,6 @@
         </configuration>
         <executions>
           <execution>
-            <id>process-vertx-docs</id>
-            <goals>
-              <goal>process-asciidoc</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <backend>html</backend>
-              <attributes>
-                <toc>left</toc>
-                <stylesheet>/stylesheets/docs.css</stylesheet>
-                <linkcss></linkcss>
-                <sourceHighlighter>prettify</sourceHighlighter>
-                <testttt>xxxxx</testttt>
-              </attributes>
-              <sourceDirectory>${project.build.directory}/docs</sourceDirectory>
-              <outputDirectory>${project.build.directory}/docs-generated</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
             <id>process-site-docs</id>
             <goals>
               <goal>process-asciidoc</goal>
@@ -767,49 +731,6 @@
               </attributes>
               <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
               <outputDirectory>${project.build.directory}/docs-generated</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>guide-for-java-devs-to-html</id>
-            <goals>
-              <goal>process-asciidoc</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <backend>html</backend>
-              <attributes>
-                <toc>left</toc>
-                <stylesheet>/stylesheets/docs.css</stylesheet>
-                <linkcss></linkcss>
-                <rendered-pdf-link>guide-for-java-devs.pdf</rendered-pdf-link>
-                <sourceHighlighter>prettify</sourceHighlighter>
-              </attributes>
-              <sourceDirectory>${project.build.directory}/docs/guide-for-java-devs</sourceDirectory>
-              <sourceDocumentName>index.adoc</sourceDocumentName>
-              <outputDirectory>${project.build.directory}/docs-generated/guide-for-java-devs-override
-              </outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>guide-for-java-devs-to-pdf</id>
-            <goals>
-              <goal>process-asciidoc</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <backend>pdf</backend>
-              <sourceHighlighter>rouge</sourceHighlighter>
-              <attributes>
-                <icons>font</icons>
-                <autofit-option></autofit-option>
-                <toc></toc>
-                <toclevels>4</toclevels>
-                <sectnums></sectnums>
-                <front-cover-image>cover.pdf</front-cover-image>
-              </attributes>
-              <sourceDirectory>${project.build.directory}/docs/guide-for-java-devs</sourceDirectory>
-              <sourceDocumentName>index.adoc</sourceDocumentName>
-              <outputDirectory>${project.build.directory}/docs-generated/guide-for-java-devs</outputDirectory>
             </configuration>
           </execution>
         </executions>
