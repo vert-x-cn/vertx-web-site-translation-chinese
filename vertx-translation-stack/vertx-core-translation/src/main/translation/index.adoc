@@ -21,7 +21,7 @@ Vert.x Core 提供了下列功能：
 * 集群
 
 Vert.x Core中的功能相当底层 —— 您在此不会找到诸如数据库访问、授权或高层Web应用的功能。您可以在 *Vert.x ext* （扩展包）
-（译者注：Vert.x的扩展包是Vert.x的子项目集合，类似 `link:../../#web[Web]` 、 `link:../../#web-client[Web Client]`
+（译者注：Vert.x的扩展包是Vert.x的子项目集合，类似 `link:../../#web[Web]` 、 `link:../../#web_client[Web Client]`
 、 `link:../../#data_access[Data Access]` 等）中找到这些功能。
 
 **Vert.x Core** 小而轻，您可以只使用您需要的部分。它可整体嵌入现存应用中。我们并不会强迫您用特定的方式构造您的应用。
@@ -962,7 +962,7 @@ java -jar my-verticle-fat.jar list
  * `java-opts` : Java虚拟机选项，若未设置，则使用 `JAVA_OPTS` 环境变量
  * `redirect-output` : 重定向生成的进程输出和错误流到父进程流
 
-若选项值包含空白，请不要忘记在 {@code ""} （双引号）之间包装值。
+若选项值包含空白，请不要忘记在 `""` （双引号）之间包装值。
 
 由于 `start` 命令产生一个新的进程，传递给JVM的java选项不会被传播，所以您必须使用 `java-opts` 来配置JVM（ `-X` ， `-D` ...）。若您使用 `CLASSPATH` 环境变量，请确保路径下包含所有需要的jar（vertx-core、您的jar和所有依赖项）。
 
@@ -1505,12 +1505,12 @@ java -jar my-fat-jar.jar hello vert.x
 
 当您使用 {@link io.vertx.core.Launcher} 类作为主类时，它使用以下退出代码：
 
-* 若进程顺利结束，或抛出未捕获的错误：{@code 0}
-* 用于通用错误： {@code 1}
-* 若Vert.x无法初始化： {@code 11}
-* 若生成的进程无法启动、发现或停止： {@code 12} ，该错误代码一般由 `start` 和 `stop` 命令使用
-* 若系统配置不符合系统要求（如找不到 `java` 命令）： {@code 14}
-* 若主Verticle不能被部署： {@code 15}
+* 若进程顺利结束，或抛出未捕获的错误：`0`
+* 用于通用错误： `1`
+* 若Vert.x无法初始化： `11`
+* 若生成的进程无法启动、发现或停止： `12` ，该错误代码一般由 `start` 和 `stop` 命令使用
+* 若系统配置不符合系统要求（如找不到 `java` 命令）： `14`
+* 若主Verticle不能被部署： `15`
 
 == 配置 Vert.x 缓存
 

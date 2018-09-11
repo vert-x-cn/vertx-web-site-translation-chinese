@@ -20,8 +20,16 @@ stylesheet: docs.css
           <h2><%= attr 'toc-title' %></h2>
           <%= converter.convert self, 'outline' %>
         </div>
+<% if attr? :modulepath %>
+  <a href="https://github.com/okou19900722/vertx-web-site-translation-chinese/tree/master/vertx-translation-stack/<%= attr :modulepath %>"
+     class="page-link-to-github"
+     target="_blank"
+     title="Edit this page on GitHub">
+    <i class="github-icon"></i>
+    <span class="text">编辑本页</span>
+  </a>
+<% end %>
         <%= content %>
-
         <% unless !footnotes? || attr?(:nofootnotes) %>
           <div id="footnotes">
           <% footnotes.each do |fn| %>
