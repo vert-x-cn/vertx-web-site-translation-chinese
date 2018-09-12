@@ -1,0 +1,46 @@
+=== Redis 存储后端
+
+服务发现组件通过实现 {@link io.vertx.servicediscovery.spi.ServiceDiscoveryBackend} SPI提供了一种可插拔的存储后端扩展机制。
+Vert.x Service Discovery Redis Backend组件是基于Redis的后端存储实现。
+
+==== 使用 Redis 存储后端
+
+要使用 Redis 存储后端，需要将如下的依赖包加入到依赖配置文件中：
+
+* Maven (在 `pom.xml` 文件中):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-service-discovery-backend-redis</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (在 `build.gradle` 文件中):
+
+[source,groovy,subs="+attributes"]
+----
+compile 'io.vertx:vertx-service-discovery-backend-redis:${maven.version}'
+----
+
+需要注意的是，你只能在 `classpath` 中指定一个SPI的实现；如果没有指定，那么将使用默认的存储后端。
+
+==== 配置
+
+Redis存储后端是基于 http://vertx.io/docs/vertx-redis-client/java[vertx-redis-client] 实现的，所以配置内容和 `RedisClient` 的配置内容一致。
+
+下面是一个示例：
+
+[source,$lang]
+----
+{@link examples.ServiceDiscoveryBackendRedisExamples#configuration1(io.vertx.core.Vertx)}
+----
+
+值得注意的一点是，配置是在 `setBackendConfiguration` 方法中传入的（如果使用JSON，则传递给backendConfiguration 对象:
+
+[source,$lang]
+----
+{@link examples.ServiceDiscoveryBackendRedisExamples#configuration2(io.vertx.core.Vertx)}
+----

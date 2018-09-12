@@ -1,0 +1,47 @@
+=== Consul 桥接器
+
+Consul 桥接器可以将 http://consul.io[Consul] 中的服务导入到Vert.x的服务发现组件中。
+这个桥接器可以连接 Consul agent（服务器），并且会进行周期性的扫描，来更新服务情况：
+
+* 新的服务被导入
+* 维护模式下的服务或已经从 Consul 中移除的服务将会被移除
+
+这个桥接器使用的是 Consul 的HTTP API接口。它不能将服务导出到Consul，并且也不支持服务的修改。
+
+服务的类型是通过`tags`推断出来的，如果有一个`tag`和已知的服务类型一样，那么就使用这种服务类型，如果没有匹配的，那么服务导入后将标记为`unknown`类型。目前暂时只支持`http-endpoint`类型。
+
+==== 桥接器的使用
+
+要使用该服务发现桥接器，需要将如下的依赖包加入到依赖配置文件中：
+
+* Maven (在 `pox.xml` 文件中):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-service-discovery-bridge-consul</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (在 `build.gradle` 文件中):
+
+[source,groovy,subs="+attributes"]
+----
+compile 'io.vertx:vertx-service-discovery-bridge-consul:${maven.version}'
+----
+
+然后，在创建服务发现对象的时候，像下面这样注册桥接器：
+
+[source, $lang]
+----
+{@link examples.ServiceDiscoveryBridgeConsulExamples#register(io.vertx.core.Vertx)}
+----
+
+你可以做一些配置：
+
+* `host` 属性，配置 agent 的地址，默认是`localhost`
+* `port` 属性，配置 agent 的端口，默认的端口是 8500
+* `acl_token` 属性，配置 agent 的访问控制令牌，默认值是 null
+* `scan-period` 属性，配置扫描的频率，扫描的单位是毫秒（ms），默认是 2000 ms

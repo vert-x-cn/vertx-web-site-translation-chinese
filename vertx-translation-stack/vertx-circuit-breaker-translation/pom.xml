@@ -75,7 +75,7 @@
       <version>${vertx.version}</version>
     </dependency>
   </dependencies>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -87,9 +87,6 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <configuration>
-          <addCompileSourceRoots>true</addCompileSourceRoots>
-        </configuration>
         <dependencies>
           <dependency>
             <groupId>io.vertx</groupId>
