@@ -21,99 +21,71 @@
       <groupId>tk.okou</groupId>
       <artifactId>guide-for-java-devs-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-amqp-bridge-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-common-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-htdigest-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-htpasswd-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-jdbc-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-jwt-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-mongo-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-oauth2-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-auth-shiro-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-bridge-common-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-camel-bridge-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-circuit-breaker-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
@@ -124,36 +96,26 @@
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-git-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-hocon-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-kubernetes-configmap-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-redis-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-spring-config-server-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
@@ -164,22 +126,16 @@
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-yaml-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-config-zookeeper-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-consul-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <!--<dependency>-->
     <!--<groupId>tk.okou</groupId>-->
@@ -190,15 +146,11 @@
       <groupId>tk.okou</groupId>
       <artifactId>vertx-consul-service-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-core-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
@@ -209,169 +161,121 @@
       <groupId>tk.okou</groupId>
       <artifactId>vertx-dropwizard-metrics-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-grpc-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-hazelcast-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-health-check-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-http-service-factory-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-ignite-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-infinispan-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-jdbc-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-junit5-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-jwt-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-kafka-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-lang-kotlin-coroutines-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-mail-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-mail-service-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-maven-service-factory-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-micrometer-metrics-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-mongo-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-mongo-service-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-mqtt-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-mysql-postgresql-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-proton-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-rabbitmq-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-reactive-streams-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-redis-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
@@ -382,8 +286,6 @@
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
@@ -394,78 +296,56 @@
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-backend-redis-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-backend-zookeeper-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-bridge-consul-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-bridge-docker-links-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-bridge-kubernetes-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-discovery-bridge-zookeeper-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-factory-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-service-proxy-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-shell-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-sockjs-service-proxy-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-sql-common-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
@@ -476,57 +356,41 @@
       <groupId>tk.okou</groupId>
       <artifactId>vertx-stomp-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-sync-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-tcp-eventbus-bridge-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-unit-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-web-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-web-api-contract-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-web-client-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-zookeeper-translation</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <classifier>docs</classifier>
-      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
