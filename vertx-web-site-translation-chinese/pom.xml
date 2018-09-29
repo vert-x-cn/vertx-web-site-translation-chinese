@@ -409,6 +409,13 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-ceylon-stack</artifactId>
+      <version>${vertx.docs.version}</version>
+      <classifier>docs</classifier>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-js</artifactId>
       <version>${vertx.docs.version}</version>
       <classifier>docs</classifier>
@@ -503,13 +510,14 @@
                 vertx-lang-kotlin,
                 vertx-lang-js,
                 vertx-lang-ceylon,
+                vertx-lang-ceylon-stack,
                 vertx-lang-scala-docs_2.12,
                 vertx-lang-ruby
               </includeArtifactIds>
               <includeClassifiers>docs</includeClassifiers>
               <includeTypes>zip</includeTypes>
               <includes>ceylondoc/**,jsdoc/**,kdoc/**,scaladocs/**,yardoc/**</includes>
-              <outputDirectory>${project.build.directory}/docs</outputDirectory>
+              <outputDirectory>${project.build.directory}/docs-generated</outputDirectory>
             </configuration>
           </execution>
         </executions>
