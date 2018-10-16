@@ -227,6 +227,18 @@
               <mvel2.disable.jit>true</mvel2.disable.jit>
             </systemProperties>
           </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>tk.okou</groupId>
+              <artifactId>vertx-lang-jphp-gen</artifactId>
+              <version>${vertx.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>io.vertx</groupId>
+              <artifactId>vertx-lang-scala-codegen</artifactId>
+              <version>${vertx.version}</version>
+            </dependency>
+          </dependencies>
           <executions>
             <execution>
               <id>generate-asciidoc</id>

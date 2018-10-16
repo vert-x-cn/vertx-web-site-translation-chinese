@@ -13,7 +13,7 @@
   <properties>
     <module>vertx-core</module>
     <scala.dependency>vertx-lang-scala_2.12</scala.dependency>
-    <docgen.generators>js,kotlin,ruby,groovy,ceylon</docgen.generators>
+    <docgen.generators>js,kotlin,ruby,groovy,ceylon,php</docgen.generators>
   </properties>
 
   <dependencies>
@@ -51,17 +51,17 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-kotlin-codegen</artifactId>
+      <artifactId>vertx-lang-kotlin-gen</artifactId>
       <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ruby-codegen</artifactId>
+      <artifactId>vertx-lang-ruby-gen</artifactId>
       <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-groovy-codegen</artifactId>
+      <artifactId>vertx-lang-groovy-gen</artifactId>
       <version>${vertx.version}</version>
     </dependency>
     <dependency>
@@ -166,6 +166,7 @@
                 <mkdir dir="${project.basedir}/src/main/override/kotlin"/>
                 <mkdir dir="${project.basedir}/src/main/override/ruby"/>
                 <mkdir dir="${project.basedir}/src/main/override/scala"/>
+                <mkdir dir="${project.basedir}/src/main/override/php"/>
               </target>
             </configuration>
           </execution>
@@ -184,7 +185,7 @@
                   <fileset dir="${project.build.directory}/sources/override/vertx-core/groovy/override"/>
                 </copy>
                 <copy todir="${project.build.directory}/asciidoc/${module}/java/override" overwrite="true">
-                  <fileset dir="${project.build.directory}/sources/override/java/java/override"/>
+                  <fileset dir="${project.build.directory}/sources/override/java/override"/>
                 </copy>
                 <copy todir="${project.build.directory}/asciidoc/${module}/js/override" overwrite="true">
                   <fileset dir="${project.build.directory}/sources/override/vertx-core/js/override"/>
@@ -198,6 +199,9 @@
                 <copy todir="${project.build.directory}/asciidoc/${module}/scala/override" overwrite="true">
                   <fileset dir="${project.build.directory}/sources/override/scala/override"/>
                 </copy>
+                <!--<copy todir="${project.build.directory}/asciidoc/${module}/php/override" overwrite="true">-->
+                  <!--<fileset dir="${project.build.directory}/sources/override/php/override"/>-->
+                <!--</copy>-->
               </target>
             </configuration>
           </execution>
@@ -229,6 +233,9 @@
                 </copy>
                 <copy todir="${project.build.directory}/asciidoc/${module}/scala/override" overwrite="true">
                   <fileset dir="${project.basedir}/src/main/override/scala"/>
+                </copy>
+                <copy todir="${project.build.directory}/asciidoc/${module}/php/override" overwrite="true">
+                  <fileset dir="${project.basedir}/src/main/override/php"/>
                 </copy>
               </target>
             </configuration>
