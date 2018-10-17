@@ -421,7 +421,7 @@ gulp.task("scripts", function() {
 // build docs
 gulp.task("site-docs", function(done) {
   buildDocs(done);
-})
+});
 
 // build site
 gulp.task("site", ["scripts", "site-docs", "install-asciidoc-bs-themes",
