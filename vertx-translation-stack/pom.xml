@@ -15,7 +15,6 @@
   <properties>
     <translation.dir>/src/main/translation</translation.dir>
     <module>vertx-core</module>
-    <docgen.version>0.9.2</docgen.version>
     <scala.dependency>vertx-lang-scala_2.12</scala.dependency>
     <docgen.generators></docgen.generators>
     <!--<asciidoc.path>${project.basedir}/../../vertx-web-site-translation-chinese/target/docs</asciidoc.path>-->

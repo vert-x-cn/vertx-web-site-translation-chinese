@@ -19,7 +19,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-docgen</artifactId>
-      <version>${stack.version}</version>
+      <version>${docgen.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
