@@ -63,7 +63,7 @@ Vert.x提供了异步文件访问的抽象，允许您操作文件系统上的�
 
 [source,$lang]
 ----
-{@link examples.FileSystemExamples#asyncFileWrite()}
+{@link examples.FileSystemExamples#asyncFileWrite}
 ----
 
 ==== 随机访问读
@@ -84,7 +84,7 @@ Vert.x提供了异步文件访问的抽象，允许您操作文件系统上的�
 
 [source,$lang]
 ----
-{@link examples.FileSystemExamples#asyncFileRead()}
+{@link examples.FileSystemExamples#asyncFileRead}
 ----
 
 ==== 打开选项
@@ -114,7 +114,7 @@ Vert.x提供了异步文件访问的抽象，允许您操作文件系统上的�
 
 [source,$lang]
 ----
-{@link examples.FileSystemExamples#asyncFilePump()}
+{@link examples.FileSystemExamples#asyncFilePump}
 ----
 
 您还可以使用泵将文件内容写入到HTTP 响应中，或者写入任意 `WriteStream` 。
