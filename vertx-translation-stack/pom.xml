@@ -27,6 +27,12 @@
       <artifactId>vertx-codegen-options</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+
+    <dependency>
+      <groupId>tk.okou</groupId>
+      <artifactId>vertx-lang-jphp-gen</artifactId>
+      <version>${vertx.version}</version>
+    </dependency>
   </dependencies>
 
   <modules>
@@ -227,11 +233,6 @@
             </systemProperties>
           </configuration>
           <dependencies>
-            <dependency>
-              <groupId>tk.okou</groupId>
-              <artifactId>vertx-lang-jphp-gen</artifactId>
-              <version>${vertx.version}</version>
-            </dependency>
             <dependency>
               <groupId>io.vertx</groupId>
               <artifactId>vertx-lang-scala-codegen</artifactId>
