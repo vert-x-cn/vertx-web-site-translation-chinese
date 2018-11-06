@@ -1,0 +1,3 @@
+[submodule "vertx-web-site-translation-chinese"]
+	path = vertx-web-site-translation-chinese
+	url = https://github.com/vert-x-cn/vertx-web-site
