@@ -1,8 +1,0 @@
-<assembly>
- <fileSets>
-   <fileSet>
-     <directory>${project.basedir}/target/site</directory>
-     <outputDirectory>.</outputDirectory>
-   </fileSet>
- </fileSets>
-</assembly>
