@@ -4,9 +4,20 @@
 
 ## 构建
 
+maven虽然配置了自动执行npm，但有时会抽风，所以先手动把node的依赖安装，再执行maven就ok了
 ```bash
+cd vertx-web-site-translation-chinese
+npm install
 mvn clean compile
 ```
+
+## 预览
+
+执行gulp的watch任务
+```bash
+gulp watch
+```
+然后打开`http://localhost:4000`即可预览
 
 vertx-web-site-translation-chinese依赖vertx-translation-stack的所有子模块，在所有子模块处理完之后，会到子模块的target/asciidoc目录下拷贝处理完的文件到vertx-web-site-translation-chinese的target/docs目录下，然后进行site操作
 
