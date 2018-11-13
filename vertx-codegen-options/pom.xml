@@ -12,14 +12,13 @@
   <artifactId>vertx-codegen-options</artifactId>
 
   <properties>
-    <stack.version>3.6.0-SNAPSHOT</stack.version>
+    <stack.version>3.6.0.CR1</stack.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-docgen</artifactId>
-      <version>${docgen.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>

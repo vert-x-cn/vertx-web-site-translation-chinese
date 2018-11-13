@@ -31,7 +31,6 @@
     <dependency>
       <groupId>tk.okou</groupId>
       <artifactId>vertx-lang-jphp-gen</artifactId>
-      <version>${vertx.version}</version>
     </dependency>
   </dependencies>
 

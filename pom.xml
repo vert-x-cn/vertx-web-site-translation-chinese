@@ -21,10 +21,11 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
+    <vertx.ceylon.version>3.6.0-SNAPSHOT</vertx.ceylon.version>
     <docgen.version>0.9.2</docgen.version>
-    <vertx.version>3.6.0-SNAPSHOT</vertx.version>
-    <vertx.docs.version>3.6.0-SNAPSHOT</vertx.docs.version>
-    <vertx.download.version>3.6.0-SNAPSHOT</vertx.download.version>
+    <vertx.version>3.6.0.CR1</vertx.version>
+    <vertx.docs.version>3.6.0.CR1</vertx.docs.version>
+    <vertx.download.version>3.6.0.CR1</vertx.download.version>
     <asciidoc.path>/kotlin</asciidoc.path>
     <host>vertx.tk</host>
     <highlightjs.version>8.7</highlightjs.version>
@@ -35,4 +36,81 @@
     <asciidoctor-maven-plugin.version>1.5.5</asciidoctor-maven-plugin.version>
     <asciidoctorj.version>1.5.5</asciidoctorj.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-dependencies</artifactId>
+        <version>${vertx.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>io.vertx</groupId>-->
+        <!--<artifactId>vertx-lang-ceylon</artifactId>-->
+      <!--</dependency>-->
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-lang-ceylon-doc</artifactId>
+        <version>${vertx.ceylon.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-lang-ceylon</artifactId>
+        <classifier>docs</classifier>
+        <version>${vertx.ceylon.version}</version>
+        <type>zip</type>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-lang-ceylon-stack</artifactId>
+        <classifier>docs</classifier>
+        <version>${vertx.ceylon.version}</version>
+        <type>zip</type>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-lang-kotlin-gen</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-lang-ruby-gen</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-lang-groovy-gen</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-lang-scala_2.12</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-core</artifactId>
+        <version>${vertx.version}</version>
+        <classifier>sources</classifier>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-stack-docker</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-auth-htpasswd</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>tk.okou</groupId>
+        <artifactId>vertx-lang-jphp-gen</artifactId>
+        <version>${vertx.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
 </project>

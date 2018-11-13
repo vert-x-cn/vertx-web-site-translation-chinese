@@ -102,7 +102,7 @@ Stack Manager 是一个管理 Vert.x 发行包的工具。
 ----
 {
 "variables": {
-  "vertx.version": "3.6.0-SNAPSHOT"
+  "vertx.version": "3.6.0.CR1"
 }
 ----
 
