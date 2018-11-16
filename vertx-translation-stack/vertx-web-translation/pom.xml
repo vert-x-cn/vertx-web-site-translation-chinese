@@ -13,7 +13,7 @@
   <properties>
     <module>vertx-web</module>
     <scala.dependency>vertx-web-scala_2.12</scala.dependency>
-    <docgen.generators>js,kotlin,ruby,groovy,ceylon,php</docgen.generators>
+    <docgen.generators>js,kotlin,ruby,groovy,php</docgen.generators>
   </properties>
 
   <dependencies>
@@ -56,10 +56,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-groovy-gen</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-ceylon-doc</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>

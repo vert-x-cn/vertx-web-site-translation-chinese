@@ -21,11 +21,10 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <vertx.ceylon.version>3.6.0-SNAPSHOT</vertx.ceylon.version>
     <docgen.version>0.9.2</docgen.version>
     <vertx.version>3.6.0.CR1</vertx.version>
-    <vertx.docs.version>3.6.0.CR1</vertx.docs.version>
-    <vertx.download.version>3.6.0.CR1</vertx.download.version>
+    <vertx.docs.version>${vertx.version}</vertx.docs.version>
+    <vertx.download.version>${vertx.version}</vertx.download.version>
     <asciidoc.path>/kotlin</asciidoc.path>
     <host>vertx.tk</host>
     <highlightjs.version>8.7</highlightjs.version>
@@ -45,29 +44,6 @@
         <version>${vertx.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <!--<dependency>-->
-        <!--<groupId>io.vertx</groupId>-->
-        <!--<artifactId>vertx-lang-ceylon</artifactId>-->
-      <!--</dependency>-->
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-lang-ceylon-doc</artifactId>
-        <version>${vertx.ceylon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-lang-ceylon</artifactId>
-        <classifier>docs</classifier>
-        <version>${vertx.ceylon.version}</version>
-        <type>zip</type>
-      </dependency>
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-lang-ceylon-stack</artifactId>
-        <classifier>docs</classifier>
-        <version>${vertx.ceylon.version}</version>
-        <type>zip</type>
       </dependency>
       <dependency>
         <groupId>io.vertx</groupId>
