@@ -63,24 +63,28 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java</artifactId>
+      <artifactId>vertx-rx-java2</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java</artifactId>
+      <artifactId>vertx-rx-java2</artifactId>
       <classifier>docs</classifier>
       <version>${vertx.version}</version>
       <type>zip</type>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java</artifactId>
+      <artifactId>vertx-rx-java2</artifactId>
       <classifier>sources</classifier>
       <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-sql-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-cassandra-client</artifactId>
     </dependency>
   </dependencies>
   
@@ -96,7 +100,7 @@
             </goals>
             <phase>generate-sources</phase>
             <configuration>
-              <includeArtifactIds>${module},vertx-rx-java</includeArtifactIds>
+              <includeArtifactIds>${module},vertx-rx-java2</includeArtifactIds>
             </configuration>
           </execution>
           <execution>
@@ -108,7 +112,7 @@
             <configuration>
               <markersDirectory>${project.build.directory}/markers/unpack-rx-override</markersDirectory>
               <includeGroupIds>io.vertx</includeGroupIds>
-              <includeArtifactIds>vertx-rx-java</includeArtifactIds>
+              <includeArtifactIds>vertx-rx-java2</includeArtifactIds>
               <includes>vertx-web-client/**/*.adoc</includes>
               <includeClassifiers>docs</includeClassifiers>
               <includeTypes>zip</includeTypes>
@@ -166,9 +170,6 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <configuration>
-          <addCompileSourceRoots>true</addCompileSourceRoots>
-        </configuration>
         <executions>
           <execution>
             <id>generate-asciidoc</id>

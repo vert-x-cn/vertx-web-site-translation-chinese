@@ -1,8 +1,0 @@
-== RxJava API
-
-Vert.x Kafka Client 组件也提供Rx风格的API。
-
-[source,$lang]
-----
-{@link examples.KafkaClientExamples#consumer(io.vertx.rxjava.kafka.client.consumer.KafkaConsumer)}
-----

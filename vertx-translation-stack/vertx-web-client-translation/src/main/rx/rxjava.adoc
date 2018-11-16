@@ -1,34 +1,34 @@
 ifdef::java[]
-== RxJava API
+== RxJava2 API
 
-RxJava的 {@link io.vertx.rxjava.ext.web.client.HttpRequest} 提供了原版API的响应式版本，
-{@link io.vertx.rxjava.ext.web.client.HttpRequest#rxSend()} 方法返回一个可被订阅的  `Single<HttpResponse<Buffer>>` ，
+RxJava的 {@link io.vertx.reactivex.ext.web.client.HttpRequest} 提供了原版API的响应式版本，
+{@link io.vertx.reactivex.ext.web.client.HttpRequest#rxSend()} 方法返回一个可被订阅的  `Single<HttpResponse<Buffer>>` ，
 故单个 `Single` 可被多次订阅。
 
 [source,$lang]
 ----
-{@link examples.RxWebClientExamples#simpleGet(io.vertx.rxjava.ext.web.client.WebClient)}
+{@link examples.RxWebClientExamples#simpleGet(io.vertx.reactivex.ext.web.client.WebClient)}
 ----
 
 获取到的 `Single` 可与其它RxJava API自然组合成链式处理
 
 [source,$lang]
 ----
-{@link examples.RxWebClientExamples#flatMap(io.vertx.rxjava.ext.web.client.WebClient)}
+{@link examples.RxWebClientExamples#flatMap(io.vertx.reactivex.ext.web.client.WebClient)}
 ----
 
 之前的例子可写成
 
 [source,$lang]
 ----
-{@link examples.RxWebClientExamples#moreComplex(io.vertx.rxjava.ext.web.client.WebClient)}
+{@link examples.RxWebClientExamples#moreComplex(io.vertx.reactivex.ext.web.client.WebClient)}
 ----
 
-当发送请求体为 `Observable<Buffer>` 时，应使用 {@link io.vertx.rxjava.ext.web.client.HttpRequest#sendStream(rx.Observable, io.vertx.core.Handler)} ：
+当发送请求体为 `Flowable<Buffer>` 时，应使用 {@link io.vertx.reactivex.ext.web.client.HttpRequest#sendStream(io.reactivex.Flowable, io.vertx.core.Handler)} ：
 
 [source,$lang]
 ----
-{@link examples.RxWebClientExamples#sendObservable(io.vertx.rxjava.ext.web.client.WebClient)}
+{@link examples.RxWebClientExamples#sendFlowable(io.vertx.reactivex.ext.web.client.WebClient)}
 ----
 
 当订阅时， `body` 将会被订阅，其内容将会被用于请求中。

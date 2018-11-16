@@ -426,7 +426,7 @@ ifdef::java,groovy,kotlin[]
 
 endif::[]
 
-include::override/rxjava.adoc[]
+include::override/rxjava2.adoc[]
 
 ifdef::java,groovy,kotlin[]
 == 流实现与 Kafka 原生对象
