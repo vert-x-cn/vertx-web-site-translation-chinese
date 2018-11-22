@@ -20,7 +20,7 @@ Vert.x用一个Java接口来描述一个 服务，这个接口包含的方法遵
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-service-proxy</artifactId>
-  <version>3.6.0.CR1</version>
+  <version>3.6.0.CR2</version>
 </dependency>
 ----
 
@@ -28,7 +28,7 @@ Vert.x用一个Java接口来描述一个 服务，这个接口包含的方法遵
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-proxy:3.6.0.CR1'
+compile 'io.vertx:vertx-service-proxy:3.6.0.CR2'
 ----
 
 要 *实现* 服务代理（译者注：即生成服务代理类），还需要加入以下依赖：
@@ -40,7 +40,7 @@ compile 'io.vertx:vertx-service-proxy:3.6.0.CR1'
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-codegen</artifactId>
-  <version>3.6.0.CR1</version>
+  <version>3.6.0.CR2</version>
   <scope>provided</scope>
 </dependency>
 ----
@@ -49,7 +49,7 @@ compile 'io.vertx:vertx-service-proxy:3.6.0.CR1'
 
 [source,groovy,subs="+attributes"]
 ----
-compileOnly 'io.vertx:vertx-codegen:3.6.0.CR1'
+compileOnly 'io.vertx:vertx-codegen:3.6.0.CR2'
 ----
 
 注意服务代理机制依赖于代码生成，所以每次修改服务接口以后都需重新执行构建过程来重新生成代码。
@@ -218,7 +218,7 @@ public interface MyDatabaseConnection {
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-service-proxy</artifactId>
-  <version>3.6.0.CR1</version>
+  <version>3.6.0.CR2</version>
   <classifier>processor</classifier>
 </dependency>
 ----
@@ -227,7 +227,7 @@ Gradle中也可以进行配置:
 
 [source]
 ----
-compile "io.vertx:vertx-service-proxy:3.6.0.CR1:processor"
+compile "io.vertx:vertx-service-proxy:3.6.0.CR2:processor"
 ----
 
 IDE通常会支持注解处理器。

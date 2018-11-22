@@ -510,7 +510,7 @@ mvn io.fabric8:fabric8-maven-plugin:2.1.4:apply
 [source, shell]
 ----
 > docker run -i -t vertx/vertx3-exec -version
-3.6.0.CR1
+3.6.0.CR2
 ----
 
 运行 verticle ：

@@ -36,15 +36,15 @@ vertx-core有个override需要翻译，翻译的文件在`src/main/override`目�
 ### 说明
 
 gulp有个task，源文件为`vertx-web-site-translation-chinese`模块的`src/main/tasks/generate-distribution-info.js`文件，里面有个http请求，因为官网没有发布3.6.0-SNPASHOT，故我在本地创建了几个对应版本号的文件，分别为
->vert.x-3.6.0.CR1.tar.gz
+>vert.x-3.6.0.CR2.tar.gz
 
->vert.x-3.6.0.CR1.zip
+>vert.x-3.6.0.CR2.zip
 
->vert.x-3.6.0.CR1-full.tar.gz
+>vert.x-3.6.0.CR2-full.tar.gz
 
->vert.x-3.6.0.CR1-full.zip
+>vert.x-3.6.0.CR2-full.zip
 
->vertx-docs-3.6.0.CR1-html.zip
+>vertx-docs-3.6.0.CR2-html.zip
 
 需要构建成功，需要在本地搭建http服务，并添加对应文件使gulp请求能通过
 

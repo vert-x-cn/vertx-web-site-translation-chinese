@@ -12,7 +12,7 @@
   <artifactId>vertx-codegen-options</artifactId>
 
   <properties>
-    <stack.version>3.6.0.CR1</stack.version>
+    <stack.version>3.6.0.CR2</stack.version>
   </properties>
 
   <dependencies>
