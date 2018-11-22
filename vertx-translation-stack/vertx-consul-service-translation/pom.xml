@@ -13,7 +13,7 @@
   <properties>
     <module>vertx-consul-service</module>
     <scala.dependency>vertx-consul-service-scala_2.12</scala.dependency>
-    <docgen.generators></docgen.generators>
+    <docgen.generators>js,kotlin,ruby,groovy,php</docgen.generators>
   </properties>
 
   <dependencies>
@@ -81,7 +81,7 @@
           <execution>
             <id>generate-asciidoc</id>
             <configuration>
-              <skip>true</skip>
+              <skip>false</skip>
             </configuration>
           </execution>
           <execution>
