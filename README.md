@@ -2,6 +2,10 @@
 
 # vert.x官网翻译项目 
 
+<h1>现在使用remove-ceylon分支开发。</h1>
+
+因为官方现在已经将ceylon从3.6.0里删除了，但官网项目还没有更新，所以还有ceylon，等官方处理了之后我这边再处理是合并remove-ceylon分支还是其他方案。
+
 ## 构建
 
 maven虽然配置了自动执行npm，但有时会抽风，所以先手动把node的依赖安装，再执行maven就ok了
