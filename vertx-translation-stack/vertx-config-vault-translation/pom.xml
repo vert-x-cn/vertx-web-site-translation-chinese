@@ -74,9 +74,6 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <configuration>
-          <addCompileSourceRoots>true</addCompileSourceRoots>
-        </configuration>
         <executions>
           <execution>
             <id>generate-asciidoc</id>
