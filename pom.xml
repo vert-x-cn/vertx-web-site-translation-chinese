@@ -22,8 +22,8 @@
 
   <properties>
     <docgen.version>0.9.2</docgen.version>
-    <vertx.version>3.6.0</vertx.version>
-    <vertx.jphp.version>3.6.0.CR2</vertx.jphp.version>
+    <vertx.version>3.6.2</vertx.version>
+    <vertx.jphp.version>3.6.2</vertx.jphp.version>
     <vertx.docs.version>${vertx.version}</vertx.docs.version>
     <vertx.download.version>${vertx.version}</vertx.download.version>
     <asciidoc.path>/kotlin</asciidoc.path>

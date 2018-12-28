@@ -33,23 +33,8 @@ vertx-web-site-translation-chinese依赖vertx-translation-stack的所有子模�
 
 vertx-core有个override需要翻译，翻译的文件在`src/main/override`目录完成
 
-### 说明
-
-gulp有个task，源文件为`vertx-web-site-translation-chinese`模块的`src/main/tasks/generate-distribution-info.js`文件，里面有个http请求，因为官网没有发布3.6.0-SNPASHOT，故我在本地创建了几个对应版本号的文件，分别为
->vert.x-3.6.0.tar.gz
-
->vert.x-3.6.0.zip
-
->vert.x-3.6.0-full.tar.gz
-
->vert.x-3.6.0-full.zip
-
->vertx-docs-3.6.0-html.zip
-
-需要构建成功，需要在本地搭建http服务，并添加对应文件使gulp请求能通过
-
 ### 当前翻译版本
 
 目前在逐步将[VertxChina](https://github.com/VertxChina/vertx-translation-chinese)里的翻译复制到这里来
 
-翻译文档的版本为3.4.2，而当前项目版本为3.6.0，因此可能会有部分差错
+翻译文档的版本为3.4.2，而当前项目版本为3.6.2，因此可能会有部分差错
